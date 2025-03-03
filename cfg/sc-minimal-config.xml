@@ -31,13 +31,13 @@
             <enable>false</enable>
         </css>
         <eps>
-            <enable>true</enable>
+            <enable>false</enable>
         </eps>
         <fss>
             <enable>false</enable>
         </fss>
         <gps>
-            <enable>false</enable>
+            <enable>false</enable>          
         </gps>
         <imu>
             <enable>false</enable>
@@ -49,7 +49,7 @@
             <enable>false</enable>
         </onair>
         <radio>
-            <enable>true</enable>
+            <enable>false</enable>
         </radio>
         <rw>
             <enable>false</enable>
