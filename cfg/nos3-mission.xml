@@ -3,11 +3,11 @@
     <!-- Note fprime only operational in sc-minimal-config.xml -->
 
     <!-- Ground Software -->
-    <!-- cosmos, openc3, fprime, or yamcs -->
+    <!-- cosmos, openc3, fprime, or yamcs (default) -->
     <gsw>yamcs</gsw>
 
     <!-- Flight Software -->
-    <!-- cfs or fprime -->
+    <!-- cfs (default) or fprime -->
     <fsw>cfs</fsw>
 
     <!-- Number of spacecraft -->
