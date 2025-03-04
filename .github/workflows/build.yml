@@ -58,7 +58,7 @@ jobs:
           run: |
             export CFLAGS="-fprofile-arcs -ftest-coverage -g"
             make build-test
-            make test-fsw
+            make gcov
         - name: Archive Coverage Directory
           uses: actions/upload-artifact@v4
           with:
