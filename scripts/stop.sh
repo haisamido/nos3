@@ -24,6 +24,8 @@ $DCALL ps --filter=name="influxdb*" -aq | xargs $DCALL stop > /dev/null 2>&1 &
 $DCALL ps --filter=name="ttc-command*" -aq | xargs $DCALL stop > /dev/null 2>&1 &
 $DCALL ps --filter ancestor="ballaerospace/cosmos:4.5.0" -aq | xargs $DCALL stop > /dev/null 2>&1 &
 
+rm -rf /dev/shm/Blackboard
+
 # Intentionally wait to complete
 wait 
 
