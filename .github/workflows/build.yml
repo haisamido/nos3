@@ -54,11 +54,13 @@ jobs:
           run: apt-get install -y gcc lcov gcovr bc
         - name: config
           run: make config
-        - name: build-test
+        - name: build coverage docs
           run: |
             export CFLAGS="-fprofile-arcs -ftest-coverage -g"
             make build-test
-            make gcov
+            make test-fsw
+            gcovr --gcov-ignore-parse-errors --branches --xml-pretty --exclude-unreachable-branches -o docs/coverage/coverage_report.xml
+            gcovr --gcov-ignore-parse-errors --branches --html --html-details -o docs/coverage/coverage_report.html
         - name: Archive Coverage Directory
           uses: actions/upload-artifact@v4
           with:
