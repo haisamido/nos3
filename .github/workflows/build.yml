@@ -58,16 +58,16 @@ jobs:
           run: |
             export CFLAGS="-fprofile-arcs -ftest-coverage -g"
             make build-test
-            make test-fsw
-            gcovr --gcov-ignore-parse-errors --branches --xml-pretty --exclude-unreachable-branches -o docs/coverage/coverage_report.xml
-            gcovr --gcov-ignore-parse-errors --branches --html --html-details -o docs/coverage/coverage_report.html
+            make gcov
+        - name: Upload coverage reports to Codecov
+          uses: codecov/codecov-action@v5
+          with:
+            token: ${{ secrets.CODECOV_TOKEN }}
+            verbose: true
+            recurse_submodules: true
         - name: Archive Coverage Directory
           uses: actions/upload-artifact@v4
           with:
             name: coverage-artifacts
             path: docs/coverage
-        - name: Upload coverage reports to Codecov
-          uses: codecov/codecov-action@v5
-          with:
-            token: ${{ secrets.CODECOV_TOKEN }}
     
