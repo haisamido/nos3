@@ -31,7 +31,7 @@
             <enable>false</enable>
         </css>
         <eps>
-            <enable>false</enable>
+            <enable>true</enable>
         </eps>
         <fss>
             <enable>false</enable>
