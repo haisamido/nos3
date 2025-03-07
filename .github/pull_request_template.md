@@ -18,10 +18,6 @@ Note that these are the recommended tasks and actions for submitting a pull requ
 * Confirm the following:
   * [ ] Flight Software loaded and running successfully
   * [ ] Spacecraft in 42 GUI points at sun and telemetry reports SVB (sun vector in body frame) X gets to a value of 1, others 0
-  * Cryptolib Testing:
-    * [ ] Cryptolib tab: run `tc`, send `CFE_ES_NOOP` and confim clear mode
-    * [ ] Run `vcid 2`, send `CFE_ES_NOOP` and confirm encrypted.
-    * [ ] Run `vcid 1`, send `CFE_ES_NOOP` and confirm clear mode again.
 
 * Submodules Updated:
   * [ ] Submodule paths correct
@@ -40,28 +36,6 @@ Note that these are the recommended tasks and actions for submitting a pull requ
 
 ### Closing Tags
 * [ ] Add any closing tags, or manually set this PR to close any related issue(s) that this PR resolves.
----
-
-### Extra Considerations
-#### COSMOS
-* Change `./cfg/nos3-mission.xml` to COSMOS as the GSW
-* Organize windows and start "COSMOS" from the NOS3 Launcher
-* Open "Telemetry Grapher" with `./gsw/cosmos/config/tools/tlm_grapher/generic_adcs.txt` 
-* Confirm
-  * Flight software loaded and running successfully
-  * Spacecraft in 42 GUI points at sun and telemetry grapher gets to SVB (sun vector in body frame) X gets to a value of 1, others 0
-* Open "Test Runner" and click "Start" next to Mission_Test and wait for success
-* Show CryptoLib tab, run `tc`, send a CFE_ES_NOOP and confirm clear mode, run `vcid 2`, send CFE_ES_NOOP and confirm encrypted, run `vcid 1`, send CFE_ES_NOOOP and confirm clear again
-* In "Test Runner" run the "Start" for Mission_Test again and wait for success
-
-#### F'
-* Change `./cfg/nos3-mission.xml` to FSW / GSW both to fprime and use sc-fprime-config.xml
-* Confirm
-  * sampleSim.NOOP command and see it in sim
-  * sampleSim.REQUEST_HOUSEKEEPING command, see it in sim, and see it in F' GDS event telemetry
-  * generic_radio.REQUEST_HOUSEKEEPING command, see it in sim, and see it in F' GDS event telemetry
-  * generic_star_tracker.NOOP command and see it in sim
-  * generic_star_tracker.REQUEST_HOUSEKEEPING command, see it in sim, and see it in F' GDS event telemetry
 
 --- 
 
