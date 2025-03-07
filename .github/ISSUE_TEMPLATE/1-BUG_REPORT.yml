@@ -1,16 +1,16 @@
-name: "🐛 Bug Report"
+name: "Bug Report"
 description: Create a new ticket for a bug.
-title: "🐛 [BUG] - <title>"
+title: ""
 labels: [
-  "bug"
+  "Bug"
 ]
 body:
   - type: textarea
     id: description
     attributes:
       label: "Description"
-      description: Please enter an explicit description of your issue
-      placeholder: Short and explicit description of your incident...
+      description: Please enter an explicit description of the bug
+      placeholder: Short and explicit description of the incident...
     validations:
       required: true
   - type: input
@@ -25,7 +25,7 @@ body:
     id: reprod
     attributes:
       label: "Reproduction steps"
-      description: Please enter an explicit description of your issue
+      description: Please enter an explicit description of the bug
       value: |
         1. Go to '...'
         2. Click on '....'
@@ -67,3 +67,6 @@ body:
         - Mac (Shared Folders)
     validations:
       required: true
+  - type: markdown
+    attributes:
+      value: "Optional: Please apply any labels or types as necessary - leave blank for unknown."
