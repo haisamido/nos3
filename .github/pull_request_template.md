@@ -22,12 +22,13 @@ Note that these are the recommended tasks and actions for submitting a pull requ
 * Submodules Updated:
   * [ ] Submodule paths correct
   * [ ] Submodules merged appropriately into submodule dev branches, or Pull requests created and completed PRIOR to this request.
-  > Describe submodules modified here.
-    * [ ] Submodule merges completed PRIOR to merging this Pull Request.
+
+    > Describe submodules modified here.
 
 ### Changes to Core Features:
 
 * [ ] Explanation added as to what your changes do and why they should be included
+
   > Describe changes here
 
 ### How to test these changes?
