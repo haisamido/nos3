@@ -43,9 +43,11 @@ Note that these are the recommended tasks and actions for submitting a pull requ
 --- 
 
 ## Test Checklist for Reviewers
-* Provisioned default path
-  - [ ] Default
+* Provisioned default path (ensure your update doesn't break other configurations)
+  - [ ] Default NOS
   - [ ] COSMOS
   - [ ] F'
 
 * [ ] Documentation reviewed
+
+* [ ] Validate destination branch after merge.
