@@ -38,6 +38,8 @@ Note that these are the recommended tasks and actions for submitting a pull requ
 
   > Describe testing steps here 
 
+### Closing Tags
+* [ ] Add any closing tags, or manually set this PR to close any related issue(s) that this PR resolves.
 ---
 
 ### Extra Considerations
