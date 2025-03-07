@@ -1,6 +1,6 @@
 name: "New Issue"
 description: Create a new ticket for a new request
-title: ""
+title: " "
 labels: [
   "NewIssue"
 ]
