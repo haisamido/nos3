@@ -6,23 +6,13 @@ labels: [
 body:
   - type: markdown
     attributes:
-      value: "Please add a short descriptive title to describe the issue above."
+      value: "Please add a short descriptive title to describe the issue."
   - type: textarea
     id: summary
     attributes:
       label: "Summary"
-      description: Provide a brief explanation of the issue
-      placeholder: Describe in a few lines your issue or request
+      description: Describe the issue or request.
+      placeholder: Provide examples of the issue or request.
     validations:
       required: true
-  - type: textarea
-    id: basic_example
-    attributes:
-      label: "Use Case"
-      description: Indicate here some basic examples of your issue.
-      placeholder: A few specific words about your issue.
-    validations:
-      required: true
-  - type: markdown
-    attributes:
-      value: "Optional: Please apply any labels or types as necessary - leave blank for unknown."
+
