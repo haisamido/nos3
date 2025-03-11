@@ -43,7 +43,7 @@
             <enable>false</enable>
         </imu>
         <mag>
-            <enable>false</enable>
+            <enable>true</enable>
         </mag>
         <onair>
             <enable>false</enable>
