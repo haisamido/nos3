@@ -40,7 +40,7 @@
             <enable>false</enable>
         </gps>
         <imu>
-            <enable>false</enable>
+            <enable>true</enable>
         </imu>
         <mag>
             <enable>true</enable>
