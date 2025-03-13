@@ -64,7 +64,7 @@
             <enable>false</enable>
         </syn>
         <torquer>
-            <enable>false</enable>
+            <enable>true</enable>
         </torquer>
         <thruster>
             <enable>false</enable>
