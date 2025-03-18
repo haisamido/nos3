@@ -96,7 +96,8 @@ do
 
     echo $SC_NUM " - Flight Software..."
     cd $FSW_DIR
-    gnome-terminal --window --title="FPrime" -- $DFLAGS -p 0.0.0.0:5000:5000 -p 0.0.0.0:50050:50050 -p 0.0.0.0:50000:50000 -v $BASE_DIR:$BASE_DIR --name $SC_NUM"_fprime" --network=$SC_NETNAME -h nos_fsw -w $BASE_DIR $DBOX $SCRIPT_DIR/fsw/start_fprime.sh
+    gnome-terminal --tab --title="FPrime_Deploy" -- $DFLAGS -p 0.0.0.0:5000:5000 -p 0.0.0.0:50050:50050 -p 0.0.0.0:50000:50000 -v $BASE_DIR:$BASE_DIR --name $SC_NUM"_fprime" --network=$SC_NETNAME -h nos_fsw -w $BASE_DIR $DBOX $SCRIPT_DIR/fsw/start_fprime.sh
+    gnome-terminal --window --title="FPrime" -- $DFLAGS -v $BASE_DIR:$BASE_DIR --name "deployment_log_fprime" --network=$SC_NETNAME -h nos_fsw -w $BASE_DIR $DBOX $SCRIPT_DIR/fsw/log_fprime.sh
     echo ""
 
     echo $SC_NUM " - CryptoLib..."
@@ -167,6 +168,6 @@ fi
 
 urlIP_fprime=${urlIP}
 
-gnome-terminal --window --title="fprime Python Script"  -- $DFLAGS -e URLIP_FPRIME=$urlIP_fprime -e URLIP_YAMCS=$URLIP_YAMCS -v $BASE_DIR:$BASE_DIR --name $SC_NUM"_fprime_gds_hook" --network=$SC_NETNAME -h nos_fsw -w $BASE_DIR $DBOX $SCRIPT_DIR/gsw/fprime_gds_python.sh
+gnome-terminal --tab --title="fprime Python Script"  -- $DFLAGS -e URLIP_FPRIME=$urlIP_fprime -e URLIP_YAMCS=$URLIP_YAMCS -v $BASE_DIR:$BASE_DIR --name $SC_NUM"_fprime_gds_hook" --network=$SC_NETNAME -h nos_fsw -w $BASE_DIR $DBOX $SCRIPT_DIR/gsw/fprime_gds_python.sh
 
 echo "Docker launch script completed!"

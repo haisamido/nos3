@@ -11,4 +11,6 @@ source $SCRIPT_DIR/../env.sh
 cd $SCRIPT_DIR/../fsw/fprime/fprime-nos3
 # sleep(20)
 python3 fprime_gds_Yamcs_script.py --tts-addr ${URLIP_FPRIME}
+# python3 fprime_testing_script.py --tts-addr ${URLIP_FPRIME} --channel-name cmdDisp.CommandsDispatched
+# python3 fprime_testing_script.py --tts-addr ${URLIP_FPRIME} --channel-name sampleSim.DeviceCounter 
 
