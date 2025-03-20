@@ -113,7 +113,7 @@ fsw:
 gcov:
 	cd $(COVERAGEDIR) && ctest -O ctest.log
 	lcov -c --directory . --output-file $(COVERAGEDIR)/coverage.info
-	genhtml $(COVERAGEDIR)/coverage.info --output-directory $$(COVERAGEDIR)/results
+	genhtml $(COVERAGEDIR)/coverage.info --output-directory $(COVERAGEDIR)/results
 
 gsw:
 	./scripts/gsw/build_cryptolib.sh
