@@ -58,7 +58,7 @@
             <enable>true</enable>
         </sample>
         <st>
-            <enable>false</enable>
+            <enable>true</enable>
         </st>
         <syn>
             <enable>false</enable>
