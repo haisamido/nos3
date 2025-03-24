@@ -50,17 +50,28 @@ The typical flow for development of a component is:
 ## 5.2 Test Articles
 The flight software source code is the test article.  This is the actual software to be used in flight, but recompiled for a Linux environment.  In addition, the ground software command and telemetry databases that are used for command and control of the flight software can also be treated as test articles.
 ## 5.3 Support Equipment
-The ground software system (AIT, COSMOS, OpenC3, or YAMCS) and the 42 dynamic software are required by the NOS system.  In addition, simulations for the components being tested are required for testing.
+The ground software system (Advanced Multi-Mission Operations System (AMMOS) Instrument Toolkit (AIT), COSMOS, OpenC3, or Yet Another Mission Control System (YAMCS)) and the 42 dynamic software are required by the NOS system.  In addition, simulations for the components being tested are required for testing.
 ## 5.4 Facilities
 No special facilities are needed for NOS verification and validation since all hardware is simulated in software.
 # 6 System Verification and Validation
 ## 6.1 Complete System Integration
+NOS can be used to perform flight and ground software verification and validation on the whole system or component by component.
 ### 6.1.1 Developmental/Engineering Unit Evaluations
+NOS mainly eliminates the need for performing evaluations on developmental or engineering units.  It provides the ability to evaluate the actual flight code, but recompiled for Linux.
+
 ### 6.1.2 Verification Activities
 #### 6.1.2.1 Verification Testing
+Testing will be the main method of verification.  As much as possible, it should be automated using the UT-Assert framework and if possible should provide pass/fail results.
+
 #### 6.1.2.2 Verification Analysis
+Analysis will be used in cases where deeper analysis is required to verify correct behavior of the software.
+
 #### 6.1.2.3 Verification Inspection
+Inspection will be rarely used.
+
 #### 6.1.2.4 Verification Demonstration
+Demonstation will be used, if necessary, to verify larger end-to-end type requirements that do not have a simple pass/fail criteria.
+
 ### 6.1.3 Validation Activities
 #### 6.1.3.1 Validation by Testing
 #### 6.1.3.2 Validation by Analysis
@@ -71,14 +82,18 @@ Once the flight and ground software have been verified and validated in the NOS 
 # 8 System Certification Products
 The output products of the verification and validation activities include test plans, test procedures, test reports, and a completed requirements traceability matrix.
 # Appendix A:  Acronyms and Abbreviations
+- AIT:  AMMOS Instrument Toolkit
+- AMMOS:  Advanced Multi-Mission Operations System
 - I&T:  Integration and Test
 - ITC:  Independent Test Capability
 - IV&V:  Independent Verification and Validation
 - NOS:  NASA Operational Simulator
 - RTM:  Requirements Traceability Matrix
 - V&V:  Verification and Validation
+- YAMCS:  Yet Another Mission Control System
 
 # Appendix B:  Definition of Terms
+TODO
 # Appendix C:  Requirement Verification Matrix
 TODO
 # Appendix D:  Validation Matrix
