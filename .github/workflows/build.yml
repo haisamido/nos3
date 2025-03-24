@@ -6,6 +6,9 @@ on:
 env:
   CTEST_OUTPUT_ON_FAILURE: true
 
+permissions:
+  contents: write
+
 jobs:
     fsw:
       runs-on: ubuntu-latest
@@ -70,4 +73,31 @@ jobs:
           with:
             name: coverage-artifacts
             path: docs/coverage
+    
+    linter:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+            submodules: recursive
+        - name: Generate file list (exclude ignored dirs)
+          id: filelist
+          run: |
+            FILES=$(find components \
+              -type f \( -name '*.c' -o -name '*.h' \) \
+              -not -path "components/syn/*" \
+              -not -path "components/onair/*")
+            echo "files=$FILES" >> $GITHUB_OUTPUT
+        - name: Clang Format
+          uses: DoozyX/clang-format-lint-action@v0.15
+          with:
+            files: ${{ steps.filelist.outputs.files}}
+            clangFormatVersion: 14
+            style: file
+            inplace: false #Change to True when satisfied
+
+
+
     
