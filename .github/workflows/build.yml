@@ -82,14 +82,17 @@ jobs:
           with:
             fetch-depth: 0
             submodules: recursive
-        - name: Generate file list (exclude ignored dirs)
+        - name: Generate Included Files List 
           id: filelist
+          shell: bash
           run: |
             FILES=$(find components \
               -type f \( -name '*.c' -o -name '*.h' \) \
               -not -path "components/syn/*" \
               -not -path "components/onair/*")
-            echo "files=$FILES" >> $GITHUB_OUTPUT
+            FILES_ESCAPED=$(echo "$FILES" | paste -sd' ' -)
+            echo "files=$FILES_ESCAPED" >> $GITHUB_OUTPUT
+
         - name: Clang Format
           uses: DoozyX/clang-format-lint-action@v0.15
           with:
