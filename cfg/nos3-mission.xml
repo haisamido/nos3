@@ -14,9 +14,12 @@
     <!-- Note this is experimental and not ready for use beyond proof of concept -->
     <number-spacecraft>1</number-spacecraft>
 
-    <!-- Spacecraft 1 Configuration -->
-    <!-- sc-full-config.xml (default), sc-minimal-config.xml, or sc-fprime-config.xml -->
-    <sc-1-cfg>sc-full-config.xml</sc-1-cfg>
+    <!-- Spacecraft 1 Configuration - options are as follows -->
+    <!-- sc-minimal-config.xml (only cFS heritage applications and the sample app) -->
+    <!-- sc-mission-config.xml (default, minimal + generic components and ADCS) -->
+    <!-- sc-research-config.xml (mission + integrations and non-generic components) -->
+    <!-- sc-fprime-config.xml (used for developing F' applications) -->
+    <sc-1-cfg>sc-mission-config.xml</sc-1-cfg>
 
     <!-- Spacecraft N Configuration -->
     <!-- <sc-N-cfg>sc-minimal-config.xml</sc-N-cfg> -->
