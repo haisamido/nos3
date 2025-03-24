@@ -19,7 +19,7 @@
     <!-- sc-mission-config.xml (default, minimal + generic components and ADCS, but no thruster) -->
     <!-- sc-research-config.xml (mission + integrations and non-generic components and thruster) -->
     <!-- sc-fprime-config.xml (used for developing F' applications) -->
-    <sc-1-cfg>sc-mission-config.xml</sc-1-cfg>
+    <sc-1-cfg>sc_cfgs/sc-mission-config.xml</sc-1-cfg>
 
     <!-- Spacecraft N Configuration -->
     <!-- <sc-N-cfg>sc-minimal-config.xml</sc-N-cfg> -->
