@@ -82,12 +82,9 @@ jobs:
           with:
             fetch-depth: 0
             submodules: recursive
+
         - name: Install clang-format
           run: sudo apt-get update && sudo apt-get install -y clang-format
-
-        - name: Generate Included Files List 
-          id: filelist
-          shell: bash
 
         - name: Run clang-format on selected files
           run: |
