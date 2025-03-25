@@ -1,12 +1,12 @@
 # STF - FSW Development Plan
-Note: STF is a Class A Design Reference Mission
+Note: Simulation To Flight (STF) is a design reference mission attempting to follow Class A practices
 ## Required Materials
 
-| Website/Support System | URL/Reference #|
+| Website/Support System | Reference #/URL|
 | ---------------------- | ---------------------- |
-| NASA Software Engineering and Assurance Handbook (NASA-HDBK-2203) | https://swehb.nasa.gov/ |
-| The NASA Software Engineering Requirements | NPR 7150.2D|
-| The NASA Software Assurance and Software Safety Standard requirements | NASA-STD-8739.8B|
+| NASA Software Engineering and Assurance Handbook | NASA-HDBK-2203: https://swehb.nasa.gov/ |
+| The NASA Software Engineering Requirements | NPR 7150.2D: https://nodis3.gsfc.nasa.gov/displayDir.cfm?t=NPR&c=7150&s=2D |
+| The NASA Software Assurance and Software Safety Standard requirements | NASA-STD-8739.8B: https://standards.nasa.gov/sites/default/files/standards/NASA/B/0/NASA-STD-87398-RevisionB.pdf |
 
 ## Software Management Approach
 
