@@ -29,7 +29,11 @@ In case of conflicts, the applicable documents take precedence over this documen
 The requirements for this system come from the Concept of Operations / Architecture, the User's Manual and Developer's Guide, and the Requirements document.
 
 ## 3.2 System Architecture
-NOS provides a complete model of a satellite and the operational ground system used to control it.  The satellite model enables development of the satellite flight software.  This model includes simulators for the various hardware components on the satellite such as sun sensors, star trackers, thrusters, payloads, etc.  The system architecture for this system can be found in the Concept of Operations / Architecture document.
+NOS provides a complete model of a satellite and the operational ground system used to control it.  The satellite model enables development of the satellite flight software.  This model includes simulators for the various hardware components on the satellite such as sun sensors, star trackers, thrusters, payloads, etc.  The diagram below depicts the NOS architecture.
+
+![NOS Architecture](./_static/NOS3-Architecture.png)
+
+More details about the system architecture for this system can be found in the Concept of Operations / Architecture document.
 
 # 4 Verification and Validation Process
 ## 4.1 Verification and Validation Management Responsibilities
