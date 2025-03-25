@@ -28,7 +28,7 @@
             <enable>true</enable>
         </cam>
         <css>
-            <enable>false</enable>
+            <enable>true</enable>
         </css>
         <eps>
             <enable>true</enable>
@@ -40,10 +40,10 @@
             <enable>false</enable>
         </gps>
         <imu>
-            <enable>false</enable>
+            <enable>true</enable>
         </imu>
         <mag>
-            <enable>false</enable>
+            <enable>true</enable>
         </mag>
         <onair>
             <enable>false</enable>
@@ -64,10 +64,10 @@
             <enable>false</enable>
         </syn>
         <torquer>
-            <enable>false</enable>
+            <enable>true</enable>
         </torquer>
         <thruster>
-            <enable>false</enable>
+            <enable>true</enable>
         </thruster>
     </components>
     <gui>
