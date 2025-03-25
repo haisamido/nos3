@@ -9,11 +9,6 @@ The purpose of this plan is to identify the activities that will establish compl
 ## 1.2 Responsibility and Change Authority
 The NASA Independent Verification and Validation (IV&V) Independent Test Capability (ITC) team is responsible for maintenance of this plan.  This group has the authority to approve changes to this plan.
 
-## 1.3 Definitions
-Validation (of a product): The process of showing proof that the product accomplishes the intended purpose based on stakeholder expectations and the Concept of Operations. May be determined by a combination of test, analysis, demonstration, and inspection. (Answers the question, “Am I building the right product?”)
-
-Verification (of a product): Proof of compliance with specifications. Verification may be determined by test, analysis, demonstration, or inspection or a combination thereof. (Answers the question, “Did I build the product right?”)
-
 # 2 Applicable and Reference Documents
 ## 2.1 Applicable Documents
 1. Concept of Operations / Architecture
@@ -122,7 +117,9 @@ The output products of the verification and validation activities include test p
 - YAMCS:  Yet Another Mission Control System
 
 # Appendix B:  Definition of Terms
-TODO
+Validation (of a product): The process of showing proof that the product accomplishes the intended purpose based on stakeholder expectations and the Concept of Operations. May be determined by a combination of test, analysis, demonstration, and inspection. (Answers the question, “Am I building the right product?”)
+
+Verification (of a product): Proof of compliance with specifications. Verification may be determined by test, analysis, demonstration, or inspection or a combination thereof. (Answers the question, “Did I build the product right?”)
 
 # Appendix C:  Requirement Verification Matrix
 TODO
