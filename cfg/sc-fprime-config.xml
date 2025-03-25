@@ -25,7 +25,7 @@
             <enable>false</enable>
         </adcs>
         <cam>
-            <enable>false</enable>
+            <enable>true</enable>
         </cam>
         <css>
             <enable>true</enable>
@@ -34,7 +34,7 @@
             <enable>true</enable>
         </eps>
         <fss>
-            <enable>false</enable>
+            <enable>true</enable>
         </fss>
         <gps>
             <enable>false</enable>
@@ -52,7 +52,7 @@
             <enable>true</enable>
         </radio>
         <rw>
-            <enable>false</enable>
+            <enable>true</enable>
         </rw>
         <sample>
             <enable>true</enable>
