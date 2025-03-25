@@ -34,7 +34,7 @@
             <enable>true</enable>
         </eps>
         <fss>
-            <enable>true</enable>
+            <enable>false</enable>
         </fss>
         <gps>
             <enable>false</enable>
@@ -52,7 +52,7 @@
             <enable>true</enable>
         </radio>
         <rw>
-            <enable>true</enable>
+            <enable>false</enable>
         </rw>
         <sample>
             <enable>true</enable>
@@ -64,10 +64,10 @@
             <enable>false</enable>
         </syn>
         <torquer>
-            <enable>false</enable>
+            <enable>true</enable>
         </torquer>
         <thruster>
-            <enable>false</enable>
+            <enable>true</enable>
         </thruster>
     </components>
     <gui>
