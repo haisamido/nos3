@@ -14,7 +14,7 @@
             <enable>true</enable>
         </lc>
         <sbn>
-            <enable>false</enable>
+            <enable>true</enable>
         </sbn>
         <sc>
             <enable>true</enable>
