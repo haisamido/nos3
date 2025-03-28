@@ -25,7 +25,7 @@
             <enable>false</enable>
         </adcs>
         <cam>
-            <enable>false</enable>
+            <enable>true</enable>
         </cam>
         <css>
             <enable>true</enable>
@@ -67,7 +67,7 @@
             <enable>true</enable>
         </torquer>
         <thruster>
-            <enable>false</enable>
+            <enable>true</enable>
         </thruster>
     </components>
     <gui>

@@ -1,6 +1,6 @@
 <nos3-mission-cfg>
     <start-time>814048200.0</start-time>
-    <!-- Note fprime only operational in sc-fprime-config.xml -->
+    <!-- Note fprime only operational in sc-minimal-config.xml -->
 
     <!-- Ground Software -->
     <!-- cosmos, openc3, fprime, or yamcs (default) -->
