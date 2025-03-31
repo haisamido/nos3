@@ -80,6 +80,7 @@ By customizing and extending the existing components or creating new ones, you c
 NOS3 isn't a substitute for hardware testing, just a tool to augment the number of types of tests possible.
 The component development flow includes the development of a standalone checkout application that can more rapidly be developed, deployed, and tested on hardware.
 The flight software will use the same functions and code developed and tested through that process allowing focus to shift to data flow and system level tests cleanly.
+The ground software in NOS3 can be used for command and control for hardware testing.
 
 ### What can NOS3 give me during Integration and Testing (I&T)?
 
