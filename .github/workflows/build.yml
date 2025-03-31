@@ -6,6 +6,9 @@ on:
 env:
   CTEST_OUTPUT_ON_FAILURE: true
 
+permissions:
+  contents: write
+
 jobs:
     fsw:
       runs-on: ubuntu-latest
