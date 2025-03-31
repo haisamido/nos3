@@ -60,6 +60,7 @@ The typical flow for development of a component is:
 3.  Flight software development reusing code from the checkout application
 4.  Ground software command and telemetry database development
 5.  Flight software test with ground software and simulator
+6.  Flight software test with ground software and actual hardware
 
 ## 5.2 Test Articles
 The flight software source code is the test article.  This is the actual software to be used in flight but recompiled for a Linux environment.  In addition, the ground software command and telemetry databases that are used for command and control of the flight software can also be treated as test articles.
@@ -68,7 +69,7 @@ The flight software source code is the test article.  This is the actual softwar
 The ground software system (Advanced Multi-Mission Operations System (AMMOS) Instrument Toolkit (AIT), COSMOS, OpenC3, or Yet Another Mission Control System (YAMCS)) and the 42 dynamic software are required by the NOS system.  In addition, simulations for the components being tested are required for testing.
 
 ## 5.4 Facilities
-No special facilities are needed for NOS verification and validation since all hardware is simulated in software.  A standard engineering laptop with git, Vagrant, and VirtualBox installed is sufficient for performing NOS verification and validation.
+No special facilities are needed for NOS verification and validation since all hardware is simulated in software.  A standard engineering laptop with git, Vagrant, and VirtualBox installed is sufficient for performing NOS verification and validation.  For testing with actual hardware, the ground software will be run on a laptop and the laptop will be connected to the actual hardware either by radio or by a hard line connection.
 
 # 6 System Verification and Validation
 ## 6.1 Complete System Integration
