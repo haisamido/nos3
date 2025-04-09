@@ -18,7 +18,7 @@ chmod +x generate_template.sh
 ```
    ![generate_template](./_static/adding_nos3_component/generate_template.png)
 
-After creating your component, you will see a folder created with the name you supplied in the script in /nos3/components. Here are the component files you will need to edit for your specific component. The next steps will detail what is needed to add your component to cFS, and cosmos. The component created is identical to the sample component, so for the remainder of this guide we will be exploring the code in the sample component necessary to add/modify in order for your newly created component to integrate into nos3. So, in each step if you see "sample" simply replace with th ename of your new component.
+After creating your component, you will see a folder created with the name you supplied in the script in /nos3/components. Here are the component files you will need to edit for your specific component. The next steps will detail what is needed to add your component to cFS, and cosmos. The component created is identical to the sample component, so for the remainder of this guide we will be exploring the code in the sample component necessary to add/modify in order for your newly created component to integrate into nos3. So, in each step if you see "sample" simply replace with the name of your new component.
 
 Fidelity to the component is ultimately left up to the user, and "TODO" statements are called out in the component files for what the user needs to modify that may be specific to the new component. For examples of different levels fidelity, you can compare and contrast in between the various generic_components, Arducam, Novatel GPS, etc in NOS3.
 
@@ -34,7 +34,7 @@ Fidelity to the component is ultimately left up to the user, and "TODO" statemen
 
     ![platform_cfg](./_static/adding_nos3_component/platform_cfg.png)
 
-5. We will know modify the opcodes for our cosmos Command and TLM definitions to match the opcodes defined in **xxxx.msgids.h**. These command and tlm definintions for cosmos are found in **nos3/components/name_of_your_component/gsw/name_of_your_component/cmd_tlm/**. Edit the two files as seen below with the opcodes you defined.
+5. We will know modify the opcodes for our cosmos Command and TLM definitions to match the opcodes defined in **xxxx.msgids.h**. These command and tlm definitions for cosmos are found in **nos3/components/name_of_your_component/gsw/name_of_your_component/cmd_tlm/**. Edit the two files as seen below with the opcodes you defined.
 
     ![Sample_cmd](./_static/adding_nos3_component/Sample_cmd_opcodes.png)
 
@@ -45,7 +45,7 @@ Fidelity to the component is ultimately left up to the user, and "TODO" statemen
 
     ![nos3-simulator](./_static/adding_nos3_component/nos3_simulator_sample_xml.png)
 
-7. Next we will add your newly defined component to the TO tables found in **nos3/cfg/tables**. In to_config.c, include your new component and add your component to the MID config table with the same syntax pictured below. Note, be sure to add the TLM_MIDs in the code blocks defined sequentially for organziation. You'll notice sample has a Sample_HK_TLM_MID and a Sample_Device_TLM_MID, so copy those lines and add to the end of the table/codeblock and modify the name for your component.
+7. Next we will add your newly defined component to the TO tables found in **nos3/cfg/tables**. In to_config.c, include your new component and add your component to the MID config table with the same syntax pictured below. Note, be sure to add the TLM_MIDs in the code blocks defined sequentially for organization. You'll notice sample has a Sample_HK_TLM_MID and a Sample_Device_TLM_MID, so copy those lines and add to the end of the table/codeblock and modify the name for your component.
 
     ![to_config_include_msgids](./_static/adding_nos3_component/to_config_include_msgIds.png)
 
@@ -80,7 +80,7 @@ Fidelity to the component is ultimately left up to the user, and "TODO" statemen
 
     ![Cosmos_cmd_tlm_server](./_static/adding_nos3_component/cosmos_cmd_tlm_server_target_interface.png)
 
-14. Now we are ready to modify the NOS3 scripts to launch either the component checkout or launching with the normal NOS3 operations. First lets add the standalone checkout to the checkout script. The checkout.sh script can be found in **nos3/scripts/**. Here you will add the targets to launch your standalone checkout like sample below. Simply copy the syntax and change sample to your components names. Note, you would need to follwo the standlone checkout documentaiont to build and launch your checkout with "make launch"
+14. Now we are ready to modify the NOS3 scripts to launch either the component checkout or launching with the normal NOS3 operations. First lets add the standalone checkout to the checkout script. The checkout.sh script can be found in **nos3/scripts/**. Here you will add the targets to launch your standalone checkout like sample below. Simply copy the syntax and change sample to your components names. Note, you would need to follow the standalone checkout documentation to build and launch your checkout with "make launch"
 
     ![checkout_script_sample](./_static/adding_nos3_component/checkout_script_sample.png)
 
@@ -116,5 +116,5 @@ Fidelity to the component is ultimately left up to the user, and "TODO" statemen
 
 You have now added the necessary files and modifications to build and run a newly generated component in NOS3! 
 
-You can now build and run NOS3 with your new component. It is always reccommended to build and run the standalone checkout of the component first before running with all of nos3. Again, this step by step guide is for reference and the user will need to modify the cFS app and hardware model simulator (found in **nos3/components/name_of_your_component/sim/) for their specific use case for their new component. However, this guide will allow you to verify basic sample functionality with a newly generated component from the template generation.
+You can now build and run NOS3 with your new component. It is always recommended to build and run the standalone checkout of the component first before running with all of nos3. Again, this step by step guide is for reference and the user will need to modify the cFS app and hardware model simulator (found in **nos3/components/name_of_your_component/sim/) for their specific use case for their new component. However, this guide will allow you to verify basic sample functionality with a newly generated component from the template generation.
 
