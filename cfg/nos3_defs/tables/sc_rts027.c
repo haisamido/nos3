@@ -15,9 +15,9 @@
 #include "mgr_app.h"
 
 /* 
-** *****************************
-** RTS 026 - Enable Science Mode
-** *****************************
+** ************************************************
+** RTS 027 - Science Mode: Low Power, Pause Science
+** ************************************************
 */
 
 /* Custom table structure, modify as needed to add desired commands */
@@ -25,27 +25,27 @@ typedef struct
 {
     SC_RtsEntryHeader_t hdr1;
     MGR_U8_cmd_t cmd1;
-} SC_RtsStruct026_t;
+} SC_RtsStruct027_t;
 
 /* Define the union to size the table correctly */
 typedef union
 {
-    SC_RtsStruct026_t rts;
+    SC_RtsStruct027_t rts;
     uint16            buf[SC_RTS_BUFF_SIZE];
-} SC_RtsTable026_t;
+} SC_RtsTable027_t;
 
 /* Helper macro to get size of structure elements */
-#define SC_MEMBER_SIZE(member) (sizeof(((SC_RtsStruct026_t *)0)->member))
+#define SC_MEMBER_SIZE(member) (sizeof(((SC_RtsStruct027_t *)0)->member))
 
 /* Used designated intializers to be verbose, modify as needed/desired */
-SC_RtsTable026_t SC_Rts026 = {    
+SC_RtsTable027_t SC_Rts027 = {    
 .rts = {
-        /* 1 - Manager Note: Science Initialized */
+        /* 1 - Manager Note: Low Power, Science Paused */
         .hdr1.TimeTag = 1,
         .cmd1.CmdHeader = CFE_MSG_CMD_HDR_INIT(MGR_CMD_MID, SC_MEMBER_SIZE(cmd1), MGR_UPDATE_SCI_STATUS_CC, 0x00),
-        .cmd1.U8 = SS_NO_SCIENCE_INITALIZED,
+        .cmd1.U8 = SS_NO_SCIENCE_LOW_POWER,
     }
 };
 
 /* Macro for table structure */
-CFE_TBL_FILEDEF(SC_Rts026, SC.RTS_TBL026, SC Example RTS_TBL026, sc_rts026.tbl)
+CFE_TBL_FILEDEF(SC_Rts027, SC.RTS_TBL027, SC Example RTS_TBL027, sc_rts027.tbl)
