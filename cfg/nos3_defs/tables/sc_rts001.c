@@ -19,6 +19,10 @@
 #include "to_cmds.h"
 #include "to_lab_msgids.h"
 #include "to_lab_msg.h"
+#include "lc_msgids.h"
+#include "lc_app.h"
+#include "mgr_msgids.h"
+#include "mgr_app.h"
 
 /* Custom table structure, modify as needed to add desired commands */
 typedef struct
@@ -38,6 +42,15 @@ typedef struct
     /* 5 - Start RTS 3 (Safe Mode) */
     SC_RtsEntryHeader_t hdr5;
     SC_RtsCmd_t cmd5;
+    /* 6 - Enable Science Transition RTS 26 */
+    SC_RtsEntryHeader_t hdr6;
+    SC_RtsCmd_t cmd6;
+    /* 7 - Reset Science Mode AP */
+    SC_RtsEntryHeader_t hdr7;
+    LC_ResetAPStats_t cmd7;
+    /* 8 - Enable Science Mode AP */
+    SC_RtsEntryHeader_t hdr8;
+    LC_SetAPState_t cmd8;
 } SC_RtsStruct001_t;
 
 /* Define the union to size the table correctly */
@@ -80,6 +93,24 @@ SC_RtsTable001_t SC_Rts001 = {
         .hdr5.TimeTag = 1,
         .cmd5.CmdHeader = CFE_MSG_CMD_HDR_INIT(SC_CMD_MID, SC_MEMBER_SIZE(cmd5), SC_START_RTS_CC, 0x00),
         .cmd5.RtsId = 3,
+
+        /* 6 - Enable Science Transition RTS: (26) */
+        .hdr6.TimeTag = 0,
+        .cmd6.CmdHeader = CFE_MSG_CMD_HDR_INIT(SC_CMD_MID, SC_MEMBER_SIZE(cmd6), SC_ENABLE_RTS_CC, 0x00),
+        .cmd6.RtsId = 26,
+        .cmd6.Padding = 0,
+
+        /* 7 - Reset Science Mode AP */
+        .hdr7.TimeTag = 1,
+        .cmd7.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd7), LC_RESET_AP_STATS_CC, 0x00),
+        .cmd7.APNumber = 26,
+        .cmd7.Padding = 0,
+
+        /* 8 - Enable Science Mode AP */
+        .hdr8.TimeTag = 1,
+        .cmd8.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd8), LC_SET_AP_STATE_CC, 0x00),
+        .cmd8.APNumber = 26,
+        .cmd8.NewAPState = LC_APSTATE_ACTIVE,
     }
 };
 
