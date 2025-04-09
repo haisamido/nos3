@@ -38,11 +38,12 @@
 #include "lc_tbldefs.h"
 
 #include "generic_eps_msgids.h"
+#include "mgr_msgids.h"
 #include "novatel_oem615_msgids.h"
 
 #define GENERIC_EPS_MID_MSG CFE_SB_MSGID_WRAP_VALUE(GENERIC_EPS_HK_TLM_MID) 
 #define NOVATEL_OEM615_DEVICE_TLM_MSG CFE_SB_MSGID_WRAP_VALUE(NOVATEL_OEM615_DEVICE_TLM_MID)
-#define MGR_HK_TLM_MSG CFE_SB_MSGID_WRAP_VALUE(0x08F8)
+#define MGR_HK_TLM_MSG CFE_SB_MSGID_WRAP_VALUE(MGR_HK_TLM_MID)
 
 // static const CFE_SB_MsgId_t testId = CFE_SB_ValueToMsgId(TEST_MID);
 
@@ -420,7 +421,6 @@ LC_WDTEntry_t LC_DefaultWDT[LC_MAX_WATCHPOINTS] = {
     },
 
     /* #26 (MGR SPACECRAFT_MODE = Science) */
-    // update offset and compvalue
     {
         .DataType                   = LC_DATA_UBYTE,
         .OperatorID                 = LC_OPER_EQ,
