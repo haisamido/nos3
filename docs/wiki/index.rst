@@ -15,6 +15,7 @@ This documentation is designed to provide information for users and developers t
    Flight_Software.md
    Ground_Software.md
    Components.md
+   Generating_NOS3_Component.md
    Simulators.md
    Design_Reference_Mission.md
    STF_FSW_Development_Plan.md
