@@ -85,7 +85,7 @@ elif [ "$GSW" == "cosmos-gui" ]; then
 elif [ "$GSW" == "yamcs" ]; then
   echo "Launching YAMCS..."
   YAMCS_CFG_BUILD_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-  YAMCS_SCRIPT_DIR=$YAMCS_CFG_BUILD_DIR/../../scripts
+  YAMCS_SCRIPT_DIR=$YAMCS_CFG_BUILD_DIR
   source $YAMCS_SCRIPT_DIR/env.sh
 
   # rm -rf $USER_NOS3_DIR/yamcs 2> /dev/null
