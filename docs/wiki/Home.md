@@ -87,3 +87,10 @@ The ground software in NOS3 can be used for command and control for hardware tes
 During I&T activities, NOS3 enables you to perform integration testing of your satellite system, validate the operational procedures, and verify the overall system performance.
 NOS3 allows you to conduct end-to-end simulations, test different mission scenarios, and assess the behavior of the satellite system under various conditions.
 
+### How do I create a new component in NOS3?
+
+You can reference the **Generating a New Component** section of the documentation. Here it will guide you through how to generate a component in NOS3. 
+
+Link: [Generating a New Component](Generating_NOS3_Component.md)
+
+

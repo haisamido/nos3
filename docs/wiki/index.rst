@@ -13,6 +13,8 @@ This documentation is designed to provide information for users and developers t
    Architecture.md
    Flight_Software.md
    Ground_Software.md
+   Components.md
+   Generating_NOS3_Component.md
    Simulators.md
    Components.md
    STF_ConOps.md
