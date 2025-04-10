@@ -75,12 +75,19 @@ if [ "$GSW" == "cosmos" ]; then
       ballaerospace/cosmos:4.5.0 tail -f /dev/null
 
   sleep 5
-
   $DCALL exec cosmos_openc3-operator_1 bash -c "apt update && apt install -y xvfb"
   $DCALL exec -d cosmos_openc3-operator_1 bash -c "xvfb-run ruby CmdTlmServer /cosmos/config/tools/cmd_tlm_server/cmd_tlm_server.txt"
 
 elif [ "$GSW" == "cosmos-gui" ]; then
     $DFLAGS -v $BASE_DIR:$BASE_DIR -dit -v /tmp/nos3:/tmp/nos3 -v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY=$DISPLAY -e QT_X11_NO_MITSHM=1 -e PROCESSOR_ENDIANNESS="LITTLE_ENDIAN" -w $GSW_DIR --name cosmos_openc3-operator_1 --network=nos3_core ballaerospace/cosmos:4.5.0
+
+    echo ""
+    echo "Please quickly click the COSMOS Ok button to launch"
+    echo "Afterwards click the top left COSMOS button in the NOS3 Launcher"
+    sleep 20
+    echo ""
+    echo "If you haven't fully started COSMOS by now, you're too late ... start over"
+    echo ""
 
 elif [ "$GSW" == "yamcs" ]; then
   echo "Launching YAMCS..."
