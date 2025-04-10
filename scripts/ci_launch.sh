@@ -205,4 +205,4 @@ for (( i=1; i<=$SATNUM; i++ )); do
     $DNETWORK connect $SC_NET nos_sim_bridge
 done
 
-echo "Docker launch script completed!"
+echo "Docker headless launch script completed!"
