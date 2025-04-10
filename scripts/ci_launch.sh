@@ -147,10 +147,11 @@ for (( i=1; i<=$SATNUM; i++ )); do
     echo "$SC_NUM - 42..."
     rm -rf $USER_NOS3_DIR/42/NOS3InOut
     cp -r $BASE_DIR/cfg/build/InOut $USER_NOS3_DIR/42/NOS3InOut
-    docker run -d --name ${SC_NUM}_42 --network=$SC_NET \
+    xhost +local:*
+    docker run -d --name ${SC_NUM}_fortytwo -h fortytwo --network=$SC_NET \
         --log-driver json-file --log-opt max-size=5m --log-opt max-file=3 \
         -e DISPLAY=$DISPLAY -v "$USER_NOS3_DIR:$USER_NOS3_DIR" \
-        -v /tmp/.X11-unix:/tmp/.X11-unix:ro -w "$USER_NOS3_DIR/42" $DBOX ./42 NOS3InOut
+        -v /tmp/.X11-unix:/tmp/.X11-unix:ro -w "$USER_NOS3_DIR/42" $DBOX $USER_NOS3_DIR/42/42 NOS3InOut
 
     echo "$SC_NUM - Flight Software..."
     docker run -dit --name ${SC_NUM}_nos_fsw -h nos_fsw --network=$SC_NET \
@@ -173,8 +174,8 @@ for (( i=1; i<=$SATNUM; i++ )); do
         -v "$SIM_DIR:$SIM_DIR" -w "$SIM_BIN" $DBOX \
         /usr/bin/nos_engine_server_standalone -f $SIM_BIN/nos_engine_server_config.json
 
-    docker run -d --name ${SC_NUM}_truth42sim --network=$SC_NET \
-        --log-driver json-file --log-opt max-size=5m --log-opt max-file=3 \
+    docker run -dit --name ${SC_NUM}_truth42sim --network=$SC_NET \
+        -h truth42sim --log-driver json-file --log-opt max-size=5m --log-opt max-file=3 \
         -v "$SIM_DIR:$SIM_DIR" -w "$SIM_BIN" $DBOX \
         ./nos3-single-simulator $CFG_FILE truth42sim
 
