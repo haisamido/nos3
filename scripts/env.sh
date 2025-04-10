@@ -30,23 +30,6 @@ INFLUXDB_DB=ait
 INFLUXDB_ADMIN_USER=ait
 INFLUXDB_ADMIN_PASSWORD=admin_password
 
-
-get_file_user() {
-    if stat --version >/dev/null 2>&1; then
-        stat -c '%U' "$1"
-    else
-        stat -f '%Su' "$1"
-    fi
-}
-
-get_file_group() {
-    if stat --version >/dev/null 2>&1; then
-        stat -c '%G' "$1"
-    else
-        stat -f '%Sg' "$1"
-    fi
-}
-
 ###
 ### Notes: 
 ###   Podman and/or Docker on RHEL not yet supported
@@ -58,22 +41,8 @@ get_file_group() {
 #    DCREATE="docker create --rm -it"
 #    DNETWORK="docker network"
 #else
-    file_user=$(get_file_user "$SCRIPT_DIR/env.sh")
-    file_group=$(get_file_group "$SCRIPT_DIR/env.sh")
-
     DCALL="docker"
-
-# Conditional mount for passwd/group files (Linux only)
-    if [[ "$(uname)" == "Linux" ]]; then
-        PASSWD_MOUNTS="-v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro"
-    else
-        PASSWD_MOUNTS=""
-    fi
-
-    DFLAGS="docker run --rm -it \
-        $PASSWD_MOUNTS \
-        -u $(id -u "$file_user"):$(getent group "$file_group" | cut -d: -f3)"
-
+    DFLAGS="docker run --rm -it -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -u $(id -u $(stat -c '%U' $SCRIPT_DIR/env.sh)):$(getent group $(stat -c '%G' $SCRIPT_DIR/env.sh) | cut -d: -f3)"
     DFLAGS_CPUS="$DFLAGS --cpus=$NUM_CPUS"
     DCREATE="docker create --rm -it"
     DNETWORK="docker network"
