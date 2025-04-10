@@ -1,5 +1,5 @@
 #!/bin/bash -i
-# set -e
+set -e
 
 # Default GSW is cosmos
 GSW="cosmos"
@@ -11,13 +11,17 @@ while [[ $# -gt 0 ]]; do
       GSW="yamcs"
       shift
       ;;
+    --use-cosmos-gui)
+      GSW="cosmos-gui"
+      shift
+      ;;      
     --use-cosmos)
       GSW="cosmos"
       shift
       ;;
     *)
       echo "Unknown option: $1"
-      echo "Usage: $0 [--use-cosmos | --use-yamcs]"
+      echo "Usage: $0 [--use-cosmos | --use-cosmos-gui | --use-yamcs]"
       exit 1
       ;;
   esac
@@ -63,6 +67,10 @@ if [ "$GSW" == "cosmos" ]; then
       -v "$BASE_DIR/scripts:/scripts:ro" \
       -v /tmp/nos3:/tmp/nos3 \
       --network=nos3_core \
+      -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+      -e DISPLAY=$DISPLAY \
+      -e QT_X11_NO_MITSHM=1 \
+      -e PROCESSOR_ENDIANNESS="LITTLE_ENDIAN" \
       -w /cosmos/tools \
       ballaerospace/cosmos:4.5.0 tail -f /dev/null
 
@@ -70,6 +78,9 @@ if [ "$GSW" == "cosmos" ]; then
 
   docker exec cosmos_openc3-operator_1 bash -c "apt update && apt install -y xvfb"
   docker exec -d cosmos_openc3-operator_1 bash -c "xvfb-run ruby CmdTlmServer /cosmos/config/tools/cmd_tlm_server/cmd_tlm_server.txt"
+
+elif [ "$GSW" == "cosmos-gui" ]; then
+    $DFLAGS -v $BASE_DIR:$BASE_DIR -dit -v /tmp/nos3:/tmp/nos3 -v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY=$DISPLAY -e QT_X11_NO_MITSHM=1 -e PROCESSOR_ENDIANNESS="LITTLE_ENDIAN" -w $GSW_DIR --name cosmos_openc3-operator_1 --network=nos3_core ballaerospace/cosmos:4.5.0
 
 elif [ "$GSW" == "yamcs" ]; then
   echo "Launching YAMCS..."

@@ -100,9 +100,11 @@ yamcs-operator:
 	@export SYSTEM_TEST_FILE_PATH=$(SYSTEM_TEST_FILE_PATH) && \
 	./scripts/ci_launch.sh --use-yamcs
 
+#Be sure that your nos3-mission.xml has been set to COSMOS
 cosmos-operator:
-	echo "TODO:  This is not yet functional"
-	
+	@export SYSTEM_TEST_FILE_PATH=../..$(SYSTEM_TEST_FILE_PATH) && \
+	./scripts/ci_launch.sh --use-cosmos-gui 
+
 clean:
 	$(MAKE) clean-fsw
 	$(MAKE) clean-sim
