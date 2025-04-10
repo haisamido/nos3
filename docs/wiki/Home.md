@@ -91,6 +91,6 @@ NOS3 allows you to conduct end-to-end simulations, test different mission scenar
 
 You can reference the **Generating a New Component** section of the documentation. Here it will guide you through how to generate a component in NOS3. 
 
-Link: [Generating a new component](Generating_NOS3_Component.md)
+Link: [Generating a New Component](Generating_NOS3_Component.md)
 
 
