@@ -542,10 +542,10 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] = {
           0, LC_RPN_EQUAL}},
 
     /* #26 Enable Science Mode */
-    {.DefaultState      = LC_APSTATE_ACTIVE,
-     .MaxPassiveEvents  = 1,
-     .MaxPassFailEvents = 1,
-     .MaxFailPassEvents = 1,
+    {.DefaultState      = LC_APSTATE_PASSIVE,
+     .MaxPassiveEvents  = 0,
+     .MaxPassFailEvents = 0,
+     .MaxFailPassEvents = 0,
      .RTSId             = 26,
      .MaxFailsBeforeRTS = 1,
      .EventType         = CFE_EVS_EventType_INFORMATION,
@@ -556,7 +556,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] = {
           26, LC_RPN_EQUAL}},
 
     /* #27 Science Mode: Low Power */
-    {.DefaultState      = LC_APSTATE_ACTIVE,
+    {.DefaultState      = LC_APSTATE_DISABLED,
      .MaxPassiveEvents  = 0,
      .MaxPassFailEvents = 0,
      .MaxFailPassEvents = 0,
@@ -570,7 +570,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] = {
           27, LC_RPN_EQUAL}},
 
     /* #28 Science Mode: Recharged */
-    {.DefaultState      = LC_APSTATE_ACTIVE,
+    {.DefaultState      = LC_APSTATE_DISABLED,
      .MaxPassiveEvents  = 0,
      .MaxPassFailEvents = 0,
      .MaxFailPassEvents = 0,
@@ -584,7 +584,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] = {
           28, LC_RPN_EQUAL}},
 
     /* #29 Science Mode: EXIT Science Mode */
-    {.DefaultState      = LC_APSTATE_ACTIVE,
+    {.DefaultState      = LC_APSTATE_DISABLED,
      .MaxPassiveEvents  = 0,
      .MaxPassFailEvents = 0,
      .MaxFailPassEvents = 0,
@@ -598,7 +598,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] = {
           29, LC_RPN_EQUAL}},
 
     /* #30 Science Mode: Entering AK Region */
-    {.DefaultState      = LC_APSTATE_ACTIVE,
+    {.DefaultState      = LC_APSTATE_DISABLED,
      .MaxPassiveEvents  = 0,
      .MaxPassFailEvents = 0,
      .MaxFailPassEvents = 0,
@@ -620,7 +620,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] = {
           LC_RPN_EQUAL}},
 
     /* #31 Science Mode: Entering CONUS Region */
-    {.DefaultState      = LC_APSTATE_ACTIVE,
+    {.DefaultState      = LC_APSTATE_DISABLED,
      .MaxPassiveEvents  = 0,
      .MaxPassFailEvents = 0,
      .MaxFailPassEvents = 0,
@@ -642,7 +642,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] = {
           LC_RPN_EQUAL}},
 
     /* #32 Science Mode: Entering HI Region */
-    {.DefaultState      = LC_APSTATE_ACTIVE,
+    {.DefaultState      = LC_APSTATE_DISABLED,
      .MaxPassiveEvents  = 0,
      .MaxPassFailEvents = 0,
      .MaxFailPassEvents = 0,
@@ -664,7 +664,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] = {
           LC_RPN_EQUAL}},
 
     /* #33 Science Mode: Left AK Region */
-    {.DefaultState      = LC_APSTATE_ACTIVE,
+    {.DefaultState      = LC_APSTATE_DISABLED,
      .MaxPassiveEvents  = 0,
      .MaxPassFailEvents = 0,
      .MaxFailPassEvents = 0,
@@ -687,7 +687,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] = {
           LC_RPN_EQUAL}},
 
     /* #34 Science Mode: Left CONUS Region */
-    {.DefaultState      = LC_APSTATE_ACTIVE,
+    {.DefaultState      = LC_APSTATE_DISABLED,
      .MaxPassiveEvents  = 0,
      .MaxPassFailEvents = 0,
      .MaxFailPassEvents = 0,
@@ -710,7 +710,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] = {
           LC_RPN_EQUAL}},
 
     /* #35 Science Mode: Left HI Region */
-    {.DefaultState      = LC_APSTATE_ACTIVE,
+    {.DefaultState      = LC_APSTATE_DISABLED,
      .MaxPassiveEvents  = 0,
      .MaxPassFailEvents = 0,
      .MaxFailPassEvents = 0,

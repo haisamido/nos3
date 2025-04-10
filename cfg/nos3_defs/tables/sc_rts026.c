@@ -26,8 +26,8 @@
 typedef struct
 {
     /* 1 - Enable Science RTS: Low Power (27) */
-    SC_RtsEntryHeader_t hdr1;
-    SC_RtsCmd_t cmd1;
+    // SC_RtsEntryHeader_t hdr1;
+    // SC_RtsCmd_t cmd1;
     /* 2 - Enable Science RTSs: Safe Mode (29), AK (30), CONUS (31), HI (32) */
     SC_RtsEntryHeader_t hdr2;
     SC_RtsGrpCmd_t cmd2;
@@ -80,14 +80,14 @@ typedef union
 SC_RtsTable026_t SC_Rts026 = {    
 .rts = {
         /* 1 - Enable Science RTS: Low Power (27) */
-        .hdr1.TimeTag = 0,
-        .cmd1.CmdHeader = CFE_MSG_CMD_HDR_INIT(SC_CMD_MID, SC_MEMBER_SIZE(cmd1), SC_ENABLE_RTS_CC, 0x00),
-        .cmd1.RtsId = 27,
-        .cmd1.Padding = 0,
-        /* 2 - Enable Science RTSs: Safe Mode (29), AK (30), CONUS (31), HI (32) */
-        .hdr2.TimeTag = 0,
+        // .hdr1.TimeTag = 0,
+        // .cmd1.CmdHeader = CFE_MSG_CMD_HDR_INIT(SC_CMD_MID, SC_MEMBER_SIZE(cmd1), SC_ENABLE_RTS_CC, 0x00),
+        // .cmd1.RtsId = 27,
+        // .cmd1.Padding = 0,
+        /* 2 - Enable Science RTSs: Low Power (27), Recharged (28), Safe Mode (29), AK (30), CONUS (31), HI (32) */
+        .hdr2.TimeTag = 1,
         .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(SC_CMD_MID, SC_MEMBER_SIZE(cmd2), SC_ENABLE_RTSGRP_CC, 0x00),
-        .cmd2.FirstRtsId = 29,
+        .cmd2.FirstRtsId = 27,
         .cmd2.LastRtsId = 32,
         /* 3-7 - Reset Science APs */
         // AP27 - Low Power
@@ -99,22 +99,22 @@ SC_RtsTable026_t SC_Rts026 = {
         .cmd3.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd3), LC_RESET_AP_STATS_CC, 0x00),
         .cmd3.APNumber = 27,
         .cmd3.Padding = 0,
-        .hdr4.TimeTag = 0,
+        .hdr4.TimeTag = 1,
         .cmd4.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd4), LC_RESET_AP_STATS_CC, 0x00),
         .cmd4.APNumber = 29,
         .cmd4.Padding = 0,
-        .hdr5.TimeTag = 0,
+        .hdr5.TimeTag = 1,
         .cmd5.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd5), LC_RESET_AP_STATS_CC, 0x00),
         .cmd5.APNumber = 30,
         .cmd5.Padding = 0,
-        .hdr6.TimeTag = 0,
+        .hdr6.TimeTag = 1,
         .cmd6.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd6), LC_RESET_AP_STATS_CC, 0x00),
         .cmd6.APNumber = 31,
         .cmd6.Padding = 0,
-        .hdr7.TimeTag = 0,
+        .hdr7.TimeTag = 1,
         .cmd7.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd7), LC_RESET_AP_STATS_CC, 0x00),
         .cmd7.APNumber = 32,
-        .cmd7.Padding = 0,
+        .cmd7.Padding = 1,
         /* 8-12 - Enable Science APs */
         // AP27 - Low Power
         // AP29 - Go to Safe Mode

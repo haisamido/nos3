@@ -39,6 +39,7 @@
 
 #include "generic_eps_msgids.h"
 #include "mgr_msgids.h"
+#include "mgr_app.h"
 #include "novatel_oem615_msgids.h"
 
 #define GENERIC_EPS_MID_MSG CFE_SB_MSGID_WRAP_VALUE(GENERIC_EPS_HK_TLM_MID) 
@@ -429,7 +430,7 @@ LC_WDTEntry_t LC_DefaultWDT[LC_MAX_WATCHPOINTS] = {
         .BitMask                    = LC_NO_BITMASK,
         .CustomFuncArgument         = 0,
         .ResultAgeWhenStale         = 0,
-        .ComparisonValue.Unsigned8  = 1,
+        .ComparisonValue.Unsigned8  = MGR_SCIENCE_MODE,
     },
 
     /* #27 (EPS BATTERY_VOLTAGE < 60) */
@@ -465,7 +466,7 @@ LC_WDTEntry_t LC_DefaultWDT[LC_MAX_WATCHPOINTS] = {
         .BitMask                    = LC_NO_BITMASK,
         .CustomFuncArgument         = 0,
         .ResultAgeWhenStale         = 0,
-        .ComparisonValue.Unsigned8  = 0,
+        .ComparisonValue.Unsigned8  = MGR_SAFE_MODE,
     },
 
     /* #30 (AK BOUNDS: GPS LAT < 71.35) */
