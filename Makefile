@@ -82,15 +82,28 @@ endif
 checkout:
 	./scripts/checkout.sh
 
+#This could currently break if not using COSMOS in the config.
 ci-launch:
 	@export SYSTEM_TEST_FILE_PATH=$(SYSTEM_TEST_FILE_PATH) && \
 	./scripts/ci_launch.sh && \
+	./scripts/system_tests.sh && \
 	./scripts/stop.sh
 
+#This could currently break if not using COSMOS in the config.
 system-tests:
 	@export SYSTEM_TEST_FILE_PATH=../..$(SYSTEM_TEST_FILE_PATH) && \
 	./cfg/build/launch.sh && \
 	./scripts/system_tests.sh
+
+#Be sure that your nos3-mission.xml has been set to YAMCS
+yamcs-operator:
+	@export SYSTEM_TEST_FILE_PATH=$(SYSTEM_TEST_FILE_PATH) && \
+	./scripts/ci_launch.sh --use-yamcs
+
+#Be sure that your nos3-mission.xml has been set to COSMOS
+cosmos-operator:
+	@export SYSTEM_TEST_FILE_PATH=../..$(SYSTEM_TEST_FILE_PATH) && \
+	./scripts/ci_launch.sh --use-cosmos-gui 
 
 clean:
 	$(MAKE) clean-fsw
