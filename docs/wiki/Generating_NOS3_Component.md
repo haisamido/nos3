@@ -1,4 +1,4 @@
-# Generating a New Component in NOS3:
+# Generating a New Component
 
 NOS3 is organized around the foundational concept of a component.
 The intent is that a spacecraft be made up of a core set of common functionality and then a custom set of components.  
