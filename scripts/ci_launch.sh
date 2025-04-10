@@ -60,7 +60,7 @@ echo "Launch GSW..."
 
 if [ "$GSW" == "cosmos" ]; then
   echo "Launching COSMOS..."
-  docker run -d --name cosmos_openc3-operator_1 \
+  $DCALL run -d --name cosmos_openc3-operator_1 \
       --log-driver json-file --log-opt max-size=5m --log-opt max-file=3 \
       -v "$GSW_DIR/config:/cosmos/config:ro" \
       -v "$GSW_DIR:/cosmos" \
@@ -76,8 +76,8 @@ if [ "$GSW" == "cosmos" ]; then
 
   sleep 5
 
-  docker exec cosmos_openc3-operator_1 bash -c "apt update && apt install -y xvfb"
-  docker exec -d cosmos_openc3-operator_1 bash -c "xvfb-run ruby CmdTlmServer /cosmos/config/tools/cmd_tlm_server/cmd_tlm_server.txt"
+  $DCALL exec cosmos_openc3-operator_1 bash -c "apt update && apt install -y xvfb"
+  $DCALL exec -d cosmos_openc3-operator_1 bash -c "xvfb-run ruby CmdTlmServer /cosmos/config/tools/cmd_tlm_server/cmd_tlm_server.txt"
 
 elif [ "$GSW" == "cosmos-gui" ]; then
     $DFLAGS -v $BASE_DIR:$BASE_DIR -dit -v /tmp/nos3:/tmp/nos3 -v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY=$DISPLAY -e QT_X11_NO_MITSHM=1 -e PROCESSOR_ENDIANNESS="LITTLE_ENDIAN" -w $GSW_DIR --name cosmos_openc3-operator_1 --network=nos3_core ballaerospace/cosmos:4.5.0
@@ -92,7 +92,7 @@ elif [ "$GSW" == "yamcs" ]; then
   cp -r $BASE_DIR/gsw/yamcs $USER_NOS3_DIR/
   echo "Directories Created"
 
-  docker run -dit \
+  $DCALL run -dit \
       --name cosmos_openc3-operator_1 \
       --hostname cosmos \
       --network=nos3_core \
@@ -112,21 +112,21 @@ elif [ "$GSW" == "yamcs" ]; then
 fi
 
 ### Connections
-docker run -dit --name nos_terminal --network=nos3_core \
+$DCALL run -dit --name nos_terminal --network=nos3_core \
     -v "$SIM_DIR:$SIM_DIR" -w "$SIM_BIN" $DBOX \
     ./nos3-single-simulator -f nos3-simulator.xml stdio-terminal
 
-docker run -dit --name nos_udp_terminal --network=nos3_core \
+$DCALL run -dit --name nos_udp_terminal --network=nos3_core \
     -v "$SIM_DIR:$SIM_DIR" -w "$SIM_BIN" $DBOX \
     ./nos3-single-simulator -f nos3-simulator.xml udp-terminal
 
-docker run -dit --name nos_sim_bridge --network=nos3_core \
+$DCALL run -dit --name nos_sim_bridge --network=nos3_core \
     -v "$SIM_DIR:$SIM_DIR" -w "$SIM_BIN" $DBOX \
     ./nos3-sim-cmdbus-bridge -f nos3-simulator.xml
 
 CFG_FILE="-f nos3-simulator.xml"
 
-docker run -dit --name nos_time_driver --network=nos3_core \
+$DCALL run -dit --name nos_time_driver --network=nos3_core \
     --log-driver json-file --log-opt max-size=5m --log-opt max-file=3 \
     -v "$SIM_DIR:$SIM_DIR" -w "$SIM_BIN" $DBOX \
     ./nos3-single-simulator -f nos3-simulator.xml time
@@ -148,13 +148,13 @@ for (( i=1; i<=$SATNUM; i++ )); do
     rm -rf $USER_NOS3_DIR/42/NOS3InOut
     cp -r $BASE_DIR/cfg/build/InOut $USER_NOS3_DIR/42/NOS3InOut
     xhost +local:*
-    docker run -d --name ${SC_NUM}_fortytwo -h fortytwo --network=$SC_NET \
+    $DCALL run -d --name ${SC_NUM}_fortytwo -h fortytwo --network=$SC_NET \
         --log-driver json-file --log-opt max-size=5m --log-opt max-file=3 \
         -e DISPLAY=$DISPLAY -v "$USER_NOS3_DIR:$USER_NOS3_DIR" \
         -v /tmp/.X11-unix:/tmp/.X11-unix:ro -w "$USER_NOS3_DIR/42" $DBOX $USER_NOS3_DIR/42/42 NOS3InOut
 
     echo "$SC_NUM - Flight Software..."
-    docker run -dit --name ${SC_NUM}_nos_fsw -h nos_fsw --network=$SC_NET \
+    $DCALL run -dit --name ${SC_NUM}_nos_fsw -h nos_fsw --network=$SC_NET \
         --log-driver json-file --log-opt max-size=5m --log-opt max-file=3 \
         -v "$BASE_DIR:$BASE_DIR" -v "$FSW_DIR:$FSW_DIR" -v "$SCRIPT_DIR:$SCRIPT_DIR" \
         -e USER=$(whoami) -e LD_LIBRARY_PATH=$FSW_DIR:/usr/lib:/usr/local/lib \
@@ -162,19 +162,19 @@ for (( i=1; i<=$SATNUM; i++ )); do
         $DBOX bash -c "cd $FSW_DIR && exec ./core-cpu1 -R PO"
 
     echo "$SC_NUM - CryptoLib..."
-    docker run -d --name ${SC_NUM}_cryptolib --network=$SC_NET \
+    $DCALL run -d --name ${SC_NUM}_cryptolib --network=$SC_NET \
         --log-driver json-file --log-opt max-size=5m --log-opt max-file=3 \
         --network-alias=cryptolib \
         -v "$BASE_DIR:$BASE_DIR" -w "$BASE_DIR/gsw/build" $DBOX ./support/standalone
 
     echo "$SC_NUM - Simulators..."
     echo "$SC_NUM - NOS Engine Server..."
-    docker run -dit --name ${SC_NUM}_nos_engine_server -h nos_engine_server --network=$SC_NET \
+    $DCALL run -dit --name ${SC_NUM}_nos_engine_server -h nos_engine_server --network=$SC_NET \
         --log-driver json-file --log-opt max-size=5m --log-opt max-file=3 \
         -v "$SIM_DIR:$SIM_DIR" -w "$SIM_BIN" $DBOX \
         /usr/bin/nos_engine_server_standalone -f $SIM_BIN/nos_engine_server_config.json
 
-    docker run -dit --name ${SC_NUM}_truth42sim --network=$SC_NET \
+    $DCALL run -dit --name ${SC_NUM}_truth42sim --network=$SC_NET \
         -h truth42sim --log-driver json-file --log-opt max-size=5m --log-opt max-file=3 \
         -v "$SIM_DIR:$SIM_DIR" -w "$SIM_BIN" $DBOX \
         ./nos3-single-simulator $CFG_FILE truth42sim
@@ -187,12 +187,12 @@ for (( i=1; i<=$SATNUM; i++ )); do
         generic_star_tracker_sim generic_thruster_sim generic_torquer_sim; do
 
         if [[ "$sim" == "generic_radio_sim" ]]; then
-            docker run -d --name ${SC_NUM}_${sim} --network=$SC_NET \
+            $DCALL run -d --name ${SC_NUM}_${sim} --network=$SC_NET \
                 -h radio_sim --network-alias=radio_sim \
                 -v "$SIM_DIR:$SIM_DIR" -w "$SIM_BIN" $DBOX \
                 ./nos3-single-simulator $CFG_FILE $sim
         else
-            docker run -d --name ${SC_NUM}_${sim} --network=$SC_NET \
+            $DCALL run -d --name ${SC_NUM}_${sim} --network=$SC_NET \
                 -v "$SIM_DIR:$SIM_DIR" -w "$SIM_BIN" $DBOX \
                 ./nos3-single-simulator $CFG_FILE $sim
         fi
@@ -206,4 +206,4 @@ for (( i=1; i<=$SATNUM; i++ )); do
     $DNETWORK connect $SC_NET nos_sim_bridge
 done
 
-echo "Docker headless launch script completed!"
+echo "$DCALL headless launch script completed!"
