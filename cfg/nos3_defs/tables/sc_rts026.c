@@ -144,7 +144,7 @@ SC_RtsTable026_t SC_Rts026 = {
         /* 13 - Manager Note: Science Initialized */
         .hdr13.TimeTag = 1,
         .cmd13.CmdHeader = CFE_MSG_CMD_HDR_INIT(MGR_CMD_MID, SC_MEMBER_SIZE(cmd13), MGR_UPDATE_SCI_STATUS_CC, 0x00),
-        .cmd13.U8 = SS_NO_SCIENCE_INITALIZED,
+        .cmd13.U8 = SS_SCIENCE_INITIALIZED,
     }
 };
 
