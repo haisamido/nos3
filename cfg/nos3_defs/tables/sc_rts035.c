@@ -30,8 +30,18 @@ typedef struct
 /* Define the union to size the table correctly */
 typedef union
 {
-    SC_RtsStruct035_t rts;
-    uint16            buf[SC_RTS_BUFF_SIZE];
+    /* 1 - Manager Note: Stop Science, Left HI Region */
+    SC_RtsEntryHeader_t hdr1;
+    MGR_U8_cmd_t cmd1;
+    /* 2 - Turn OFF Instrument */
+    SC_RtsEntryHeader_t hdr2;
+    SAMPLE_NoArgs_cmd_t cmd2;
+    /* 3 - Reset AP 31 - Do Science, Entering HI Region */
+    SC_RtsEntryHeader_t hdr3;
+    LC_ResetAPStats_t cmd3;
+    /* 4 - Enable AP 31 - Do Science, Entering HI Region */
+    SC_RtsEntryHeader_t hdr4;
+    LC_SetAPState_t cmd4;
 } SC_RtsTable035_t;
 
 /* Helper macro to get size of structure elements */
@@ -44,6 +54,19 @@ SC_RtsTable035_t SC_Rts035 = {
         .hdr1.TimeTag = 1,
         .cmd1.CmdHeader = CFE_MSG_CMD_HDR_INIT(MGR_CMD_MID, SC_MEMBER_SIZE(cmd1), MGR_UPDATE_SCI_STATUS_CC, 0x00),
         .cmd1.U8 = SS_NO_SCIENCE_LEFT_HI,
+        /* 2 - Turn OFF Instrument */
+        .hdr2.TimeTag = 1,
+        .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd2), SAMPLE_DISABLE_CC, 0x00),
+        /* 3 - Reset AP 32 - Do Science, Entering HI Region */
+        .hdr3.TimeTag = 1,
+        .cmd3.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd3), LC_RESET_AP_STATS_CC, 0x00),
+        .cmd3.APNumber = 32,
+        .cmd3.Padding = 0,
+        /* 4 - Enable AP 32 - Do Science, Entering HI Region */
+        .hdr4.TimeTag = 1,
+        .cmd4.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd4), LC_SET_AP_STATE_CC, 0x00),
+        .cmd4.APNumber = 32,
+        .cmd4.NewAPState = LC_APSTATE_ACTIVE,
     }
 };
 
