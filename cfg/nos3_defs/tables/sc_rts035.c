@@ -11,6 +11,8 @@
 #include "cam_app.h"
 #include "generic_radio_app.h"
 #include "sample_app.h"
+#include "lc_app.h"
+#include "lc_msgids.h"
 #include "mgr_msgids.h"
 #include "mgr_app.h"
 
@@ -22,13 +24,6 @@
 
 /* Custom table structure, modify as needed to add desired commands */
 typedef struct
-{
-    SC_RtsEntryHeader_t hdr1;
-    MGR_U8_cmd_t cmd1;
-} SC_RtsStruct035_t;
-
-/* Define the union to size the table correctly */
-typedef union
 {
     /* 1 - Manager Note: Stop Science, Left HI Region */
     SC_RtsEntryHeader_t hdr1;
@@ -42,6 +37,13 @@ typedef union
     /* 4 - Enable AP 31 - Do Science, Entering HI Region */
     SC_RtsEntryHeader_t hdr4;
     LC_SetAPState_t cmd4;
+} SC_RtsStruct035_t;
+
+/* Define the union to size the table correctly */
+typedef union
+{
+    SC_RtsStruct035_t rts;
+    uint16            buf[SC_RTS_BUFF_SIZE];
 } SC_RtsTable035_t;
 
 /* Helper macro to get size of structure elements */
