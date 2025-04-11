@@ -55,10 +55,10 @@ With a terminal navigated to the top level of your NOS3 repository:
   * Visually in 42
     * Note you can click and drag within the 42 Cam window to rotate around the spacecraft
 
+![Scenario Demo - SunSafe](./_static/scenario_demo/scenario_demo_sunsafe.png)
+
 ---
 ### Commanding the Spacecraft
-
-![Scenario Demo - SunSafe](./_static/scenario_demo/scenario_demo_sunsafe.png)
 
 * Let's confirm we can command the spacecraft
   * The CFS CFE_ES_NOOP command has a nice print to  the FSW console to confirm this easily
@@ -75,9 +75,6 @@ With a terminal navigated to the top level of your NOS3 repository:
   * In the Command Sender let's chang eot use the CFS TO_ENABLE_OUTPUT command
     * The default arguments of DEST_IP 'radio_sim' and DEST_PORT '5011' work for this
 
----
-### The Radio Interface
-
 ![Scenario Demo - TO Enable Output](./_static/scenario_demo/scenario_demo_to_enable.png)
 
 * Note that while we are getting Bytes Rx in the COSMOS Command and Telemetry Server, we don't have Bytes Tx still
@@ -92,14 +89,14 @@ With a terminal navigated to the top level of your NOS3 repository:
 
 ![Scenario Demo - Radio Telemetry](./_static/scenario_demo/scenario_demo_radio_telemetry.png)
 
+---
+### The Sample Component
+
 * Let's see if we can command the sample instrument payload
   * This is a standard NOS3 component meaning it has FSW, GSW, and a simulator running and talking to the 42 dynamics provider
   * Change the main terminal via the drop down carrot on the right of the primary windows to `sc_1 - Sample Sim` and resize
   * Also prepare the packet viewer by changing to the SAMPLE SAMPLE_HK_TLM packet
   * Send the SAMPLE SAMPLE_NOOP_CC via the Command Sender
-
----
-### The Sample Component
 
 ![Scenario Demo - Sample NOOP](./_static/scenario_demo/scenario_demo_sample_noop.png)
 
@@ -127,15 +124,16 @@ With a terminal navigated to the top level of your NOS3 repository:
   * We see in the sample sim that it received the command to change status
   * The FSW console shows `Device disabled successfully` and `Request device data reported status error 5`
   * If you dive into the [sample component readme](../../components/sample/README.md) you can figure out why!
+
+---
+### ADCS
+
 * We can leave sample like that, let's place with the Attitude Determination and Control System (ADCS)
   * In short, ADCS uses various components to make the vehicle change orientation
   * These components are called typically referred to as sensors and actuators
 * Let's first disable the ADCS from doing anything so we can play
   * Note that if you are eclipse your spacecraft can't point at the sun because it doesn't know where it is (not smart enough to guess) 
   * In the Command Sender send the GENENRIC_ADCS GENERIC_ADCS_SET_MODE_CC with GNC_MODE PASSIVE (0)
-
----
-### ADCS
 
 ![Scenario Demo - ADCS Passive](./_static/scenario_demo/scenario_demo_adcs_passive.png)
 
