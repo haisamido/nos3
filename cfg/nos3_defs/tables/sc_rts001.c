@@ -60,6 +60,9 @@ typedef struct
     /* 11 - Enable Science_Reboot to Science AP */
     SC_RtsEntryHeader_t hdr11;
     LC_SetAPState_t cmd11;
+    /* 12 - Update Science Status in MGR */
+    SC_RtsEntryHeader_t hdr12;
+    MGR_U8_cmd_t cmd12;
 } SC_RtsStruct001_t;
 
 /* Define the union to size the table correctly */
@@ -138,6 +141,11 @@ SC_RtsTable001_t SC_Rts001 = {
         .cmd11.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd11), LC_SET_AP_STATE_CC, 0x00),
         .cmd11.APNumber = 25,
         .cmd11.NewAPState = LC_APSTATE_ACTIVE,
+
+        /* 12 - Set Science Status to Off to avoid Confusion with reloaded Science Status */
+        .hdr12.TimeTag = 1,
+        .cmd12.CmdHeader = CFE_MSG_CMD_HDR_INIT(MGR_CMD_MID, SC_MEMBER_SIZE(cmd12), MGR_UPDATE_SCI_STATUS_CC, 0x00),
+        .cmd12.U8 = SS_SCIENCE_OFF,
     }
 };
 
