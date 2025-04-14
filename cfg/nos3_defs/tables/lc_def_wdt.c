@@ -409,16 +409,16 @@ LC_WDTEntry_t LC_DefaultWDT[LC_MAX_WATCHPOINTS] = {
         .ComparisonValue.Unsigned32 = 0,
     },
 
-    /* #25 (unused) */
+    /* #25 (MGR SPACECRAFT_MODE = Science_Reboot) */
     {
-        .DataType                   = LC_WATCH_NOT_USED,
-        .OperatorID                 = LC_NO_OPER,
-        .MessageID                  = CFE_SB_MSGID_RESERVED,
-        .WatchpointOffset           = 0,
+        .DataType                   = LC_DATA_UBYTE,
+        .OperatorID                 = LC_OPER_EQ,
+        .MessageID                  = MGR_HK_TLM_MSG,
+        .WatchpointOffset           = 18,
         .BitMask                    = LC_NO_BITMASK,
         .CustomFuncArgument         = 0,
         .ResultAgeWhenStale         = 0,
-        .ComparisonValue.Unsigned32 = 0,
+        .ComparisonValue.Unsigned8  = MGR_SCIENCE_REBOOT_MODE,
     },
 
     /* #26 (MGR SPACECRAFT_MODE = Science) */

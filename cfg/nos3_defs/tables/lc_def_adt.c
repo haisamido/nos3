@@ -527,19 +527,19 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] = {
          {/* (WP_0) */
           0, LC_RPN_EQUAL}},
 
-    /* #25 (unused) */
-    {.DefaultState      = LC_ACTION_NOT_USED,
+    /* #25 Science_Reboot to Science */
+    {.DefaultState      = LC_APSTATE_PASSIVE,
      .MaxPassiveEvents  = 0,
      .MaxPassFailEvents = 0,
      .MaxFailPassEvents = 0,
-     .RTSId             = 0,
-     .MaxFailsBeforeRTS = 0,
+     .RTSId             = 25,
+     .MaxFailsBeforeRTS = 1,
      .EventType         = CFE_EVS_EventType_INFORMATION,
      .EventID           = LC_BASE_AP_EID + 25,
-     .EventText         = {" "},
+     .EventText         = {"Sci_Reboot transition to Sci Now"},
      .RPNEquation =
-         {/* (WP_0) */
-          0, LC_RPN_EQUAL}},
+         {/* (WP_25) */
+          25, LC_RPN_EQUAL}},
 
     /* #26 Enable Science Mode */
     {.DefaultState      = LC_APSTATE_PASSIVE,
