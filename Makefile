@@ -8,6 +8,8 @@ GSWBUILDDIR ?= $(CURDIR)/gsw/build
 SIMBUILDDIR ?= $(CURDIR)/sims/build
 COVERAGEDIR ?= $(CURDIR)/fsw/build/amd64-posix/default_cpu1
 
+SC1_CFG ?= 
+
 export SYSTEM_TEST_FILE_PATH = /scripts/gsw/system_test.rb
 
 export CFS_APP_PATH = ../components
@@ -113,8 +115,14 @@ clean-gsw:
 	rm -rf gsw/cosmos/build
 	rm -rf /tmp/nos3
 
+
 config:
-	./scripts/cfg/config.sh
+	@if [ -n "$(SC1_CFG)" ]; then \
+		echo "Overriding sc-1-cfg with: $(SC1_CFG)"; \
+		SC1_CFG="$(SC1_CFG)" ./scripts/cfg/config.sh; \
+	else \
+		./scripts/cfg/config.sh; \
+	fi
 
 debug:
 	./scripts/debug.sh
@@ -160,6 +168,17 @@ start-sat:
 
 stop:
 	./scripts/stop.sh
+	@if [ -f ./cfg/build/current_config_path.txt ]; then \
+	  echo "Cleaning up temporary config file..."; \
+	  CONFIG_FILE=$$(cat ./cfg/build/current_config_path.txt | tr -d '\n'); \
+	  if [ "$$(basename $$CONFIG_FILE)" != "nos3-mission.xml" ]; then \
+	    echo "Removing $$CONFIG_FILE"; \
+	    rm -f "$$CONFIG_FILE"; \
+	  fi; \
+	  rm -f ./cfg/build/current_config_path.txt; \
+	fi
+
+
 
 stop-gsw:
 	./scripts/gsw/stop_gsw.sh
