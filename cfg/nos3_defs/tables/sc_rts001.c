@@ -51,6 +51,15 @@ typedef struct
     /* 8 - Enable Science Mode AP */
     SC_RtsEntryHeader_t hdr8;
     LC_SetAPState_t cmd8;
+    /* 9 - Enable Science_Reboot to Science Mode RTS 25 */
+    SC_RtsEntryHeader_t hdr9;
+    SC_RtsCmd_t cmd9;
+    /* 10 - Reset Science_Reboot to Science AP */
+    SC_RtsEntryHeader_t hdr10;
+    LC_ResetAPStats_t cmd10;
+    /* 11 - Enable Science_Reboot to Science AP */
+    SC_RtsEntryHeader_t hdr11;
+    LC_SetAPState_t cmd11;
 } SC_RtsStruct001_t;
 
 /* Define the union to size the table correctly */
@@ -111,6 +120,24 @@ SC_RtsTable001_t SC_Rts001 = {
         .cmd8.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd8), LC_SET_AP_STATE_CC, 0x00),
         .cmd8.APNumber = 26,
         .cmd8.NewAPState = LC_APSTATE_ACTIVE,
+
+        /* 9 - Enable Science Reboot to Science RTS: (25) */
+        .hdr9.TimeTag = 0,
+        .cmd9.CmdHeader = CFE_MSG_CMD_HDR_INIT(SC_CMD_MID, SC_MEMBER_SIZE(cmd9), SC_ENABLE_RTS_CC, 0x00),
+        .cmd9.RtsId = 25,
+        .cmd9.Padding = 0,
+
+        /* 10 - Reset Science_Reboot to Science Mode AP 25 */
+        .hdr10.TimeTag = 1,
+        .cmd10.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd10), LC_RESET_AP_STATS_CC, 0x00),
+        .cmd10.APNumber = 25,
+        .cmd10.Padding = 0,
+
+        /* 11 - Enable Science_Reboot to Science Mode AP 25*/
+        .hdr11.TimeTag = 1,
+        .cmd11.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd11), LC_SET_AP_STATE_CC, 0x00),
+        .cmd11.APNumber = 25,
+        .cmd11.NewAPState = LC_APSTATE_ACTIVE,
     }
 };
 

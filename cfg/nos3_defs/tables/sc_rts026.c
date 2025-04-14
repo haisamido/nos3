@@ -25,7 +25,7 @@
 /* Custom table structure, modify as needed to add desired commands */
 typedef struct
 {
-    /* 1 - Enable Science RTS: Low Power (27) */
+    /* 1 - UNUSED */
     // SC_RtsEntryHeader_t hdr1;
     // SC_RtsCmd_t cmd1;
     /* 2 - Enable Science RTSs: Safe Mode (29), AK (30), CONUS (31), HI (32) */
@@ -79,7 +79,7 @@ typedef union
 /* Used designated intializers to be verbose, modify as needed/desired */
 SC_RtsTable026_t SC_Rts026 = {    
 .rts = {
-        /* 1 - Enable Science RTS: Low Power (27) */
+        /* 1 - UNUSED */
         // .hdr1.TimeTag = 0,
         // .cmd1.CmdHeader = CFE_MSG_CMD_HDR_INIT(SC_CMD_MID, SC_MEMBER_SIZE(cmd1), SC_ENABLE_RTS_CC, 0x00),
         // .cmd1.RtsId = 27,
