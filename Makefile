@@ -48,10 +48,16 @@ OTHERTGTS := $(filter-out $(LOCALTGTS),$(MAKECMDGOALS))
 # Commands
 #
 all:
-	$(MAKE) config
+	@if [ ! -f ./cfg/build/current_config_path.txt ]; then \
+		echo "Running make config (initial)..."; \
+		$(MAKE) config; \
+	else \
+		echo "Skipping make config (already configured)"; \
+	fi
 	$(MAKE) fsw
 	$(MAKE) sim
 	$(MAKE) gsw
+
 
 build-cryptolib:
 	mkdir -p $(GSWBUILDDIR)
@@ -118,7 +124,6 @@ clean-gsw:
 
 config:
 	@if [ -n "$(SC1_CFG)" ]; then \
-		echo "Overriding sc-1-cfg with: $(SC1_CFG)"; \
 		SC1_CFG="$(SC1_CFG)" ./scripts/cfg/config.sh; \
 	else \
 		./scripts/cfg/config.sh; \

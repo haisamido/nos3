@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ET
 import sys
 
 # Use passed-in mission file if provided, otherwise default to ./cfg/nos3-mission.xml
-mission_file = sys.argv[1] if len(sys.argv) > 1 else './cfg/nos3-mission.xml'
+mission_file = sys.argv[1] if len(sys.argv) > 1 else 'nos3-mission.xml'
 
 # Ensure it exists
 if not os.path.isfile(mission_file):
@@ -18,7 +18,7 @@ if not os.path.isfile(mission_file):
     sys.exit(1)
 
 # Parse mission configuration
-mission_tree = ET.parse(mission_file)
+mission_tree = ET.parse("./cfg/" + os.path.basename(mission_file))
 mission_root = mission_tree.getroot()
 mission_start_time = mission_root.find('start-time').text
 print('  start-time:', mission_start_time)
