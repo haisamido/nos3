@@ -457,7 +457,7 @@ LC_WDTEntry_t LC_DefaultWDT[LC_MAX_WATCHPOINTS] = {
         .ComparisonValue.Unsigned32 = 0,
     },
 
-    /* #29 (MGR SPACECRAFT_MODE = Engineering) */
+    /* #29 (MGR SPACECRAFT_MODE = Safe Mode) */
     {
         .DataType                   = LC_DATA_UBYTE,
         .OperatorID                 = LC_OPER_EQ,
