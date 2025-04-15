@@ -9,7 +9,8 @@ ORIGINAL_CONFIG="$BASE_DIR/cfg/nos3-mission.xml"
 CONFIG_FILE="$ORIGINAL_CONFIG"
 
 # Make flight software configuration directory
-mkdir -p "$BASE_DIR/cfg/build"
+mkdir -p "$BASE_DIR/cfg/build/temp_mission/"
+cp -r "$BASE_DIR/cfg/nos3-mission.xml" "$BASE_DIR/cfg/build/temp_mission/"
 
 # Copy baseline configurations into build directory
 cp -r "$BASE_DIR/cfg/InOut" "$BASE_DIR/cfg/build/"
@@ -27,7 +28,7 @@ if [ -n "${SC1_CFG// }" ]; then
     fi
 
     echo "Overriding <sc-1-cfg> with: $REL_SC1_CFG"
-    TEMP_CONFIG=$(mktemp "$BASE_DIR/cfg/XXXXXX.xml")
+    TEMP_CONFIG=$(mktemp "$BASE_DIR/cfg/build/temp_mission/XXXXXX.xml")
     sed "s|<sc-1-cfg>.*</sc-1-cfg>|<sc-1-cfg>$REL_SC1_CFG</sc-1-cfg>|" "$ORIGINAL_CONFIG" > "$TEMP_CONFIG"
     CONFIG_FILE="$TEMP_CONFIG"
 
