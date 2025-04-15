@@ -108,7 +108,9 @@ do
     echo ""
 
     echo $SC_NUM " - CryptoLib..."
-    gnome-terminal --tab --title=$SC_NUM" - CryptoLib" -- $DFLAGS -v $BASE_DIR:$BASE_DIR --name $SC_NUM"_cryptolib"  --network=$SC_NETNAME --network-alias=cryptolib -w $BASE_DIR/gsw/build $DBOX ./support/standalone
+    gnome-terminal --tab --title=$SC_NUM" - CryptoLib GSW" -- $DFLAGS -v $BASE_DIR:$BASE_DIR --name $SC_NUM"_cryptolib_gsw"  --network=$SC_NETNAME --network-alias=cryptolib -w $BASE_DIR/gsw/build $DBOX ./support/standalone
+    cp -r $BASE_DIR/gsw/build $BASE_DIR/fsw/build/cryptolib
+    cp $BASE_DIR/fsw/build/cryptolib/libcryptolib.so $BASE_DIR/fsw/build/exe/cpu1/cf/libcryptolib.so
     echo ""
 
     echo $SC_NUM " - Simulators..."
