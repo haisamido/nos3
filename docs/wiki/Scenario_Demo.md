@@ -44,14 +44,15 @@ With a terminal navigated to the top level of your NOS3 repository:
 
 ![Scenario Demo - COSMOS](./_static/scenario_demo/scenario_demo_cosmos.png)
 
-* By default we went to sun-safe mode and the should be able to confirm that report that multiple ways
+* By default, we go to sun-safe mode
+* We should be able to confirm that in multiple ways
   * In the FSW console
     * Lots of logs get captured here as events occur during startup
     * You may need to scroll back in that terminal to view the message
     * Console prints should calm down after initialization as the spacecraft reaches a steady state
   * In GSW telemetry
     * The COSMOS Packet Viewer lets you select the desired Target and Packet and see what has been reported
-    * If the text is displayed as pink, that means that no data has been received or that the data has done stale
+    * If the text is displayed as pink, that means that no data has been received or that the data has gone stale
   * Visually in 42
     * Note you can click and drag within the 42 Cam window to rotate around the spacecraft
 
@@ -61,30 +62,30 @@ With a terminal navigated to the top level of your NOS3 repository:
 ### Commanding the Spacecraft
 
 * Let's confirm we can command the spacecraft
-  * The CFS CFE_ES_NOOP command has a nice print to  the FSW console to confirm this easily
-    * Note you may need to return the FSW console back to the bottom of the window to view
-  * Additionally, we can confirm inspect that specific applications command counter in telemetry
+  * The CFS CFE_ES_NOOP command has a nice print to the FSW console to confirm this easily
+    * You may need to return the FSW console back to the bottom of the window to see it
+  * Additionally, we can confirm via inspection that specific application command counter in telemetry
 
 ![Scenario Demo - COSMOS Command](./_static/scenario_demo/scenario_demo_cosmos_command.png)
 
 * Note the previous command was sent via the DEBUG interface
   * In the above image you can see this in the Bytes Tx column of the COSMOS Command and Telemetry Server
-  * This DEBUG interface is if you are physically plugged into the spacecraft, useful for development and test, but not realistic
-* Let's command the radio to transmit, by default it must be enabled / disabled for use
+  * This DEBUG interface mimics being physically plugged into the spacecraft, useful for development and test, but not realistic
+* Let's command the radio to transmit
   * It is common that the spacecraft radio is always listening for commands, but doesn't transmit unless enabled
-  * In the Command Sender let's chang eot use the CFS TO_ENABLE_OUTPUT command
+  * In the Command Sender let's change to use the CFS TO_ENABLE_OUTPUT command
     * The default arguments of DEST_IP 'radio_sim' and DEST_PORT '5011' work for this
 
 ![Scenario Demo - TO Enable Output](./_static/scenario_demo/scenario_demo_to_enable.png)
 
-* Note that while we are getting Bytes Rx in the COSMOS Command and Telemetry Server, we don't have Bytes Tx still
+* Note that while we are getting Bytes Rx in the COSMOS Command and Telemetry Server, we don't have Bytes Tx
   * This is because that standard CFS target utilizes the debug interface
   * Let's send another NOOP, but use the CFS_RADIO target
 
 ![Scenario Demo - Radio Command](./_static/scenario_demo/scenario_demo_radio_command.png)
 
 * Things look as expected now in the COSMOS Command and Telemetry Server
-  * Let's double check we're actually getting radio telemetry and it matches the debug
+  * Let's confirm we're actually getting radio telemetry which matches the debug interface
   * Open another Packet Viewer window via the COSMOS NOS3 Launcher (third row, first column)
 
 ![Scenario Demo - Radio Telemetry](./_static/scenario_demo/scenario_demo_radio_telemetry.png)
@@ -94,13 +95,13 @@ With a terminal navigated to the top level of your NOS3 repository:
 
 * Let's see if we can command the sample instrument payload
   * This is a standard NOS3 component meaning it has FSW, GSW, and a simulator running and talking to the 42 dynamics provider
-  * Change the main terminal via the drop down carrot on the right of the primary windows to `sc_1 - Sample Sim` and resize
+  * Change the terminal tab via the drop down carrot on the right of the window to `sc_1 - Sample Sim` and resize
   * Also prepare the packet viewer by changing to the SAMPLE SAMPLE_HK_TLM packet
   * Send the SAMPLE SAMPLE_NOOP_CC via the Command Sender
 
 ![Scenario Demo - Sample NOOP](./_static/scenario_demo/scenario_demo_sample_noop.png)
 
-* We can confirm the FSW console and CMD_COUNT again for the sample component, but nothing in the simulator
+* We can confirm that the command was sent successfully in both the FSW console and by observing an increase in the CMD_COUNT, but nothing appears in the simulator
   * This is because of the NOOP or No Operation command itself
   * NOOPs are standard across cFS applications and simply prove that that application is alive and listening
   * This does not interface with anything but the FSW application however
@@ -110,35 +111,34 @@ With a terminal navigated to the top level of your NOS3 repository:
 
 ![Scenario Demo - Sample Enable](./_static/scenario_demo/scenario_demo_sample_enable.png)
 
-* The sample simulator now is communicating with the sample application
-  * The sample application has scheduled rate at which is requests data from the device
+* The sample simulator is now communicating with the sample application
+  * The sample application has a scheduled rate at which it requests data from the device
 * This is cool, but let's break some stuff
   * Change to the SIM_CMD_BUS_BRIDGE Target in the Command Sender
-  * Note that various commands exist, these commands use this special interface called out in the COSMOS Command and Telemetry Server
   * This interface enables us to command the simulators directly so we can see how flight software would respond
   * Let's send the SAMPLE_SIM_SET_STATUS command with a status value of 5
 
 ![Scenario Demo - Sample Set Sim Status](./_static/scenario_demo/scenario_demo_sample_set_sim_status.png)
 
-* We successfully told the sample simulator to change it's status to 5
+* We successfully told the sample simulator to change its status to 5
   * We see in the sample sim that it received the command to change status
   * The FSW console shows `Device disabled successfully` and `Request device data reported status error 5`
-  * If you dive into the [sample component readme](../../components/sample/README.md) you can figure out why!
+  * If you dive into the [sample component readme](https://github.com/nasa-itc/sample/blob/275edcf55cf5b1d7d0c3e0c4978927b5814529a7/README.md) you can figure out why!
 
 ---
 ### ADCS
 
-* We can leave sample like that, let's place with the Attitude Determination and Control System (ADCS)
+* We can leave sample like that - let's play with the Attitude Determination and Control System (ADCS)
   * In short, ADCS uses various components to make the vehicle change orientation
-  * These components are called typically referred to as sensors and actuators
+  * These components are typically referred to as sensors and actuators
 * Let's first disable the ADCS from doing anything so we can play
-  * Note that if you are eclipse your spacecraft can't point at the sun because it doesn't know where it is (not smart enough to guess) 
-  * In the Command Sender send the GENENRIC_ADCS GENERIC_ADCS_SET_MODE_CC with GNC_MODE PASSIVE (0)
+  * Note that if you are in eclipse your spacecraft can't point at the sun because it doesn't know where it is (not smart enough to guess) 
+  * In the Command Sender send the GENERIC_ADCS GENERIC_ADCS_SET_MODE_CC with GNC_MODE PASSIVE (0)
 
 ![Scenario Demo - ADCS Passive](./_static/scenario_demo/scenario_demo_adcs_passive.png)
 
-* The spacecraft appears to be tumbling around more than before now as seen visually in the 42 Cam
-  * Note that is was important to command ADCS to passive so that we can poke at the various components it leverages
+* The spacecraft appears to be tumbling around more as seen in the 42 Cam
+  * Note that it is important to command ADCS to passive so that we can poke at the various components it leverages
   * ADCS requests telemetry and sends new commands to these components at 1Hz so it would fight us otherwise
   * Let's command a reaction wheel to spin and see if it does stuff
 
@@ -150,7 +150,7 @@ With a terminal navigated to the top level of your NOS3 repository:
 ![Scenario Demo - RW Down](./_static/scenario_demo/scenario_demo_rw_down.png)
 
 * Close, but this is really tough to do manually
-  * We happen to be in the sun again so let's turn back on the ADCS and see if it finishes the job for us
+  * We happen to be in the sun again so let's turn ADCS back on and see if it finishes the job for us
   * Send the GENERIC_ADCS GENERIC_ADCS_SET_MODE_CC with GNC_MODE SUNSAFE_MODE (2)
 
 ![Scenario Demo - ADCS SunSafe](./_static/scenario_demo/scenario_demo_adcs_sunsafe.png)
