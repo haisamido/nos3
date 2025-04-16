@@ -150,8 +150,66 @@ help: ## Display this help message
 	@echo ""
 	@echo "Usage: make <target>"
 	@echo ""
-	@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
-		awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
+	@printf "%-20s %s\n" "all"           "Build everything: config, fsw, sim, gsw"
+	@printf "%-20s %s\n" "clean"         "Clean all build files and configurations"
+	@printf "%-20s %s\n" "help"          "Display this help message"
+	@printf "%-20s %s\n" "help-all"      "Display advanced help information"
+	@printf "%-20s %s\n" "launch"        "Launch NOS3 System"
+	@printf "%-20s %s\n" "prep"          "Prepare full development environment"
+	@printf "%-20s %s\n" "stop"          "Stop entire system"
+	@printf "%-20s %s\n" "uninstall"     "Remove all build artifacts and containers"
+
+
+help-all: ## Displays advanced help information
+	@echo ""
+	@echo "Usage: make <target>"
+	@echo ""
+
+	@echo "Setup:"
+	@printf "\t%-20s %s\n" "prep"           "Prepare full development environment"
+	@printf "\t%-20s %s\n" "prep-gsw"       "Prepare Ground Software"
+	@printf "\t%-20s %s\n" "prep-sat"       "Prepare Satellite IP Routes"
+	@printf "\t%-20s %s\n" "start-gsw"      "Launch Ground Software"
+	@printf "\t%-20s %s\n" "start-sat"      "Satellite Launch"
+
+	@echo ""
+	@echo "Building:"
+	@printf "\t%-20s %s\n" "build-cryptolib" "Build CryptoLib Component"
+	@printf "\t%-20s %s\n" "build-fsw"      "Build the Flight Software (cFS or F')"
+	@printf "\t%-20s %s\n" "build-sim"      "Build Simulator"
+	@printf "\t%-20s %s\n" "build-test"     "Build Unit Tests"
+	@printf "\t%-20s %s\n" "config"			"Configuration Setup.  Optional: [SC1_CFG=/spacecraft/sc_minimal_cfg.xml]"
+	@printf "\t%-20s %s\n" "igniter"        "Launch Configuration GUI Igniter"
+
+	@echo ""
+	@echo "Running:"
+	@printf "\t%-20s %s\n" "checkout"       "Run a checkout application (may require reconfiguration)"
+	@printf "\t%-20s %s\n" "debug"          "Launch the debug container terminal"
+	@printf "\t%-20s %s\n" "fsw"            "Build Flight Software Binaries"
+	@printf "\t%-20s %s\n" "gcov"           "Build Code Coverage Results"
+	@printf "\t%-20s %s\n" "gsw"            "Build Ground Software Binaries"
+	@printf "\t%-20s %s\n" "sim"            "Build Simulation Binaries"
+	@printf "\t%-20s %s\n" "cosmos-operator" "Launch as COSMOS operator viewpoint - requires configuration"
+	@printf "\t%-20s %s\n" "yamcs-operator" "Launch as YAMCS operator viewpoint - requires configuration"
+
+	@echo ""
+	@echo "Testing:"
+	@printf "\t%-20s %s\n" "ci-launch"      "Headless Launch for System Testing"
+	@printf "\t%-20s %s\n" "system-tests"   "GUI Launch for System Testing"
+	@printf "\t%-20s %s\n" "test-fsw"       "Test Flight Software"
+
+	@echo ""
+	@echo "Cleanup:"
+	@printf "\t%-20s %s\n" "clean"          "Clean all build files and configurations"
+	@printf "\t%-20s %s\n" "clean-fsw"      "Clean only Flight Software build artifacts"
+	@printf "\t%-20s %s\n" "clean-gsw"      "Clean only Ground Software build artifacts"
+	@printf "\t%-20s %s\n" "clean-sim"      "Clean only Simulation build artifacts"
+	@printf "\t%-20s %s\n" "log"            "Log Outputs"
+	@printf "\t%-20s %s\n" "stop"           "Stop entire System"
+	@printf "\t%-20s %s\n" "stop-gsw"       "Stop Ground Software"
+	@printf "\t%-20s %s\n" "uninstall"      "Remove all build artifacts and containers"
+
+
 
 igniter: ## Launch Configuration GUI Igniter
 	./scripts/cfg/igniter_launch.sh
