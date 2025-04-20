@@ -180,5 +180,6 @@ SERVER                                  ! Socket Role (SERVER,CLIENT,GMSEC_CLIEN
 fortytwo       4283                     ! Server Host Name, Port 
 FALSE                                   ! Allow Blocking (i.e. wait on RX)
 FALSE                                   ! Echo to stdout
-1                                       ! Number of TX prefixes
+2                                       ! Number of TX prefixes
 "SC"                                    ! Prefix 0
+"Orb"                                   ! Prefix 1
