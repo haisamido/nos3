@@ -20,6 +20,8 @@ Before running the scenario, ensure the following steps are completed:
   * [Installation](./Getting_Started.md#installation)
   * [Running](./Getting_Started.md#running)
 
+### CryptoLib Config Settings
+
 Go to `NOS3/cfg/nos3_defs/toolchain-amd64-nos3.cmake` and change line 34 (`TO_TRANSPORT`), as seen in the picture below, from `udp` to `udp_tf`. This will force NOS3 to format telemetry in a way that CryptoLib can understand.
 
 ![Toolchain Config](./_static/command_encryption/command_encryption_toolchain.png)
