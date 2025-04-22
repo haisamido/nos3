@@ -74,13 +74,13 @@ Two SC types exist:
   * This is used to control the spacecraft through mode transitions, start of pass, and general setup/teardown/maintenance command sequences
 
 A summary of the current RTSs for the STF mission are captured below:
-* [sc_rts001.c](../../cfg/nos3_defs/tables/sc_rts001.c) - Power On Reset (POR)
+* [sc_rts001.c](https://github.com/nasa/nos3/blob/dev/cfg/nos3_defs/tables/sc_rts001.c) - Power On Reset (POR)
   * Enable DS
   * Enable debug interface
   * Enable RTS 3-64
   * Enable LC
   * Start RTS 3 (Safe Mode)
-* [sc_rts003.c](../../cfg/nos3_defs/tables/sc_rts003.c) - Goto Safe Mode
+* [sc_rts003.c](https://github.com/nasa/nos3/blob/dev/cfg/nos3_defs/tables/sc_rts003.c) - Goto Safe Mode
   * Enable CSS
   * Enable FSS
   * Enable IMU
@@ -88,6 +88,63 @@ A summary of the current RTSs for the STF mission are captured below:
   * Enable Torquers
   * Enable GPS
   * Set ADCS To SUNSAFE_MODE
+* [sc_rts025.c](https://github.com/nasa/nos3/blob/dev/cfg/nos3_defs/tables/sc_rts025.c) - Enable Science Mode
+  * Disable AP25
+  * Set science mode in MGR
+* [sc_rts026.c](https://github.com/nasa/nos3/blob/dev/cfg/nos3_defs/tables/sc_rts026.c) - Science, Enable
+  * Enable RTS27 - RTS32
+  * Reset AP27 - AP32
+  * Set AP27 - AP32 active
+* [sc_rts027.c](https://github.com/nasa/nos3/blob/dev/cfg/nos3_defs/tables/sc_rts027.c) - Science, Low power pause
+  * Lower power in MGR, SS_NO_SCIENCE_LOW_POWER
+  * Disable AP30 - AP35
+  * Disable instrument application
+  * Reset AP28
+  * Set AP28 active
+* [sc_rts028.c](https://github.com/nasa/nos3/blob/dev/cfg/nos3_defs/tables/sc_rts028.c) - Science, Recharged resuming
+  * Resume science in MGR, SS_NO_SCIENCE_RECHARGED
+  * Disable AP28
+  * Reset AP27 - AP32
+  * Set AP27 - AP32 active
+* [sc_rts029.c](https://github.com/nasa/nos3/blob/dev/cfg/nos3_defs/tables/sc_rts029.c) - Science, Exit
+  * Stop science in MGR, SS_EXITED_SCIENCE_MODE
+  * Disable AP27 - AP35
+  * Disable instrument application
+  * Reset AP26
+  * Set AP26 active
+* [sc_rts030.c](https://github.com/nasa/nos3/blob/dev/cfg/nos3_defs/tables/sc_rts030.c) - Science, Over AK
+  * Start science in MGR, SS_SCIENCE_OVER_AK
+  * Increment science pass counter
+  * Enable instrument application
+  * Reset AP33
+  * Set AP33 active 
+* [sc_rts031.c](https://github.com/nasa/nos3/blob/dev/cfg/nos3_defs/tables/sc_rts031.c) - Science, Over CONUS
+  * Start science in MGR, SS_SCIENCE_OVER_CONUS
+  * Increment science pass counter
+  * Enable instrument application
+  * Reset AP34
+  * Set AP34 active
+* [sc_rts032.c](https://github.com/nasa/nos3/blob/dev/cfg/nos3_defs/tables/sc_rts032.c) - Science, Over HI
+  * Start science in MGR, SS_SCIENCE_OVER_HI
+  * Increment science pass counter
+  * Enable instrument application
+  * Reset AP35
+  * Set AP35 active
+* [sc_rts033.c](https://github.com/nasa/nos3/blob/dev/cfg/nos3_defs/tables/sc_rts033.c) - Science Idle, Left AK
+  * Stop science in MGR, SS_NO_SCIENCE_LEFT_AK
+  * Disable instrument application
+  * Reset AP31
+  * Set AP31 active
+* [sc_rts034.c](https://github.com/nasa/nos3/blob/dev/cfg/nos3_defs/tables/sc_rts034.c) - Science Idle, Left CONUS
+  * Stop science in MGR, SS_NO_SCIENCE_LEFT_CONUS
+  * Disable instrument application
+  * Reset AP31
+  * Set AP31 active
+* [sc_rts035.c](https://github.com/nasa/nos3/blob/dev/cfg/nos3_defs/tables/sc_rts035.c) - Science Idle, Left HI
+  * Stop science in MGR, SS_NO_SCIENCE_LEFT_HI
+  * Disable instrument application
+  * Reset AP31
+  * Set AP31 active
 
 Note that if an RTS number is not in the above list, it will use the default table available which typically performs no operation (NOOP) commands.
 

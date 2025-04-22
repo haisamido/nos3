@@ -55,7 +55,7 @@ typedef struct
     /* 10 - Disable AP 35 - Pause Science, Left HI */  
     SC_RtsEntryHeader_t hdr10;
     LC_SetAPState_t cmd10;
-    /* 11 - Turn OFF Instrument */
+    /* 11 - Disable Instrument Application */
     SC_RtsEntryHeader_t hdr11;
     SAMPLE_NoArgs_cmd_t cmd11;
     /* 12 - Reset AP 26 - Go to Science Mode */
@@ -88,7 +88,7 @@ SC_RtsTable029_t SC_Rts029 = {
         .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd2), LC_SET_AP_STATE_CC, 0x00),
         .cmd2.APNumber = 27,
         .cmd2.NewAPState = LC_APSTATE_DISABLED,
-        /* 3 - Disbale AP 28 - Science, Recharged */
+        /* 3 - Disable AP 28 - Science, Recharged */
         .hdr3.TimeTag = 1,
         .cmd3.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd3), LC_SET_AP_STATE_CC, 0x00),
         .cmd3.APNumber = 28,
@@ -128,7 +128,7 @@ SC_RtsTable029_t SC_Rts029 = {
         .cmd10.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd10), LC_SET_AP_STATE_CC, 0x00),
         .cmd10.APNumber = 35,
         .cmd10.NewAPState = LC_APSTATE_DISABLED,
-        /* 11 - Turn OFF Instruemnt */
+        /* 11 - Disable Instrument Application */
         .hdr11.TimeTag = 1,
         .cmd11.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd11), SAMPLE_DISABLE_CC, 0x00),
         /* 12 - Reset AP 26 - Go to Science Mode */

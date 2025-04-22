@@ -31,7 +31,7 @@ typedef struct
     /* 2 - Increment Science Pass Counter */
     SC_RtsEntryHeader_t hdr2;
     MGR_NoArgs_cmd_t cmd2;
-    /* 3 - Turn ON Instrument */
+    /* 3 - Enable Instrument Application */
     SC_RtsEntryHeader_t hdr3;
     SAMPLE_NoArgs_cmd_t cmd3;
     /* 4 - Reset AP 35 - Leaving HI Region */
@@ -62,7 +62,7 @@ SC_RtsTable032_t SC_Rts032 = {
         /* 2 - Increment Science Pass Counter */
         .hdr2.TimeTag = 1,
         .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(MGR_CMD_MID, SC_MEMBER_SIZE(cmd2), MGR_SCI_PASS_INC_CC, 0x00),
-        /* 3 - Turn ON Instrument */
+        /* 3 - Enable Instrument Application */
         .hdr3.TimeTag = 1,
         .cmd3.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd3), SAMPLE_ENABLE_CC, 0x00),
         /* 4 - Reset AP 35 - Leaving HI Region */

@@ -28,7 +28,7 @@ typedef struct
     /* 1 - Manager Note: Stop Science, Left AK Region */
     SC_RtsEntryHeader_t hdr1;
     MGR_U8_cmd_t cmd1;
-    /* 2 - Turn OFF Instrument */
+    /* 2 - Disable Instrument Application */
     SC_RtsEntryHeader_t hdr2;
     SAMPLE_NoArgs_cmd_t cmd2;
     /* 3 - Reset AP 30 - Do Science, Entering AK Region */
@@ -56,7 +56,7 @@ SC_RtsTable033_t SC_Rts033 = {
         .hdr1.TimeTag = 1,
         .cmd1.CmdHeader = CFE_MSG_CMD_HDR_INIT(MGR_CMD_MID, SC_MEMBER_SIZE(cmd1), MGR_UPDATE_SCI_STATUS_CC, 0x00),
         .cmd1.U8 = SS_NO_SCIENCE_LEFT_AK,
-        /* 2 - Turn OFF Instrument */
+        /* 2 - Disable Instrument Application */
         .hdr2.TimeTag = 1,
         .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd2), SAMPLE_DISABLE_CC, 0x00),
         /* 3 - Reset AP 30 - Do Science, Entering AK Region */

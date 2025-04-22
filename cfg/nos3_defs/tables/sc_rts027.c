@@ -46,7 +46,7 @@ typedef struct
     /* 7 - Disable Science AP 35 - Pause Science, Left HI */
     SC_RtsEntryHeader_t hdr7;
     LC_SetAPState_t cmd7;
-    /* 8 Turn OFF Instrument */
+    /* 8 Disable Instrument Application */
     SC_RtsEntryHeader_t hdr8;
     SAMPLE_NoArgs_cmd_t cmd8;
     /* 9 - Reset AP 28 - Science Recharged */
@@ -104,7 +104,7 @@ SC_RtsTable027_t SC_Rts027 = {
         .cmd7.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd7), LC_SET_AP_STATE_CC, 0x00),
         .cmd7.APNumber = 35,
         .cmd7.NewAPState = LC_APSTATE_DISABLED,
-        /* 8 Turn OFF Instrument */
+        /* 8 Disable Instrument Application */
         .hdr8.TimeTag = 1,
         .cmd8.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd8), SAMPLE_DISABLE_CC, 0x00),
         /* 9 - Reset Science AP 28 - Science Recharged */
