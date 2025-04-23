@@ -12,6 +12,7 @@
 #include "generic_radio_app.h"
 #include "generic_eps_app.h"
 #include "generic_eps_msgids.h"
+#include "generic_eps_msg.h"
 #include "sample_app.h"
 #include "lc_app.h"
 #include "lc_msgids.h"
@@ -30,12 +31,12 @@ typedef struct
     /* 1 - Manager Note: Stop Science, Left AK Region */
     SC_RtsEntryHeader_t hdr1;
     MGR_U8_cmd_t cmd1;
-    /* 2 - Disable Instrument Switch on EPS*/
+    /* 2 - Disable Instrument Application */
     SC_RtsEntryHeader_t hdr2;
-    GENERIC_EPS_Switch_cmd_t cmd2;
-    /* 3 - Disable Instrument Application */
+    SAMPLE_NoArgs_cmd_t cmd2;
+    /* 3 - Disable Instrument Switch on EPS*/
     SC_RtsEntryHeader_t hdr3;
-    SAMPLE_NoArgs_cmd_t cmd3;
+    GENERIC_EPS_Switch_cmd_t cmd3;
     /* 4 - Reset AP 30 - Do Science, Entering AK Region */
     SC_RtsEntryHeader_t hdr4;
     LC_ResetAPStats_t cmd4;
@@ -61,14 +62,14 @@ SC_RtsTable033_t SC_Rts033 = {
         .hdr1.TimeTag = 1,
         .cmd1.CmdHeader = CFE_MSG_CMD_HDR_INIT(MGR_CMD_MID, SC_MEMBER_SIZE(cmd1), MGR_UPDATE_SCI_STATUS_CC, 0x00),
         .cmd1.U8 = SS_NO_SCIENCE_LEFT_AK,
-        /* 2 - Disable Instrument Switch on EPS*/
+        /* 2 - Disable Instrument Application */
         .hdr2.TimeTag = 1,
-        .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd2), GENERIC_EPS_SWITCH_CC, 0x00),
-        .cmd2.SwitchNumber = 0,
-        .cmd2.State = 0x00,
-        /* 3 - Disable Instrument Application */
+        .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd2), SAMPLE_DISABLE_CC, 0x00),
+        /* 3 - Disable Instrument Switch on EPS*/
         .hdr3.TimeTag = 1,
-        .cmd3.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd3), SAMPLE_DISABLE_CC, 0x00),
+        .cmd3.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_EPS_CMD_MID, SC_MEMBER_SIZE(cmd3), GENERIC_EPS_SWITCH_CC, 0x00),
+        .cmd3.SwitchNumber = 0,
+        .cmd3.State = 0x00,
         /* 4 - Reset AP 30 - Do Science, Entering AK Region */
         .hdr4.TimeTag = 1,
         .cmd4.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd4), LC_RESET_AP_STATS_CC, 0x00),

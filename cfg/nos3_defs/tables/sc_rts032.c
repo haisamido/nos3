@@ -12,6 +12,7 @@
 #include "generic_radio_app.h"
 #include "generic_eps_app.h"
 #include "generic_eps_msgids.h"
+#include "generic_eps_msg.h"
 #include "sample_app.h"
 #include "lc_app.h"
 #include "lc_msgids.h"
@@ -69,7 +70,7 @@ SC_RtsTable032_t SC_Rts032 = {
         .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(MGR_CMD_MID, SC_MEMBER_SIZE(cmd2), MGR_SCI_PASS_INC_CC, 0x00),
         /* 3 - Enable Instrument Switch on EPS*/
         .hdr3.TimeTag = 1,
-        .cmd3.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd3), GENERIC_EPS_SWITCH_CC, 0x00),
+        .cmd3.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_EPS_CMD_MID, SC_MEMBER_SIZE(cmd3), GENERIC_EPS_SWITCH_CC, 0x00),
         .cmd3.SwitchNumber = 0,
         .cmd3.State = 0xAA,
         /* 4 - Enable Instrument Application */
