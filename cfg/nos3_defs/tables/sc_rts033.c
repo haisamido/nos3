@@ -63,20 +63,20 @@ SC_RtsTable033_t SC_Rts033 = {
         .cmd1.U8 = SS_NO_SCIENCE_LEFT_AK,
         /* 2 - Disable Instrument Switch on EPS*/
         .hdr2.TimeTag = 1,
-        .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd3), GENERIC_EPS_SWITCH_CC, 0x00),
+        .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd2), GENERIC_EPS_SWITCH_CC, 0x00),
         .cmd2.SwitchNumber = 0,
         .cmd2.State = 0x00,
         /* 3 - Disable Instrument Application */
         .hdr3.TimeTag = 1,
-        .cmd3.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd2), SAMPLE_DISABLE_CC, 0x00),
+        .cmd3.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd3), SAMPLE_DISABLE_CC, 0x00),
         /* 4 - Reset AP 30 - Do Science, Entering AK Region */
         .hdr4.TimeTag = 1,
-        .cmd4.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd3), LC_RESET_AP_STATS_CC, 0x00),
+        .cmd4.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd4), LC_RESET_AP_STATS_CC, 0x00),
         .cmd4.APNumber = 30,
         .cmd4.Padding = 0,
         /* 5 - Enable AP 30 - Do Science, Entering AK Region */
         .hdr5.TimeTag = 1,
-        .cmd5.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd4), LC_SET_AP_STATE_CC, 0x00),
+        .cmd5.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd5), LC_SET_AP_STATE_CC, 0x00),
         .cmd5.APNumber = 30,
         .cmd5.NewAPState = LC_APSTATE_ACTIVE,
     }

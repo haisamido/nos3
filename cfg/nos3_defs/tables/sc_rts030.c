@@ -74,15 +74,15 @@ SC_RtsTable030_t SC_Rts030 = {
         .cmd3.State = 0xAA,
         /* 4 - Enable Instrument Application */
         .hdr4.TimeTag = 1,
-        .cmd4.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd3), SAMPLE_ENABLE_CC, 0x00),
+        .cmd4.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd4), SAMPLE_ENABLE_CC, 0x00),
         /* 5 - Reset AP 33 - Leaving AK Region */
         .hdr5.TimeTag = 1,
-        .cmd5.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd4), LC_RESET_AP_STATS_CC, 0x00),
+        .cmd5.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd5), LC_RESET_AP_STATS_CC, 0x00),
         .cmd5.APNumber = 33,
         .cmd5.Padding = 0,
         /* 6 - Enable AP 33 - Leaving AK Region */
         .hdr6.TimeTag = 1,
-        .cmd6.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd5), LC_SET_AP_STATE_CC, 0x00),
+        .cmd6.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd6), LC_SET_AP_STATE_CC, 0x00),
         .cmd6.APNumber = 33,
         .cmd6.NewAPState = LC_APSTATE_ACTIVE,
     }
