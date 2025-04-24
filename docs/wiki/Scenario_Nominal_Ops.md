@@ -41,7 +41,9 @@ Press `Start`:
 
 ![Scenario Nominal - Nominal Pass](./_static/scenario_demo/scenario_nominal.png)
 
-**_NOTE:_** The user must select `go` when they are done commanding for the pass, since the script does not stop and disconnect COSMOS automatically.
+After the script connects COSMOS and checks the health of the spacecraft, the operator can proceed with any commanding specified for the pass.
+
+**_NOTE:_** The user must select `go` in the script runner window when they are done commanding for the pass, since the script does not stop and disconnect COSMOS automatically.
 Also, typical passes are of short duration (8-10 minutes) and it is up to the operator to keep track of time and when the pass ends.
 
 
