@@ -39,3 +39,10 @@ fi
 
 # Run the configuration Python script
 python3 "$SCRIPT_DIR/cfg/configure.py" "$CONFIG_FILE"
+
+# Configure Cosmos Targets
+for i in $(find ./components/ -mindepth 1 -maxdepth 1 -type d)
+do
+    python3 $BASE_DIR/scripts/cfg/declare_cosmos_target.py $i
+    python3 $BASE_DIR/scripts/cfg/configure_cosmos_target.py $i
+done
