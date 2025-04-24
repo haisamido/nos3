@@ -29,22 +29,19 @@ With a terminal navigated to the top level of your NOS3 repository, run make cle
 
 
  * `make`
-![Scenario Demo - Make](./_static/scenario_demo/scenario_demo_make.png)
+![Scenario Nominal - Make](./_static/scenario_demo/scenario_demo_make.png)
 
 Then, launch NOS3 and open COSMOS:
 
-![Scenario Demo - COSMOS](./_static/scenario_demo/scenario_demo_cosmos.png)
+![Scenario Nominal - COSMOS](./_static/scenario_demo/scenario_demo_cosmos.png)
 
-**_NOTE:_** COSMOS will automatically connect to the satellite, and assumes it always has communication with it.  This is not true for an actual satellite; in actuality, COSMOS would be running on a ground antenna and would therefore have to connect to the satellite and also have a fairly sharply limited duration of connection.  
+Open the script runner.  
+In the script runner, perform File->Open... and choose the `gsw/cosmos/config/targets/MISSION/procedures/nominal_ops.rb` script.  
+Press `Start`:
 
+![Scenario Nominal - Nominal Pass](./_static/scenario_demo/scenario_nominal.png)
 
+**_NOTE:_** The user must select `go` when they are done commanding for the pass, since the script does not stop and disconnect COSMOS automatically.
+Also, typical passes are of short duration (8-10 minutes) and it is up to the operator to keep track of time and when the pass ends.
 
-
-THOUGHTS:
-
-For this scenario, it really feels like the logical way to do things would be to make a script.
-Maybe not a script which is Ruby, and runs in COSMOS, but one which runs alongside launch.sh and
-does two things - firstly, it should launch COSMOS without connecting automatically, and then it
-should close the connection (shut down the spacecraft, or some such similar thing) after however
-long a pass would normally take.  Other than that, I do not think a script would be very necessary
 
