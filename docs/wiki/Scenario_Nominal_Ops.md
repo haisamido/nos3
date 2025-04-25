@@ -48,10 +48,28 @@ Also, typical passes are of short duration (8-10 minutes) and it is up to the op
 
 ### Connect to the Spacecraft
 
+Before you can do anything else with the spacecraft, you must connect to it.  In NOS3 this is handled automatically, but with a real satellite this would have to be done first, in conjunction with the ground station and at the appropriate time for when your particular satellite would be in range.
+
 ### Confirm Telemetry is Nominal
+
+
 
 ### Send Commands
 
+Once the spacecraft is known to be in a nominal state, the next step is to either send commands or to downlink data.  This scenario will provide an example of each.
+
+For an example of sending a command, we will direct the spacecraft to enter science mode.  
+The example spacecraft in NOS3 conducts science using the sample instrument when over the US; it has to be activated into science mode, however, to start doing this.  We will do so via COSMOS.  
+First, navigate to the Command Sender and open the (INSERT_RELEVANT_THING).
+
 ### Downlink Data
 
-After the script connects COSMOS and checks the health of the spacecraft, the operator can proceed with any commanding specified for the pass.
+Next we will go through an example of downlinking data.  This is the other thing likely to be done during a pass. 
+
+Our example will be to downlink a picture from the Arducam, using the CAM_EXP_3 commands.  Typically this is how downlinking data will have to be done; some kind of command will trigger it.  
+
+
+
+
+
+
