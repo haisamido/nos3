@@ -52,7 +52,26 @@ Before you can do anything else with the spacecraft, you must connect to it.  In
 
 ### Confirm Telemetry is Nominal
 
+#### COSMOS Alone
 
+The first task to confirm that spacecraft telemetry is nominal by checking that data is being downlinked and that commands are being sent.  Both can be confirmed by use of the NOOP command.
+On an actual spacecraft, the only information to which you would have access would be COSMOS and its associated outputs.  As such, we will start by looking only at those to confirm that the spacecraft is in a nominal state before looking at other pieces of information.
+Among the COSMOS windows, make sure the Command Sender and Telemetry Viewer are both visible, and in both, navigate to the GENERIC_IMU:
+
+![Scenario Nominal - COSMOS1](./_static/scenario_nominal_ops/COSMOS_before_test.png)
+
+Within the Telemetry Viewer, it is possible to see both housekeeping information and regular data, which will allow confirming that information is being sent down and that the satellite is not spinning or in a bad situation physically (the values of the IMU's rotational sensors should all be near zero).  
+Now, to confirm that ground commands have an impact on the IMU, start by sending a NOOP command.  This should increment the command counter under the housekeeping data, like so:
+
+![Scenario Nominal - COSMOS2](./_static/scenario_nominal_ops/COSMOS_after_test.png)
+
+Note that the command counter has increased by one.
+
+The other component which should be checked to ensure nominal operations is the electrical power system, or EPS.  Check that the EPS is sending telemetry and is able to receive commands in the same way.
+
+#### 42 and the Simulator
+
+On an actual mission, this (COSMOS) would be all the information you have available.  When running in a simulator, however, there is more information to which you have access, and which can tell you in fairly short order about the state of the spacecraft and whether it's in nominal operations. 
 
 ### Send Commands
 
