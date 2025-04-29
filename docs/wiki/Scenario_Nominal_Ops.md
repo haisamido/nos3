@@ -87,7 +87,16 @@ Once the spacecraft is known to be in a nominal state, the next step is to eithe
 
 For an example of sending a command, we will direct the spacecraft to enter science mode.  
 The example spacecraft in NOS3 conducts science using the sample instrument when over the US; it has to be activated into science mode, however, to start doing this.  We will do so via COSMOS.  
-First, navigate to the Command Sender and open the (INSERT_RELEVANT_THING).
+
+First, navigate to the Command Sender and go to the MGR under "Target".  Do the same with the Packet Viewer, like so:
+
+![Scenario Nominal - Science Mode commands](./_static/scenario_nominal_ops/MGR_cmd_and_tlm.png)
+
+Notice the various commands listed in the dropdown menu.  For this we will be sending one to activate science mode (this tells the spacecraft that it's OK to perform science when conditions allow).  This is done by going to "MGR_SET_MODE_CC" and, in the dropdown menu therein, selecting "SCIENCE_ACTIVE" as the mode:
+
+![Scenario Nominal - Set Science Mode](./_static/scenario_nominal_ops/Science_Mode_cmd.png)
+
+Once sent, the "SPACECRAFT_MODE" in the Packet Viewer should switch to SCIENCE_ACTIVE.  This change can also be seen in the Flight Software (FSW) terminal.
 
 ### Downlink Data
 
