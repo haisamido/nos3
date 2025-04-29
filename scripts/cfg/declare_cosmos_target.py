@@ -1,101 +1,83 @@
-import sys
 import os
+import shutil
 import xml.etree.ElementTree as ET
 
+# Map component names to their XML identifiers
 components = {
-    "arducam" : "cam",
-    "cryptolib" : "cryptolib",
-    "generic_adcs" : "adcs",
-    "generic_css" : "css",
-    "generic_eps" : "eps",
-    "generic_fss" : "fss",
-    "generic_imu" : "imu",
-    "generic_mag" : "mag",
-    "generic_radio" : "radio",
-    "generic_reaction_wheel" : "rw",
-    "generic_star_tracker" : "st",
-    "generic_thruster" : "thruster",
-    "generic_torquer" : "torquer",
-    "mgr" : "mgr",
-    "novatel_oem615" : "novatel_oem615",
-    "onair" : "onair",
-    "sample" : "sample",
-    "syn" : "syn"
+    "arducam": "cam",
+    "cryptolib": "radio",
+    "generic_adcs": "adcs",
+    "generic_css": "css",
+    "generic_eps": "eps",
+    "generic_fss": "fss",
+    "generic_imu": "imu",
+    "generic_mag": "mag",
+    "generic_radio": "radio",
+    "generic_reaction_wheel": "rw",
+    "generic_star_tracker": "st",
+    "generic_thruster": "thruster",
+    "generic_torquer": "torquer",
+    "mgr": "mgr",
+    "novatel_oem615": "gps",
+    "onair": "onair",
+    "sample": "sample",
+    "syn": "syn"
 }
 
+def clean_declare_targets(input_file, output_file, sc_root, component_key, xml_name):
+    """Remove DECLARE_TARGET lines related to a disabled component."""
+    component_upper = component_key.upper()
+    node = sc_root.find(f"components/{xml_name}/enable")
+    enabled = node is not None and node.text.strip().lower() == 'true'
+
+    if enabled:
+        return
+
+    # Lines to remove if the component is disabled
+    patterns_to_remove = {
+        f'DECLARE_TARGET ../../COMPONENTS/{component_upper} {component_upper}',
+        f'DECLARE_TARGET ../../COMPONENTS/GENERIC_{component_upper} GENERIC_{component_upper}',
+        f'DECLARE_TARGET ../../COMPONENTS/{component_upper} {component_upper}_RADIO',
+        f'DECLARE_TARGET ../../COMPONENTS/GENERIC_{component_upper} GENERIC_{component_upper}_RADIO',
+        f'DECLARE_TARGET ../../COMPONENTS/{component_upper} SYNOPSIS',
+        f'DECLARE_TARGET ../../COMPONENTS/{component_upper} SYNOPSIS_RADIO'
+    }
+
+    with open(input_file, 'r') as f:
+        lines = f.readlines()
+
+    # Remove any line that matches exactly one of the patterns
+    filtered_lines = [line for line in lines if line.strip() not in patterns_to_remove]
+
+    with open(output_file, 'w') as f:
+        f.writelines(filtered_lines)
+
 def main():
+    # === Parse XML to get SC config ===
     mission_file = 'nos3-mission.xml'
-    mission_tree = ET.parse("./cfg/build/temp_mission/" + os.path.basename(mission_file))
-    mission_root = mission_tree.getroot()
-    sc_cfg = mission_root.find("sc-1-cfg").text
-    sc_cfg_str = './cfg/' + sc_cfg
-    sc_tree = ET.parse(sc_cfg_str)
-    sc_root = sc_tree.getroot()
-
-    component = sys.argv[1]
-    component = component.split('/')[-1]
-
-    xml_path = 'components/{x}/enable'.format(x=components[component])
-    component = component.upper()
-
-    # Parse spacecraft configuration
-    sc_component_en = None
-    try:
-        sc_component_en = sc_root.find(xml_path).text
-    except AttributeError:
-        pass
-
-    write_lines = []
-    if sc_component_en == 'false':
-        # remove the target from COSMOS
-        with open("./gsw/cosmos/config/system/system.txt", 'r') as fp:
-            lines = fp.read().splitlines()
-            for line in lines:
-                if line in [
-                    f'DECLARE_TARGET ../../COMPONENTS/{component} {component}',
-                    f'DECLARE_TARGET ../../COMPONENTS/GENERIC_{component} GENERIC_{component}',
-                    f'DECLARE_TARGET ../../COMPONENTS/{component} {component}_RADIO',
-                    f'DECLARE_TARGET ../../COMPONENTS/GENERIC_{component} GENERIC_{component}_RADIO',
-                    f'DECLARE_TARGET ../../COMPONENTS/{component} SYNOPSIS',
-                    f'DECLARE_TARGET ../../COMPONENTS/{component} SYNOPSIS_RADIO'
-                ]:
-                    print("Removed:", line)
-                else:
-                    write_lines.append(line + "\n")
-            fp.close()
-    elif sc_component_en == 'true':
-        # add the target to cosmos
-        with open("./gsw/cosmos/config/system/system.txt", 'r') as fp:
-            line_found = False
-            radio_found = False
-            lines = fp.read().splitlines()
-            for line in lines:
-                if line in [
-                    f'DECLARE_TARGET ../../COMPONENTS/{component} {component}',
-                    f'DECLARE_TARGET ../../COMPONENTS/GENERIC_{component} GENERIC_{component}',
-                    f'DECLARE_TARGET ../../COMPONENTS/{component} SYNOPSIS',
-                ]:
-                    line_found = True
-                elif line in [
-                    f'DECLARE_TARGET ../../COMPONENTS/{component} {component}_RADIO',
-                    f'DECLARE_TARGET ../../COMPONENTS/GENERIC_${component} GENERIC_{component}_RADIO',
-                    f'DECLARE_TARGET ../../COMPONENTS/{component} SYNOPSIS_RADIO'
-                ]:
-                    radio_found = True
-                write_lines.append(line + "\n")
-            if line_found == False:
-                write_lines.append(f'DECLARE_TARGET ../../COMPONENTS/{component} {component}\n')
-                print(f'Added: DECLARE_TARGET ../../COMPONENTS/{component} {component}\n')
-            if radio_found == False:
-                write_lines.append(f'DECLARE_TARGET ../../COMPONENTS/{component} {component}_RADIO\n')
-                print(f'Added: DECLARE_TARGET ../../COMPONENTS/{component} {component}_RADIO\n')
-            fp.close()
-
-    if len(write_lines) > 0:
-        os.remove("./gsw/cosmos/config/system/system.txt")
-        with open("./gsw/cosmos/config/system/system.txt", 'a') as new_fp:
-            new_fp.writelines(write_lines)
+    mission_path = "./cfg/build/temp_mission/" + os.path.basename(mission_file)
     
+    try:
+        mission_tree = ET.parse(mission_path)
+        mission_root = mission_tree.getroot()
+        sc_cfg = mission_root.find("sc-1-cfg").text
+        sc_cfg_path = './cfg/' + sc_cfg
+        sc_tree = ET.parse(sc_cfg_path)
+        sc_root = sc_tree.getroot()
+    except Exception as e:
+        print(f"Error parsing XML: {e}")
+        return
 
-if __name__ == "__main__":
+    # === File paths ===
+    input_path = './gsw/cosmos/config/system/stash/system.txt'
+    output_path = './gsw/cosmos/config/system/system.txt'
+
+    # Start fresh from stash copy
+    shutil.copyfile(input_path, output_path)
+
+    # Process each component
+    for comp_key, xml_name in components.items():
+        clean_declare_targets(output_path, output_path, sc_root, comp_key, xml_name)
+
+if __name__ == '__main__':
     main()
