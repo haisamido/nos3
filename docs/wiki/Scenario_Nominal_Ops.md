@@ -104,6 +104,12 @@ Next we will go through an example of downlinking data.  This is the other thing
 
 Our example will be to downlink a picture from the Arducam, using the CAM_EXP_3 commands.  Typically this is how downlinking data will have to be done; some kind of command will trigger it.  
 
+The first task, like above, is to navigate to the ARDUCAM target of the Command Sender and the Packet Viewer:
+
+![Scenario Nominal - Arducam Windows](./_static/scenario_nominal_ops/CAM_cmd_and_tlm.png)
+
+Notice that both the data and the housekeeping data (HK) of the Arducam are pink, indicating no recent change.  In this case, that is because the Arducam is not connected to start; we will have to connect it with CAM_HW_CHECK_CC.  This will connect both the SPI and I2C buses of the Arducam and leave us ready to downlink a picture.  This is done with the CAM_EXP3_CC command
+
 
 
 
