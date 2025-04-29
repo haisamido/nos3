@@ -73,6 +73,14 @@ The other component which should be checked to ensure nominal operations is the 
 
 On an actual mission, this (COSMOS) would be all the information you have available.  When running in a simulator, however, there is more information to which you have access, and which can tell you in fairly short order about the state of the spacecraft and whether it's in nominal operations. 
 
+The two other places where information about the spacecraft state is available are 42 and the various simulators.  The simulators are all launched as tabs on the terminal from which you launched NOS3, and a simulator in a nominal state will be both running and (likely) have some message indicating its successful launch and connection to the buses.  Below is an image of the Generic IMU simulator tab, after it has successfully completed construction but before it has begun sending telemetry (which happens automatically):
+
+![Scenario Nominal - IMU tab](./_static/scenario_nominal_ops/IMU_Success.png)
+
+Then, 42 will indicate the state of the spacecraft to some degree.  Its camera window will show whether the spacecraft is rotating significantly, as well as showing the spacecraft attitude with respect to the Sun and its location over the Earth:  
+
+![Scenario Nominal - 42 Cam](./_static/scenario_nominal_ops/42_Nominal.png)
+
 ### Send Commands
 
 Once the spacecraft is known to be in a nominal state, the next step is to either send commands or to downlink data.  This scenario will provide an example of each.
