@@ -108,10 +108,17 @@ The first task, like above, is to navigate to the ARDUCAM target of the Command 
 
 ![Scenario Nominal - Arducam Windows](./_static/scenario_nominal_ops/CAM_cmd_and_tlm.png)
 
-Notice that both the data and the housekeeping data (HK) of the Arducam are pink, indicating no recent change.  In this case, that is because the Arducam is not connected to start; we will have to connect it with CAM_HW_CHECK_CC.  This will connect both the SPI and I2C buses of the Arducam and leave us ready to downlink a picture.  This is done with the CAM_EXP3_CC command
+Notice that both the data and the housekeeping data (HK) of the Arducam are pink, indicating no recent change.  In this case, that is because the Arducam is not connected to start; we will have to connect it with CAM_HW_CHECK_CC.  This will connect both the SPI and I2C buses of the Arducam and leave us ready to downlink a picture, which can be confirmed by the Packet Viewer beginning to have HK data:
 
+![Scenario Nominal - Arducam Active](./_static/scenario_nominal_ops/CAM_Active.png)
 
+This is done with the CAM_EXP3_CC command; once sent, the Experiment Telemetry will begin to be populated in the Packet Viewer, and a series of messages will come through on the simulator:
 
+![Scenario Nominal - Arducam Transmitting](./_static/scenario_nominal_ops/CAM_Downlinking.png)
+
+Once it finishes, the picture file will be located in the base NOS3 directory.
+
+And with that, you have completed this scenario.  To review, you learned about what spacecraft nominal operations look like and how to send commands and downlink data in NOS3.
 
 
 
