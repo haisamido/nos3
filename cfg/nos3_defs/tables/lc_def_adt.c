@@ -732,19 +732,20 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] = {
           LC_RPN_NOT, 
           LC_RPN_EQUAL}},
 
-    /* #36 (unused) */
+    /* #36 (Sample Device Status, != 0 is BAD) */
     {.DefaultState      = LC_ACTION_NOT_USED,
      .MaxPassiveEvents  = 0,
      .MaxPassFailEvents = 0,
      .MaxFailPassEvents = 0,
-     .RTSId             = 0,
+     .RTSId             = 36,
      .MaxFailsBeforeRTS = 0,
      .EventType         = CFE_EVS_EventType_INFORMATION,
      .EventID           = LC_BASE_AP_EID + 36,
-     .EventText         = {" "},
+     .EventText         = {"Sample Device Status !=0 in Science"},
      .RPNEquation =
-         {/* (WP_0) */
-          0, LC_RPN_EQUAL}},
+         {/* (WP_26) && (WP_24)*/
+            26, 24, 
+            LC_RPN_AND,}},
 
     /* #37 (unused) */
     {.DefaultState      = LC_ACTION_NOT_USED,
