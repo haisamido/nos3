@@ -18,6 +18,32 @@
 #include "lc_msgids.h"
 #include "mgr_msgids.h"
 #include "mgr_app.h"
+// #include "cpu1_msgids.h"
+// #include "default_cfe_es_fcncodes.h"
+
+
+#define CFE_ES_CMD_MID 0x1806
+#define CFE_ES_RESTART_CC 2
+
+// /**
+//  * \brief cFS command header
+//  */
+// typedef struct CFE_MSG_CommandHeader CFE_MSG_CommandHeader_t;
+
+typedef struct CFE_ES_RestartCmd_Payload
+{
+    uint16 RestartType; /**< \brief #CFE_PSP_RST_TYPE_PROCESSOR=Processor Reset
+                             or #CFE_PSP_RST_TYPE_POWERON=Power-On Reset        */
+} CFE_ES_RestartCmd_Payload_t;
+
+/**
+ * \brief Restart cFE Command
+ */
+typedef struct CFE_ES_RestartCmd
+{
+    CFE_MSG_CommandHeader_t     CommandHeader; /**< \brief Command header */
+    CFE_ES_RestartCmd_Payload_t Payload;       /**< \brief Command payload */
+} CFE_ES_RestartCmd_t;
 
 /* 
 ** ************************************************
@@ -34,12 +60,9 @@ typedef struct
     /* 12 - Disable Instrument Switch on EPS*/
     SC_RtsEntryHeader_t hdr12;
     GENERIC_EPS_Switch_cmd_t cmd12;
-    /* 13 - Reset AP 26 - Go to Science Mode */
+    // 13
     SC_RtsEntryHeader_t hdr13;
-    LC_ResetAPStats_t cmd13;
-    /* 14 - Enable AP 26 - Go to Science Mode */
-    SC_RtsEntryHeader_t hdr14;
-    LC_SetAPState_t cmd14;
+    CFE_ES_RestartCmd_t cmd13;
 } SC_RtsStruct036_t;
 
 /* Define the union to size the table correctly */
@@ -63,16 +86,11 @@ SC_RtsTable036_t SC_Rts036 = {
         .cmd12.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_EPS_CMD_MID, SC_MEMBER_SIZE(cmd12), GENERIC_EPS_SWITCH_CC, 0x00),
         .cmd12.SwitchNumber = 0,
         .cmd12.State = 0x00,
-        /* 13 - Reset AP 26 - Go to Science Mode */
+        /* 13 - Restart CFS*/
         .hdr13.TimeTag = 1,
-        .cmd13.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd13), LC_RESET_AP_STATS_CC, 0x00),
-        .cmd13.APNumber = 26,
-        .cmd13.Padding = 0,
-        /* 14 - Enable AP 26 - Go to Science Mode */
-        .hdr14.TimeTag = 1,
-        .cmd14.CmdHeader = CFE_MSG_CMD_HDR_INIT(LC_CMD_MID, SC_MEMBER_SIZE(cmd14), LC_SET_AP_STATE_CC, 0x00),
-        .cmd14.APNumber = 26,
-        .cmd14.NewAPState = LC_APSTATE_ACTIVE,
+        .cmd13.CommandHeader = CFE_MSG_CMD_HDR_INIT(CFE_ES_CMD_MID, SC_MEMBER_SIZE(cmd13), CFE_ES_RESTART_CC, 0x00),
+        .cmd13.Payload.RestartType = 1,
+        
     }
 };
 /* Macro for table structure */
