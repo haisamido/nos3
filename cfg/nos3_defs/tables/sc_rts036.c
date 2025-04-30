@@ -21,7 +21,7 @@
 
 /* 
 ** ************************************************
-** RTS 036 - Science Mode: Exited Science Mode
+** RTS 036 - Sample Device Fail in Science Mode
 ** ************************************************
 */
 
