@@ -44,7 +44,7 @@ ENV BASE_DIR=${BASE_DIR}
 
 RUN apt-get update && \
     apt-get -y install \
-        sudo git curl vim make cmake tmux tree python3 pip iputils-ping dnsutils && \
+        sudo git curl vim make cmake tmux tree python3 pip iputils-ping dnsutils libgcrypt20-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
