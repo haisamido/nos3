@@ -40,7 +40,7 @@ Then, launch NOS3 (using `make launch`) and open COSMOS using the `COSMOS` butto
 ### Connect to the Spacecraft
 
 Before you can do anything else with the spacecraft, you must connect to it.
-In the following script, this is done at least partly automatically (the `RADIO` interface is connected automatically), but with a real satellite this would have to be done first, in conjunction with the ground station and at the appropriate time for when your particular satellite would be in range.
+In the following script, this is done at least partly automatically (the `RADIO` interface is connected automatically), but with a real satellite this would have to be done first, in conjunction with the ground station and at the appropriate time for when your particular satellite would be in range.  Note that the COSMOS `DEBUG` interface is supposed to be like having a direct interface to the spacecraft from the ground system using a debug port; while the COSMOS `RADIO` interface is supposed to be like interfacing the ground system to the spacecraft using a radio.
 
 ### Execute the pass script
 Open the script runner from the `NOS3 Launcher`.
@@ -85,7 +85,7 @@ Note also that there can be a few second delay between sending the command and t
 
 The other component which should be checked to ensure nominal operations is the electrical power system, or EPS.
 Check that the EPS is sending telemetry and is able to receive commands by sending a `NOOP` command and verifying that the command counter increases.
-EPS telemetry should also show `BATT_VOLTAGE` as a healthy state of charge (e.g. greater than 15V).
+EPS telemetry should also show `BATT_VOLTAGE` as a healthy state of charge (e.g. greater than 23V).
 
 ![Scenario Nominal - COSMOS3](./_static/scenario_nominal_ops/COSMOS_EPS_Testing.png)
 
