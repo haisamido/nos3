@@ -12,6 +12,8 @@ jobs:
       container:
         image: ivvitc/nos3-64:20250124
       steps:
+        - name: Delete huge unnecessary tools folder
+          run: rm -rf /opt/hostedtoolcache
         - uses: actions/checkout@v4
           with:
             fetch-depth: 1
