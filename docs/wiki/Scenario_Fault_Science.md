@@ -38,7 +38,7 @@ Before starting, make sure to launch NOS3 in the default misson configuration in
 ---
 ### Triggering a Simiulated Fault with the Sample Device
 
-* Now, you can wait until your Spacecraft is orbiting over North America Which will enable the sample device or you can enable it manually if you would like to speed up this Scenario Walkthrough.
+* Now, you can wait until your Spacecraft is orbiting over North America, which will enable the sample device, or you can enable it manually if you would like to speed up this Scenario Walkthrough.
 
 ![Sample Enable](./_static/scenario_fault_sample/sample_enable.png)
 
@@ -55,7 +55,7 @@ Before starting, make sure to launch NOS3 in the default misson configuration in
 
 ![Sample Set Sim Status](./_static/scenario_fault_sample/sample_device_status_1.png)
 
-* Now, since we have simulated a fault detected on the sample device by changing the status to 1, Action Point 36 should be detected which will trigger AP 36. This is pictured below.
+* Now, since we have simulated a fault detected on the sample device by changing the status to 1, Action Point 36 should be detected which will trigger RTS 36. This is pictured below.
 
 ![CFE ES Reset when triggered](./_static/scenario_fault_sample/cfe_es_reset.png)
 
@@ -64,7 +64,7 @@ Before starting, make sure to launch NOS3 in the default misson configuration in
 ![STF Splash Screen](./_static/scenario_fault_sample/stf1_splash_screen.png)
 
 * It is important to understand that we have disabled Action point 36 by default when booting into safe mode, but it is enabled when in Science mode. This is done to protect the spacecraft from resetting cyclically. 
-* Basically, we are protecting the spacecraft from constantly resetting itself if a fault is detected, So it is important we disable Action Points like this in the boot up RTS procedures if a user was to add more APs, WPs, and RTS's like this in the future.
+* Basically, we are protecting the spacecraft from constantly resetting itself if a fault is detected, So it is important we disable Action Points like this in the appropriate RTS procedures if a user was to add more APs, WPs, and RTS's like this in the future.
 
 
 ## How is this Fault Scenario Possible?
@@ -111,6 +111,6 @@ Note, we disable AP 36 in the Science mode exit RTS (rts029) and we enable AP 36
 ---
 ### Conclusions
 
-The user is now able to Fault the sample device and have the Spaceraft recover itself. Also, the user should have an understanding of what a AP, WP, and RTS do in the cFS system.
+The user is now able to Fault the sample device and have the Spaceraft recover itself. Also, the user should have an understanding of what an AP, WP, and RTS do in the cFS system.
 
 
