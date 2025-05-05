@@ -22,6 +22,7 @@ Before running the scenario, ensure the following steps are completed:
 ## Scenario Walkthrough
 Before starting, make sure to launch NOS3 in the default misson configuration in your nos3-mission.xml (sc-mission-config.xml).
 
+---
 ### Commanding the Spacecraft into Science mode.
 
 * Once NOS3 is running and FSW enters ADCS Mode 2 (Sunpoint Mode). We can command the spacecraft into Science mode. As Pictured Below.
@@ -34,14 +35,15 @@ Before starting, make sure to launch NOS3 in the default misson configuration in
 
 ![Enabling over North America](./_static/scenario_fault_sample/mgr_set_conus_1.png)
 
-
+---
 ### Triggering a Simiulated Fault with the Sample Device
 
 * Now, you can wait until your Spacecraft is orbiting over North America Which will enable the sample device or you can enable it manually if you would like to speed up this Scenario Walkthrough.
 
 ![Sample Enable](./_static/scenario_fault_sample/sample_enable.png)
 
-* once the sample device is enabled you should see the sample device enabled event in cFS in your FSW window as pictured below. Also, take note that AP 36 is activated.
+* Once the sample device is enabled you should see the sample device enabled event in cFS in your FSW window as pictured below. Also, take note that AP 36 is activated.
+
 ![Sample Enable](./_static/scenario_fault_sample/sample_device_enabled_fsw_science.png)
 
 * The sample simulator is now communicating with the sample application
@@ -49,19 +51,15 @@ Before starting, make sure to launch NOS3 in the default misson configuration in
 * This is cool, but let's break some stuff
   * Change to the SIM_CMD_BUS_BRIDGE Target in the Command Sender
   * This interface enables us to command the simulators directly so we can see how flight software would respond
-  * Let's send the SAMPLE_SIM_SET_STATUS command with a status value of 5
+  * Let's send the SAMPLE_SIM_SET_STATUS command with a status value of 1
 
-![Scenario Demo - Sample Set Sim Status](./_static/scenario_demo/scenario_demo_sample_set_sim_status.png)
+![Sample Set Sim Status](./_static/scenario_fault_sample/sample_device_status_1.png)
 
-* We successfully told the sample simulator to change its status to 5
-  * We see in the sample sim that it received the command to change status
-  * The FSW console shows `Device disabled successfully` and `Request device data reported status error 5`
-
-* Now, since we have simulated a fault detected on the sample device by changing the status to 5, Action Point 36 should be detected which will trigger rts036. This is pictured below.
+* Now, since we have simulated a fault detected on the sample device by changing the status to 1, Action Point 36 should be detected which will trigger AP 36. This is pictured below.
 
 ![CFE ES Reset when triggered](./_static/scenario_fault_sample/cfe_es_reset.png)
 
-* This RTS will trigger a power cycle event on the spacecraft. Thus, FSW will reset and boot the spacecraft back into safe mode. You should see the STF splash screen come up again in your FSW window. as seen below:
+* This AP will trigger an RTS that will cause a power cycle event on the spacecraft. Thus, FSW will reset and boot the spacecraft back into safe mode. You should see the STF splash screen come up again in your FSW window. as seen below:
 
 ![STF Splash Screen](./_static/scenario_fault_sample/stf1_splash_screen.png)
 
@@ -69,10 +67,11 @@ Before starting, make sure to launch NOS3 in the default misson configuration in
 * Basically, we are protecting the spacecraft from constantly resetting itself if a fault is detected, So it is important we disable Action Points like this in the boot up RTS procedures if a user was to add more APs, WPs, and RTS's like this in the future.
 
 
-## How is this Scenario Possible?
+## How is this Fault Scenario Possible?
 
-This Scenario is possible because the user created new Action Points, Watch Points, and a new RTS 36. These concepts are described below.
+This Scenario is possible because of Action Points, Watch Points, and a new RTS 36. These concepts are described below.
 
+---
 ### Creating an Action Point for cFS
 
 An Action Point (AP) is used in Limit Checker (LC) and it defines a specific telemetry parameter to monitor, along with the associated conditions (limits) and actions to take when those limits are violated.
@@ -81,7 +80,7 @@ For this scenario, we created Action point 36 and added it to the LC table found
 
 ![Action Point 36](./_static/scenario_fault_sample/ap_36.png)
 
-
+---
 ### Creating a Watch Point for cFS
 
 A Watch Point (WP) is a used to monitor individual telemetry values and determine if they violate predefined conditions within the Limit Checker (LC) cFS application.
@@ -94,7 +93,7 @@ Note, the **watchpointoffset** is set equal to 29. This is because the telemetry
 
 ![TLM details](./_static/scenario_fault_sample/Device_status_details_232.png)
 
-
+---
 ### Creating an RTS
 
 RTS stands for Real-Time Sequence. It is used by the Stored Command (SC) application to automate the execution of predefined command sequences on the spacecraft.
@@ -106,8 +105,10 @@ In that rts table you will see the RTS perform the following tasks:
 2. Disable Instrument Switch on EPS
 3. Restart CFS
 
-Again, when we boot cFS after a reset we are disabling AP 36, thus prohibiting the spacecraft from entering a FSW reset loop if the device is still broken. We also boot up into safe mode as another precaution.
+Again, when we boot cFS after a reset we have AP 36 disabled, thus prohibiting the spacecraft from entering a FSW reset loop if the device is still broken. We also boot up into safe mode as another precaution.
+Note, we disable AP 36 in the Science mode exit RTS (rts029) and we enable AP 36 in the Science mode boot up RTS (rts026). Both of these rts tables can be found in **nos3/cfs/nos3_defs/tables/**.
 
+---
 ### Conclusions
 
 The user is now able to Fault the sample device and have the Spaceraft recover itself. Also, the user should have an understanding of what a AP, WP, and RTS do in the cFS system.
