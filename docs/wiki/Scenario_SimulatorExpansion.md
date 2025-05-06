@@ -37,7 +37,7 @@ Add an 11 line section to the end that is like the previous section.  Change the
 ![Scenario Simulator Expansion - Inp_IPC.txt](./_static/scenario_simulator_expansion/inp_ipc.png)
 
 Change line 2 to be one more than the current value.
-Run `make launch`.
+Run `make`, then `make launch`
 The 42 window should now show 42 output.
 
 ![Scenario Simulator Expansion - 42 Output](./_static/scenario_simulator_expansion/42_output.png)
@@ -52,23 +52,23 @@ Add parsing and saving of the "bvb" data.
 
 ![Scenario Simulator Expansion - sample_data_point.cpp](./_static/scenario_simulator_expansion/sample_data_point.cpp.png)
 
-Add "_sample_bvb" array to the "SampleDataPoint" and add getter methods (`sample_data_point.hpp`).
+Add "_sample_bvb" array to the "SampleDataPoint" and add getter methods (`sample_data_point.hpp`). This file can be found `components/sample/sim/inc`.
 
 ![Scenario Simulator Expansion - sample_data_point.hpp](./_static/scenario_simulator_expansion/sample_data_point.hpp.png)
 
 ### Enhance the Sample simulator to provide additional data to flight software
 Edit the `components/sample/sim/src/sample_hardware_model.cpp` file.
-Add "bvb" data to the out_data in the "create_sample_data()" method.
+Add "bvb" data to the out_data in the "create_sample_data()" method. Note be sure to change the size of the out_data (out_data.resize(14, 0x00)) to 20, increasing the original value from 14. This is defined at top of the method.
 
 ![Scenario Simulator Expansion - sample_hardware_model.hpp](./_static/scenario_simulator_expansion/sample_hardware_model.cpp.png)
 
-Run `make launch`.
+Run `make clean`, then `make`, and`make launch`.
 The 42 window should now show 42 output and the sample sim window should show a connection to get the 42 data.
 Run `make stop`.
 
 ### Enhance the Sample flight software to receive additional data from the simulator and to provide additional telemetry for the additional data
 Edit the `components/sample/fsw/shared/sample_device.c` file.
-Add "bvb" data reads in the "SAMPLE_RequestData()" function.
+Add "bvb" data reads in the "SAMPLE_RequestData()" function. Note, since we have increased our data buffer, we are changing the conditional to check read_data indices 18 and 19 in order to find the appropriate trailer message.
 
 ![Scenario Simulator Expansion - sample_device.c](./_static/scenario_simulator_expansion/sample_device.c.png)
 
@@ -84,6 +84,6 @@ Add "bvb" telemetry points to the "SAMPLE_DATA_TLM" telemetry packet.
 ![Scenario Simulator Expansion - SAMPLE_TLM_txt](./_static/scenario_simulator_expansion/SAMPLE_TLM.txt.png)
 
 ### Run NOS3 and view the additional data in the Sample telemetry
-Run `make launch`.
+Run `make clean`, then `make`, and`make launch`.
 
 ![Scenario Simulator Expansion - TRUTH and SAMPLE packets](./_static/scenario_simulator_expansion/TRUTH_and_SAMPLE_packets.png)
