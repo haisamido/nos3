@@ -21,5 +21,6 @@ This documentation is designed to provide information for users and developers t
    STF_Software_Development_Plan.md
    STF_VV_Plan.md
    Scenario_Demo.md
-   Scenario_Creating_Unit_Tests.md
    Scenario_Nominal_Ops.md
+   Scenario_Fault_Science.md
+   Scenario_Creating_Unit_Tests.md
