@@ -99,7 +99,7 @@ Note that the **watchpointoffset** is set equal to 29. This is because the telem
 
 RTS stands for Real-Time Sequence. It is used by the Stored Command (SC) application to automate the execution of predefined command sequences on the spacecraft.
 
-In this scenario, we created an RTS to execute if our AP 36 condition is true. According to that RTS036, if the sample device status telemetry point is nonzero and we are in science mode, the spacecraft will enter a power cycle event. This in turn resets the FSW as mentioned before. To view the new RTS you can find the create RTS 36 and review the RTS table in **nos3/cfs/nos3_defs/tables/sc_rts036.c**.
+In this scenario, we created an RTS to execute if our AP 36 condition is true. According to that RTS036, if the sample device status telemetry point is nonzero and we are in science mode, the spacecraft will enter a power cycle event. This in turn resets the FSW as mentioned before. You can find the newly-created RTS 36 and review the RTS table in **nos3/cfs/nos3_defs/tables/sc_rts036.c**.
 
 In that RTS table you will see the RTS perform the following tasks:
 1. Disable the Instrument Application
