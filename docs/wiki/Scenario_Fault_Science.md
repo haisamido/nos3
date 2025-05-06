@@ -46,9 +46,9 @@ Before starting, make sure to launch NOS3 in the default misson configuration in
 
 ![Sample Enable](./_static/scenario_fault_sample/sample_device_enabled_fsw_science.png)
 
-* The sample simulator is now communicating with the sample application
-  * The sample application has a scheduled rate at which it requests data from the device
-* This is cool, but let's break some stuff
+* The sample simulator is now communicating with the sample application.  The sample application has a scheduled rate at which it requests data from the device.
+
+* To test the RTS, however, there must be a fault in the sample application, which we can simulate as follows:
   * Change to the SIM_CMD_BUS_BRIDGE Target in the Command Sender
   * This interface enables us to command the simulators directly so we can see how flight software would respond
   * Let's send the SAMPLE_SIM_SET_STATUS command with a status value of 1
