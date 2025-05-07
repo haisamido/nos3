@@ -1,0 +1,72 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ssmo-dev-missions-exp-nos3-m01-sc1
+  name: nos3-m01-sc1-generic-fss-sim
+  labels:
+    app: ssmo-dev-missions-exp-nos3-m01-sc1-generic-fss-sim
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ssmo-dev-missions-exp-nos3-m01-sc1-generic-fss-sim
+  template:
+    metadata:
+      labels:
+        app: ssmo-dev-missions-exp-nos3-m01-sc1-generic-fss-sim
+    spec:
+      # imagePullSecrets:
+      #   - name: appdat-registry
+
+      containers:
+      - name: nos3-m01-sc1-generic-fss-sim
+        image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: 128Mi
+            cpu: 100m
+          requests:
+            memory: 128Mi
+            cpu: 100m
+        ports:
+        - containerPort: 60000
+        env:
+          - name: HEALTHCHECK_PORT
+            value: "60000"
+          - name: OU
+            value: ssmo
+          - name: TENANT
+            value: ssmo
+          - name: ENVIRO
+            value: dev
+          - name: CONTEXT
+            value: missions
+          - name: MISSION
+            value: nos3-m01
+          - name: SPACECRAFT
+            value: sc1
+          - name: MISSION_GIT_USER
+            value: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+          - name: MISSION_GIT_TOKEN
+            value: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+          - name: MISSION_GIT_SERVER
+            value: appdat.jsc.nasa.gov
+          - name: BASE_DIR
+            value: /builds/nos3
+          - name: SIM_BIN
+            value: /builds/nos3/sims/build/bin
+          - name: SIMULATOR_BIN
+            value: /builds/nos3/sims/build/bin/nos3-single-simulator
+          - name: LOG_CONFIG
+            value: /builds/nos3/sims/build/bin/sim_log_config.xml
+          - name: CFG_FILE
+            value: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+          - name: NETWORK
+            value: nos3_sc1
+# PROVIDER_MISSION_PATH=/ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/
+# CFG_FILE=/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+#            value: /builds/nos3/sims/build/bin/nos3-simulator.xml
+          - name: COMPONENT_NAME
+            value: generic-fss-sim

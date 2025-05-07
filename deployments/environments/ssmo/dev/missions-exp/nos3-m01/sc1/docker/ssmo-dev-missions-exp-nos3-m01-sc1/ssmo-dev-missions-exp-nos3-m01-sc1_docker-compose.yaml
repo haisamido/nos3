@@ -1,0 +1,416 @@
+# generated on 2025T19:07:53
+
+services:
+  ssmo-dev-missions-exp-nos3-m01-sc1-camsim:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-camsim
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-camsim
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: camsim
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-generic-css-sim:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-generic-css-sim
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-generic-css-sim
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: generic-css-sim
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-generic-eps-sim:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-generic-eps-sim
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-generic-eps-sim
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: generic-eps-sim
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-generic-fss-sim:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-generic-fss-sim
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-generic-fss-sim
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: generic-fss-sim
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-gps:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-gps
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-gps
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: gps
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-generic-imu-sim:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-generic-imu-sim
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-generic-imu-sim
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: generic-imu-sim
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-generic-mag-sim:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-generic-mag-sim
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-generic-mag-sim
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: generic-mag-sim
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-generic-reactionwheel-sim0:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-generic-reactionwheel-sim0
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-generic-reactionwheel-sim0
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: generic-reactionwheel-sim0
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-generic-reactionwheel-sim1:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-generic-reactionwheel-sim1
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-generic-reactionwheel-sim1
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: generic-reactionwheel-sim1
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-generic-reactionwheel-sim2:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-generic-reactionwheel-sim2
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-generic-reactionwheel-sim2
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: generic-reactionwheel-sim2
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-generic-radio-sim:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-generic-radio-sim
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-generic-radio-sim
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: generic-radio-sim
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-generic-star-tracker-sim:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-generic-star-tracker-sim
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-generic-star-tracker-sim
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: generic-star-tracker-sim
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-generic-torquer-sim:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-generic-torquer-sim
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-generic-torquer-sim
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: generic-torquer-sim
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-generic-thruster-sim:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-generic-thruster-sim
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-generic-thruster-sim
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: generic-thruster-sim
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-time:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-time
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-time
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: time
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-stdio-terminal:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-stdio-terminal
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-stdio-terminal
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: stdio-terminal
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+  ssmo-dev-missions-exp-nos3-m01-sc1-udp-terminal:
+    image: registry.appdat.jsc.nasa.gov/ssmo/images/ssmo/nos3/nos3-base:20250217
+    container_name: ssmo-dev-missions-exp-nos3-m01-sc1-udp-terminal
+    hostname: ssmo-dev-missions-exp-nos3-m01-sc1-udp-terminal
+    environment:
+      HEALTHCHECK_PORT: 60000
+      OU: ssmo
+      TENANT: ssmo
+      ENVIRO: dev
+      CONTEXT: missions
+      MISSION: nos3-m01
+      SPACECRAFT: sc1
+      MISSION_GIT_USER: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_TOKEN: appdat-glpat-8GCAUqKgSDvtrupFaSuz
+      MISSION_GIT_SERVER: appdat.jsc.nasa.gov
+      BASE_DIR: /builds/nos3
+      SIM_BIN: /builds/nos3/sims/build/bin
+      NOS3_SIMULATOR_BIN: /builds/nos3/sims/build/bin/nos3-single-simulator
+      LOG_CONFIG: /builds/nos3/sims/build/bin/sim_log_config.xml
+      CFG_FILE: /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+      COMPONENT_NAME: udp-terminal
+    privileged: true
+    networks:
+      - ssmo-dev-missions-exp-nos3-m01-sc1
+
+networks:
+  ssmo-dev-missions-exp-nos3-m01-sc1:
+    driver: bridge
+

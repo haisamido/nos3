@@ -1,0 +1,21 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./camsim
+  - ./generic-css-sim
+  - ./generic-eps-sim
+  - ./generic-fss-sim
+  - ./gps
+  - ./generic-imu-sim
+  - ./generic-mag-sim
+  - ./generic-reactionwheel-sim0
+  - ./generic-reactionwheel-sim1
+  - ./generic-reactionwheel-sim2
+  - ./generic-radio-sim
+  - ./generic-star-tracker-sim
+  - ./generic-torquer-sim
+  - ./generic-thruster-sim
+  - ./time
+  - ./stdio-terminal
+  - ./udp-terminal
