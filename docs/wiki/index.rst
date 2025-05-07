@@ -24,4 +24,5 @@ This documentation is designed to provide information for users and developers t
    Scenario_cFS.md
    Scenario_Nominal_Ops.md
    Scenario_Fault_Science.md
+   Scenario_SimulatorExpansion.md
    Scenario_Creating_Unit_Tests.md
