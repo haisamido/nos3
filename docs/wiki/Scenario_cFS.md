@@ -47,11 +47,11 @@ Before running the scenario, ensure the following steps are completed:
 
 * Architecture Layers (Bottom Up)
   * RTOS / BOOT
-    * The RTOS/Boot Layer provides the operating system services, device drivers, and C library that the cFS depends on
-    * Supported operating systems include VxWorks, RTEMS, and Linux. Most flight projects use a real time operating system
+    * The RTOS/Boot Layer provides the operating system services, device drivers, and C library that the cFS depends on.
+    * Supported operating systems include VxWorks, RTEMS, and Linux. Most flight projects use a real time operating system.
   * Platform Abstraction
-    * The OS Abstraction Layer (OSAL) is a software library that provides a single Application Program Interface (API) to the core Flight Executive (cFE) regardless of the underlying real-time operating system
-    * The Platform Support Package (PSP) is a software library that provides a single Application Program Interface (API) to underlying avionics hardware and board support package. It contains startup code, interfaces to hardware such as nonvolatile memory, watchdog, and timers
+    * The OS Abstraction Layer (OSAL) is a software library that provides a single Application Program Interface (API) to the core Flight Executive (cFE) regardless of the underlying real-time operating system.
+    * The Platform Support Package (PSP) is a software library that provides a single Application Program Interface (API) to underlying avionics hardware and board support package. It contains startup code, interfaces to hardware such as nonvolatile memory, watchdog, and timers.
   * core Flight Executive
     * The core Flight Executive (cFE) is a portable, platform-independent framework that creates an application runtime environment by providing services that are common to most flight applications.
     * cFE Services include:
@@ -65,19 +65,19 @@ Before running the scenario, ensure the following steps are completed:
   * Development Tools and Ground Systems
     * Development tools and ground systems are used to test and run the cFS. 
     * A variety of ground systems can be used with cFS. 
-    * Ground system and tool selection generally vary by project
+    * Ground system and tool selection generally vary by project.
 
 ![Scenario cFS - Architecture](./_static/scenario_cfs/scenario_cfs_architecture.png)
 
-* cFS APIs support add and remove functions
-* Applications can be switched in and out at runtime, without rebooting, or building the system
-* Changes can be dynamically during development, test, and on-orbit even
+* cFS APIs support add and remove functions.
+* Applications can be switched in and out at runtime without rebooting or building the system.
+* Changes can be dynamically added during development, test, and even on-orbit.
 
 ![Scenario cFS - Plug and Play](./_static/scenario_cfs/scenario_cfs_plug_and_play.png)
 
-* The addition of new applications can be completed vary easily
-* An entire generic design reference mission is what is provided by default in NOS3
-* This would look like the following with each app communicating with each other via the SB:
+* The addition of new applications can be completed very easily.
+* An entire generic design reference mission is provided by default in NOS3.
+* This looks like the following, with each app communicating with the others as needed via the SB:
 
 ![Scenario cFS - FSW Diagram](./_static/scenario_cfs/scenario_cfs_fsw_diagram.png)
 
@@ -86,47 +86,47 @@ Before running the scenario, ensure the following steps are completed:
 
 With a terminal navigated to the top level of your NOS3 repository:
 * `make clean`
-  * Note we clean here just in case previous files exist from other scenarios now that we have changed the configuration
+  * Note that we clean here just in case previous files exist from other scenarios now that we have changed the configuration.
 * `make`
 * `make launch`
-* Let's dive into the sc_1 - NOS3 Flight Software window and break down what all is happening
+* Let's dive into the sc_1 - NOS3 Flight Software window and break down what all is happening:
 
 ![Scenario cFS - Boot 0](./_static/scenario_cfs/scenario_cfs_boot0.png)
 
-* In the above we see a standard splash screen honoring the Simulation To Flight - 1 mission which started NOS3
-* PSP then initializes tasks and memory
-* The various pieces of cFE then start executing
-* ES determines it boot up state, power on reset in this case
-* Versions are printed and logged for records on the spacecraft
+* In the above we see a standard splash screen honoring the Simulation To Flight - 1 mission which started NOS3.  Then:
+  * PSP initializes tasks and memory
+  * The various pieces of cFE start executing
+  * ES determines its boot-up state (power on reset in this case)
+  * Versions are printed and logged for records on the spacecraft
 
 ![Scenario cFS - Boot 1](./_static/scenario_cfs/scenario_cfs_boot1.png)
 
-* Additional version info is printed for each "Module" loaded
-* The various shared objects from the cFS startup script are then loaded
-* Each is then loaded down the list and the specified initialization function provided in the startup script is executed
-* They each typically print a success message upon completion
+* Additional version info is printed for each "Module" loaded, and then:
+  * The various shared objects from the cFS startup script are loaded
+  * Each is loaded down the list and the specified initialization function provided in the startup script is executed
+  * They each typically print a success message upon completion
 
 ![Scenario cFS - Boot 2](./_static/scenario_cfs/scenario_cfs_boot2.png)
 
-* Once all applications have initialized we enter the OPERATIONAL state
-* Depending on the boot type a Relative Time Sequence (RTS) executes
+* Once all applications have initialized we enter the OPERATIONAL state.
+* Depending on the boot type a Relative Time Sequence (RTS) executes:
   * RTS1 - Power On Reset (POR)
   * RTS2 - Processor Reset
-* In NOS3 we always do a hard POR each time we start up
+* In NOS3 we always do a hard POR each time we start up.
 
 ---
 ### Core Services
 
 * Command Ingest (CI) and Telemetry Output (TO)
-  * These applications handle the essential functions of receiving commands and outputting telemetry
-  * The NASA JSC CI and TO applications used in NOS3 leverage a modular architecture where the desired module can be set for each
-  * The modules can handle different interfaces or frame types for use
-    * Any frames received by CI must be broken down into the desired CCSDS Space Packets to be published on the software bus
-    * TO collects published software bus messages then can package multiple together into a large frame (CCSDS TM for example)
+  * These applications handle the essential functions of receiving commands and outputting telemetry.
+  * The NASA JSC CI and TO applications used in NOS3 leverage a modular architecture where the desired module can be set for each.
+  * The modules can handle different interfaces or frame types for use.
+    * Any frames received by CI must be broken down into the desired CCSDS Space Packets to be published on the software bus.
+    * TO collects published software bus messages, and can then package multiple collected messages together into a large frame (CCSDS TM for example).
 * Scheduler (SCH)
-  * SCH is responsible for triggering periodic activities like telemetry collection or process wake ups
-  * By default SCH runs at 100Hz, where each slot in the provided table executes repeatably in it's slot
-  * The SCH table lets you set a delay and offset for a specific packet as well
+  * SCH is responsible for triggering periodic activities like telemetry collection or process wake ups.
+  * By default SCH runs at 100Hz, where each slot in the provided table executes repeatably in its slot.
+  * The SCH table lets you set a delay and offset for a specific packet as well.
 
 ![Scenario cFS - CI TO SCH](./_static/scenario_cfs/scenario_cfs_ci_to_sch.png)
 
@@ -134,16 +134,16 @@ With a terminal navigated to the top level of your NOS3 repository:
 ### Data Management
 
 * File Manager (FM)
-  * Provides a means to create or remove directories and files as well as poll what currently exists
+  * Provides a means to create or remove directories and files as well as poll what currently exists.
 * Data Storage (DS)
-  * Creates files based on it's defined tables
-  * Listens on the software bus for telemetry, down samples as desired, and writes those to one or more files
-  * Can have a maximum file size, age, and specific names for files by count or by current time at creation
+  * Creates files based on its defined tables.
+  * Listens on the software bus for telemetry, down samples as desired, and writes the data to one or more files.
+  * Can have a maximum file size and age, as well as specific names for files determined by count or by current time at creation.
 * CCSDS File Delivery Protocol (CFDP)
-  * Enables file transfers to and from the spacecraft
-  * Class 1 transfers are equivalent to UDP, if data is lost its lost
-  * Class 2 transfers are equivalent to TCP, if data needs transmitted it will be via the ACK and NAK process
-  * Class 2 is typically preferred, but class 1 is sometimes used instead to minimize complexity or when data quantity supersedes quality
+  * Enables file transfers to and from the spacecraft.
+  * Class 1 transfers are equivalent to UDP - if data is lost it is lost.
+  * Class 2 transfers are equivalent to TCP - if data must be transmitted it will be done via the ACK and NAK process.
+  * Class 2 is typically preferred, but class 1 is sometimes used instead to minimize complexity or when data quantity supersedes quality.
 
 ![Scenario cFS - Data Management](./_static/scenario_cfs/scenario_cfs_data_management.png)
 
@@ -151,15 +151,15 @@ With a terminal navigated to the top level of your NOS3 repository:
 ### Advanced Operations
 
 * Limit Checker (LC)
-  * Monitors table specific telemetry, called watch points
-  * Evaluates action points, statements such as greater than a set value, and acts on them
+  * Monitors table specific telemetry, called watch points.
+  * Evaluates action points, statements (such as greater than a set value), and acts on them.
 * Stored Command (SC)
-  * Relative Time Sequence (RTS) tables are used to simplify operations or actions on the vehicle
-    * An RTS can send a set of commands with varying time delays between them
-    * SC has no means to provide logic, thus must rely on LC's action points or an operator to fire them
-  * Absolute Time Sequences (ATS) tables are also available to essentially run various commands at a set time
-    * These mimic an RTS except with real times for each command being present
-    * An ATS is usually leveraged for advanced science purposes to schedule future ground passes or collection periods
+  * Relative Time Sequence (RTS) tables are used to simplify operations or actions on the vehicle.
+    * An RTS can send a set of commands with varying time delays between them.
+    * SC has no means to provide logic, and thus must rely on LC's action points or an operator to fire them.
+  * Absolute Time Sequences (ATS) tables are also available to essentially run various commands at a set time.
+    * These mimic an RTS except that they use real times for the execution of each command which they contain.
+    * An ATS is usually leveraged for advanced science purposes to schedule future ground passes or collection periods.
 
 ![Scenario cFS - LC SC](./_static/scenario_cfs/scenario_cfs_lc_sc.png)
 
