@@ -2,7 +2,8 @@
 
 This scenario was developed to capture how to expand a simulator.
 In this scenario, we will expand the Sample simulator to use additional data from 42.
-This scenario will show how data flows through the entire system, from 42 to a simulator to a component application to COSMOS telemetry for an application.
+This scenario will show how data flows through the entire system.
+This data starts at 42, passes to the simulator, who talks to the component application, that publishes COSMOS telemetry.
 
 ## Learning Goals
 
