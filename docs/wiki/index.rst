@@ -28,3 +28,4 @@ This documentation is designed to provide information for users and developers t
    Scenario_Controlling_ADCS_During_Science.md
    Scenario_SimulatorExpansion.md
    Scenario_Creating_Unit_Tests.md
+   Scenario_Run_Checkout_GDB.md
