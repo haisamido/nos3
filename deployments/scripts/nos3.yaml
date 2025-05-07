@@ -121,7 +121,7 @@ defaults:
       #       << : *container
 
 missions:
-  - nos3-m01:
+  - m01:
       enabled: true
       spacecraft:
         - sc1:
@@ -129,7 +129,7 @@ missions:
             components: 
               << : *hw_components
         - sc2:
-            enabled: false
+            enabled: true
             components: 
               << : *hw_components
               # camsim:
@@ -141,8 +141,8 @@ missions:
               #       requests:
               #         memory: "128Mi"
               #         cpu: "125m"
-  - nos3-m02:
-      enabled: false
+  - m02:
+      enabled: true
       spacecraft:
         - sc1:
             enabled: true
