@@ -3,9 +3,9 @@
 This scenario was developed to provide an overview of the core Flight System (cFS) as implemented in the NASA Operational Simulator for Small Satellites (NOS3).
 
 The "little c" in cFS signifies its design as a lean, modular core, built as an extension of the core Flight Executive (cFE). While cFE provides the fundamental services for application loading, event logging, and resource management, cFS expands this functionality through:
-* An Operating System Abstraction Layer (OSAL) and Platform Support Layer (PSP) enabling portability across various flight hardware
-* A collection of reusable applications that can be configured for specific mission requirements
-* A standardized framework for developing mission-specific components
+* An Operating System Abstraction Layer (OSAL) and Platform Support Layer (PSP) enabling portability across various flight hardware.
+* A collection of reusable applications that can be configured for specific mission requirements.
+* A standardized framework for developing mission-specific components.
 
 NOS3 serves as a specialized distribution of cFS, incorporating customized components while maintaining compatibility with the upstream codebase.
 This approach allows teams to benefit from community updates while contributing improvements back to the open-source ecosystem.
@@ -16,11 +16,11 @@ This scenario was last updated on 5/6/25 and leveraged the `dev` branch at the t
 ## Learning Goals
 
 By the end of this scenario, you should be able to:
-* Understand what the Core Flight System (cFS) is and its capabilities as a flight software framework
-* Navigate the essential applications (CI/TO, DS, FM, LC, SC, SCH) and their interactions
-* Modify tables for various applications to customize their behavior for specific mission needs
-* Trace end-to-end command and telemetry flows through the system
-* Implement basic operational scenarios combining multiple cFS applications
+* Understand what the Core Flight System (cFS) is and its capabilities as a flight software framework.
+* Navigate the essential applications (CI/TO, DS, FM, LC, SC, SCH) and their interactions.
+* Modify tables for various applications to customize their behavior for specific mission needs.
+* Trace end-to-end command and telemetry flows through the system.
+* Implement basic operational scenarios combining multiple cFS applications.
 
 ## Prerequisites
 
@@ -34,16 +34,16 @@ Before running the scenario, ensure the following steps are completed:
 
 ## Walkthrough
 
-* core Flight System (cFS) Goals
-  * Reduce time to deploy high quality flight software
-  * Reduce project schedule and cost uncertainty
-  * Directly facilitate formalized software reuse
-  * Enable collaboration across organizations
-  * Simplify sustaining engineering 
-    * (AKA. On Orbit FSW maintenance) Missions last 10 years or more
-  * Scale from small instruments to Hubble class missions
-  * Build a platform for advanced concepts and prototyping
-  * Create common standards and tools across NASA
+* core Flight System (cFS) Goals:
+  * Reduce time to deploy high quality flight software.
+  * Reduce project schedule and cost uncertainty.
+  * Directly facilitate formalized software reuse.
+  * Enable collaboration across organizations.
+  * Simplify sustaining engineering:
+    * AKA On Orbit FSW maintenance - missions often last 10 years or more.
+  * Scale from small instruments to Hubble class missions.
+  * Build a platform for advanced concepts and prototyping.
+  * Create common standards and tools across NASA.
 
 * Architecture Layers (Bottom Up)
   * RTOS / BOOT
@@ -55,11 +55,11 @@ Before running the scenario, ensure the following steps are completed:
   * core Flight Executive
     * The core Flight Executive (cFE) is a portable, platform-independent framework that creates an application runtime environment by providing services that are common to most flight applications.
     * cFE Services include:
-      * Event Services (EVS) - manage the software system and create an application runtime environment
-      * Executive Services (ES) - provide a service for sending, filtering, and logging event messages
-      * Table Services (TBL) - manage application table images
-      * Time Services (TIME)- manage the spacecraft time
-      * Software Bus (SB) - provide an application publish/subscribe message service
+      * Event Services (EVS) - manage the software system and create an application runtime environment.
+      * Executive Services (ES) - provide a service for sending, filtering, and logging event messages.
+      * Table Services (TBL) - manage application table images.
+      * Time Services (TIME)- manage the spacecraft time.
+      * Software Bus (SB) - provide an application publish/subscribe message service.
   * Application
     * Applications provide mission functionality using a combination of cFS community apps and mission-specific apps. 
   * Development Tools and Ground Systems
