@@ -78,9 +78,17 @@ defaults:
           container: 
             << : *container
         generic-radio-sim:
-          name: radio
-          container: 
-            << : *container
+          name: radio_sim
+          container:
+            resources:
+              limits:
+                memory: "128Mi"
+                cpu: "125m"
+              requests:
+                memory: "128Mi"
+                cpu: "125m"
+            host: radio_sim
+            network-alias: radio_sim
         generic-star-tracker-sim:
           name: start-tracker
           container: 
