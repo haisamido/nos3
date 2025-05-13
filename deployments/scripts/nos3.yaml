@@ -1,8 +1,9 @@
 metadata:
-  OU: ssmo
+  OU: myorg
   ENVIRO: dev
-  TENANT: ssmo
-  CONTEXT: missions-exp # -exp must exist to match remote AWS EKS cluster in appdat
+  TENANT: tenant
+  CONTEXT: missions # -exp must exist to match remote AWS EKS cluster
+  PURPOSE: -exp
 
 defaults:
   spec:    
@@ -39,46 +40,57 @@ defaults:
       components: &hw_components
         camsim:
           name: camsim
+          replicas: 1
           container: 
             << : *container
         generic-css-sim:
           name: css
+          replicas: 1
           container: 
             << : *container
         generic-eps-sim:
           name: eps
+          replicas: 1
           container: 
             << : *container
         generic-fss-sim:
           name: fss
+          replicas: 1
           container: 
             << : *container
         gps:
           name: gps
+          replicas: 1
           container: 
             << : *container
         generic-imu-sim:
           name: imu
+          replicas: 1
           container: 
             << : *container 
         generic-mag-sim:
           name: mag
+          replicas: 1
           container: 
             << : *container
         generic-reactionwheel-sim0: 
           name: rw0
+          replicas: 1
           container: 
             << : *container 
         generic-reactionwheel-sim1: 
           name: rw1
+          replicas: 1
           container: 
             << : *container
         generic-reactionwheel-sim2: 
           name: rw2
+          replicas: 1
           container: 
             << : *container
         generic-radio-sim:
           name: radio_sim
+          replicas: 1
           container:
             PATHS: 
               << : *PATHS
@@ -93,25 +105,31 @@ defaults:
             network-alias: radio_sim
         generic-star-tracker-sim:
           name: start-tracker
+          replicas: 1
           container: 
             << : *container
         generic-torquer-sim:
           name: torquer
+          replicas: 1
           container: 
             << : *container
         generic-thruster-sim:
           name: thruster
+          replicas: 1
           container: 
             << : *container
         time:
           name: time
+          replicas: 1
           container: 
             << : *container
         stdio-terminal:
           name: stdio-terminal
+          replicas: 1
           container: 
             << : *container
         udp-terminal:
+          replicas: 2
           name: udp-terminal
           container: 
             << : *container
@@ -139,7 +157,7 @@ missions:
             components: 
               << : *hw_components
         - sc2:
-            enabled: true
+            enabled: false
             components: 
               << : *hw_components
               # camsim:
@@ -156,5 +174,9 @@ missions:
       spacecraft:
         - sc1:
             enabled: true
+            components: 
+              << : *hw_components
+        - sc2:
+            enabled: false
             components: 
               << : *hw_components

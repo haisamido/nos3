@@ -1,6 +1,8 @@
 #!/bin/bash -e
 
-RECREATE=${1:-no} # recreate namespaces, pods, etc.
+RECREATE=${1:-no}     # recreate namespaces, pods, etc.
+PROVIDER=${2:-podman} # 
+
 MY_PWD=${PWD}
 
 #------------------------------------------------------------------------------
@@ -9,6 +11,8 @@ MY_PWD=${PWD}
 
 #------------------------------------------------------------------------------
 # TODO: figure out podman and arm64 for nos3
+export KIND_EXPERIMENTAL_PROVIDER=${PROVIDER}
+
 K8S_CONTEXT=docker-desktop
 NODE_SELECTOR=docker-desktop
 
@@ -56,8 +60,11 @@ NOS3_CONFIG=$(cat ./scripts/nos3.yaml  | yq 'explode(.)' | grep -iv '^null$')
 OU=$(echo "${NOS3_CONFIG}" | yq '.metadata.OU')
 ENVIRO=$(echo "${NOS3_CONFIG}" | yq '.metadata.ENVIRO')
 TENANT=$(echo "${NOS3_CONFIG}" | yq '.metadata.TENANT')
-# -exp must exist to match remote AWS EKS cluster in appdat
-CONTEXT=$(echo "${NOS3_CONFIG}" | yq '.metadata.CONTEXT')
+PURPOSE=$(echo "${NOS3_CONFIG}" | yq '.metadata.PURPOSE')
+CONTEXT=$(echo "${NOS3_CONFIG}" | yq '.metadata.CONTEXT')${PURPOSE} # -exp must exist to match remote cluster system
+
+REALM=${OU}-${ENVIRO}-${CONTEXT}
+
 nodeSelector=$(echo "${NOS3_CONFIG}" | yq '.defaults.spec.nodes.nodeSelector') # will be overridden if target k8s is remote
 imagePullPolicy=$(echo "${NOS3_CONFIG}" | yq '.defaults.spec.nodes.imagePullPolicy')
 HEALTHCHECK_PORT=$(echo "${NOS3_CONFIG}" | yq '.defaults.spec.HEALTHCHECK_PORT')
@@ -194,7 +201,7 @@ EOF
       )
     fi
 
-    NAMESPACE=${OU}-${ENVIRO}-${CONTEXT}-${MISSION}-${SC}
+    K8S_NAMESPACE=${OU}-${ENVIRO}-${CONTEXT}-${MISSION}-${SC}
 
     cat <<-EOF >> ${KUSTOMIZATION_FILE_MISSION}
   - ./${SC}/kubernetes
@@ -211,13 +218,13 @@ echo "    Created ${KUSTOMIZATION_FILE_MISSION}"
     rm -f ${KUSTOMIZATION_FILE_SC}
     touch ${KUSTOMIZATION_FILE_SC}
 
-    SPACECRAFT_PATH_DOCKER=${SPACECRAFT_PATH}/docker/${NAMESPACE}
+    SPACECRAFT_PATH_DOCKER=${SPACECRAFT_PATH}/docker/${K8S_NAMESPACE}
     mkdir -p ${SPACECRAFT_PATH_DOCKER}
 
     #------------------------------------------------------------------------------
     # docker-compose
     #------------------------------------------------------------------------------
-    DOCKER_COMPOSE_FILE=${SPACECRAFT_PATH_DOCKER}/${NAMESPACE}_docker-compose.yaml
+    DOCKER_COMPOSE_FILE=${SPACECRAFT_PATH_DOCKER}/${K8S_NAMESPACE}_docker-compose.yaml
 
     rm -rf ${DOCKER_COMPOSE_FILE} 
     touch ${DOCKER_COMPOSE_FILE}
@@ -231,14 +238,14 @@ echo "    Created ${DOCKER_COMPOSE_FILE}"
     #------------------------------------------------------------------------------
 
     # create configMap per namespace TODO: how to use
-CONFIGMAP_FILE=${SPACECRAFT_PATH_K8S}/${NAMESPACE}_configmap.yaml
+CONFIGMAP_FILE=${SPACECRAFT_PATH_K8S}/${K8S_NAMESPACE}_configmap.yaml
 
     cat <<-EOF > ${CONFIGMAP_FILE}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ${NAMESPACE}-configmap
-  namespace: ${NAMESPACE}
+  name: ${K8S_NAMESPACE}-configmap
+  namespace: ${K8S_NAMESPACE}
 data:
   key1: value1
 EOF
@@ -268,6 +275,11 @@ echo "    Created blank ${KUSTOMIZATION_FILE_SC}"
     COMPONENTS=($(echo "${_COMPONENTS}" | yq ' keys[]'))
 
     _CONTAINER=$(echo "${_COMPONENTS}" | yq ".${COMPONENT}.container" | grep -iv '^null$')
+
+    # TODO: get replicas: value
+#    REPLICAS=$(echo "${_COMPONENTS}" | yq ".${COMPONENT}.container.replicas" | grep -iv '^null$')
+
+    REPLICAS=1
     CONTAINER_RESOURCES=$(echo "${_CONTAINER}" | yq ".resources"  | grep -iv '^null$')
 
     CONTAINER_LIMITS_MEMORY=$(echo "${CONTAINER_RESOURCES}"| yq ".limits.memory"  | grep -iv '^null$' )
@@ -326,25 +338,25 @@ echo "        Added component ${COMPONENT} to ${SERVICE_FILE_COMPONENT}"
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: ${NAMESPACE}
-  name: ${DEPLOYMENT}
+  namespace: ${K8S_NAMESPACE}
+  name: ${K8S_NAMESPACE}-${COMPONENT}
   labels:
-    app: ${NAMESPACE}-${COMPONENT}
+    app: ${K8S_NAMESPACE}-${COMPONENT}
 spec:
-  replicas: 1
+  replicas: ${REPLICAS}
   selector:
     matchLabels:
-      app: ${NAMESPACE}-${COMPONENT}
+      app: ${K8S_NAMESPACE}-${COMPONENT}
   template:
     metadata:
       labels:
-        app: ${NAMESPACE}-${COMPONENT}
+        app: ${K8S_NAMESPACE}-${COMPONENT}
     spec:
       imagePullSecrets:
         - name: appdat-registry
 ${nodeSelector}
       containers:
-      - name: ${METADATA_NAME}
+      - name: ${K8S_NAMESPACE}-${COMPONENT}
         image: ${IMAGE_URI}
         imagePullPolicy: ${imagePullPolicy}
         resources:
@@ -405,11 +417,11 @@ echo "      Created ${DEPLOYMENT_FILE_COMPONENT}"
 apiVersion: v1
 kind: Service
 metadata:
-  name: ${MISSION}-${SC}-${COMPONENT}
-  namespace: ${NAMESPACE}
+  name: ${K8S_NAMESPACE}-${COMPONENT}
+  namespace: ${K8S_NAMESPACE}
 spec:
   selector:
-    app: ${NAMESPACE}-${COMPONENT}
+    app: ${K8S_NAMESPACE}-${COMPONENT}
   ports:
     - name: healthcheck-tcp
       protocol: TCP
@@ -427,7 +439,7 @@ echo "      Created ${SERVICE_FILE_COMPONENT}"
     #------------------------------------------------------------------------------
     # docker-compose: services
     #------------------------------------------------------------------------------
-    SERVICE_NAME=${NAMESPACE}-${COMPONENT}
+    SERVICE_NAME=${K8S_NAMESPACE}-${COMPONENT}
 
     cat <<-EOF >> ${DOCKER_COMPOSE_FILE}
   ${SERVICE_NAME}:
@@ -453,7 +465,7 @@ echo "      Created ${SERVICE_FILE_COMPONENT}"
       COMPONENT_NAME: ${COMPONENT}
     privileged: true
     networks:
-      - ${NAMESPACE}
+      - ${K8S_NAMESPACE}
 EOF
 
     echo $MISSION $SC $COMPONENT ${SPACECRAFT[@]}
@@ -466,7 +478,7 @@ EOF
     cat <<-EOF >> ${DOCKER_COMPOSE_FILE}
 
 networks:
-  ${NAMESPACE}:
+  ${K8S_NAMESPACE}:
     driver: bridge
 
 EOF
@@ -494,6 +506,25 @@ do
     echo; echo MISSION ${MISSION} is enabled continuing.
   fi
 
+  # resource names, to be used with context, cluster, namespace, pods, and services
+  RESOURCE_NAME=${REALM}-${MISSION}
+
+#  REALM=docker-desktop
+
+  # contexts/clusters
+  K8S_CONTEXT=${REALM} #${RESOURCE_NAME}
+  K8S_CLUSTER=${K8S_CONTEXT}
+  K8S_USER=${K8S_CONTEXT}
+
+#  kind delete cluster --name ${K8S_CLUSTER} || true
+  kind create cluster --name ${K8S_CLUSTER} || true
+
+  K8S_CONTEXT_PREFIX=kind-
+  K8S_CONTEXT=${K8S_CONTEXT_PREFIX}${K8S_CONTEXT}
+
+  # set and use context
+  kubectl config set-context ${K8S_CONTEXT}
+  kubectl config use-context ${K8S_CONTEXT}
   SPACECRAFT=($(echo "${NOS3_CONFIG}" | yq ".missions[].${MISSION}.spacecraft[] | keys[]"))
 
   for SC in "${SPACECRAFT[@]}"
@@ -508,23 +539,23 @@ do
       echo "  MISSION ${MISSION} is enabled, and SPACECRAFT ${SC} is enabled continuing."
     fi
 
-    NAMESPACE=${OU}-${ENVIRO}-${CONTEXT}-${MISSION}-${SC}
+    K8S_NAMESPACE=${OU}-${ENVIRO}-${CONTEXT}-${MISSION}-${SC}
 
     if [ "${RECREATE}" == "yes" ]; then
-      echo; echo Deleting namespace ${NAMESPACE} in context ${K8S_CONTEXT}...
-      kubectl delete namespace ${NAMESPACE} --context ${K8S_CONTEXT} || true
+      echo; echo Deleting namespace ${K8S_NAMESPACE} in context ${K8S_CONTEXT}...
+      kubectl delete namespace ${K8S_NAMESPACE} --context ${K8S_CONTEXT} || true
     fi
 
-    echo; echo Creating namespace ${NAMESPACE} in context ${K8S_CONTEXT}...
-    kubectl create namespace ${NAMESPACE} --context ${K8S_CONTEXT} || true
+    echo; echo Creating namespace ${K8S_NAMESPACE} in context ${K8S_CONTEXT}...
+    kubectl create namespace ${K8S_NAMESPACE} --context ${K8S_CONTEXT} || true
 
-    echo; echo Creating secret ${IMAGE_SECRET_NAME} in namespace ${NAMESPACE} in context ${K8S_CONTEXT}...
-    kubectl delete secret ${IMAGE_SECRET_NAME} -n ${NAMESPACE} || true
+    echo; echo Creating secret ${IMAGE_SECRET_NAME} in namespace ${K8S_NAMESPACE} in context ${K8S_CONTEXT}...
+    kubectl delete secret ${IMAGE_SECRET_NAME} -n ${K8S_NAMESPACE} || true
     kubectl create secret generic ${IMAGE_SECRET_NAME} \
       --from-file=.dockerconfigjson=/tmp/config.json \
       --type=kubernetes.io/dockerconfigjson \
-      -n ${NAMESPACE}
-    kubectl get secret ${IMAGE_SECRET_NAME} --output=yaml -n ${NAMESPACE}
+      -n ${K8S_NAMESPACE}
+    kubectl get secret ${IMAGE_SECRET_NAME} --output=yaml -n ${K8S_NAMESPACE}
 
     SPACECRAFT_PATH=${MISSION_PATH}/${SC}
     SPACECRAFT_PATH_K8S=${SPACECRAFT_PATH}/kubernetes
@@ -533,10 +564,10 @@ do
 
     echo; echo Applying ${KUSTOMIZATION_FILE_SC} in context ${K8S_CONTEXT}...
     kubectl apply -k ${KUSTOMIZATION_FILE_SC}
-    kubectl get deployments -n ${NAMESPACE}
+    kubectl get deployments -n ${K8S_NAMESPACE}
 
-    echo; echo Get pods in namespace ${NAMESPACE} in context ${K8S_CONTEXT}...
-    kubectl get pods -o wide -n ${NAMESPACE}
+    echo; echo Get pods in namespace ${K8S_NAMESPACE} in context ${K8S_CONTEXT}...
+    kubectl get pods -o wide -n ${K8S_NAMESPACE}
 
   done # SC
 
