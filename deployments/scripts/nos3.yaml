@@ -80,6 +80,8 @@ defaults:
         generic-radio-sim:
           name: radio_sim
           container:
+            PATHS: 
+              << : *PATHS
             resources:
               limits:
                 memory: "128Mi"

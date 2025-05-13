@@ -199,11 +199,12 @@ EOF
     cat <<-EOF >> ${KUSTOMIZATION_FILE_MISSION}
   - ./${SC}/kubernetes
 EOF
+echo "    Created ${KUSTOMIZATION_FILE_MISSION}"
 
     SPACECRAFT_PATH=${MISSION_PATH}/${SC}
     mkdir -p ${SPACECRAFT_PATH}
 
-    SPACECRAFT_PATH_K8S=${SPACECRAFT_PATH}/kubernetes/
+    SPACECRAFT_PATH_K8S=${SPACECRAFT_PATH}/kubernetes
     mkdir -p ${SPACECRAFT_PATH_K8S}
 
     KUSTOMIZATION_FILE_SC=${SPACECRAFT_PATH_K8S}/kustomization.yaml
@@ -226,10 +227,13 @@ EOF
 
 services:
 EOF
+echo "    Created ${DOCKER_COMPOSE_FILE}"
     #------------------------------------------------------------------------------
 
     # create configMap per namespace TODO: how to use
-    cat <<-EOF > ${SPACECRAFT_PATH_K8S}/${NAMESPACE}_configmap.yaml
+CONFIGMAP_FILE=${SPACECRAFT_PATH_K8S}/${NAMESPACE}_configmap.yaml
+
+    cat <<-EOF > ${CONFIGMAP_FILE}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -238,6 +242,7 @@ metadata:
 data:
   key1: value1
 EOF
+echo "    Created ${CONFIGMAP_FILE}.yaml"
 
     # Print preamble of kustomization file
     cat <<-EOF > ${KUSTOMIZATION_FILE_SC}
@@ -246,6 +251,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 EOF
+echo "    Created blank ${KUSTOMIZATION_FILE_SC}"
 
   #------------------------------------------------------------------------------
   # By component
@@ -299,6 +305,7 @@ resources:
   - ./deployment.yaml
   - ./service.yaml
 EOF
+echo "      Created ${KUSTOMIZATION_FILE_COMPONENT}"
 
     SERVICE_FILE_COMPONENT=${COMPONENT_PATH}/service.yaml
     rm -f ${SERVICE_FILE_COMPONENT}
@@ -306,6 +313,7 @@ EOF
     cat <<-EOF >> ${KUSTOMIZATION_FILE_SC}
   - ./${COMPONENT}
 EOF
+echo "        Added component ${COMPONENT} to ${SERVICE_FILE_COMPONENT}"
 
     DEPLOYMENT_FILE_COMPONENT=${COMPONENT_PATH}/deployment.yaml
     rm -f ${DEPLOYMENT_FILE_COMPONENT}
@@ -387,6 +395,7 @@ ${nodeSelector}
           - name: COMPONENT_NAME
             value: ${COMPONENT}
 EOF
+echo "      Created ${DEPLOYMENT_FILE_COMPONENT}"
 
     #------------------------------------------------------------------------------
     # Generate Service files
@@ -413,6 +422,7 @@ spec:
   type: ClusterIP
 
 EOF
+echo "      Created ${SERVICE_FILE_COMPONENT}"
 
     #------------------------------------------------------------------------------
     # docker-compose: services
@@ -445,6 +455,8 @@ EOF
     networks:
       - ${NAMESPACE}
 EOF
+
+    echo $MISSION $SC $COMPONENT ${SPACECRAFT[@]}
 
     done # COMPONENT loop
 
