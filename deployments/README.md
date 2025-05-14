@@ -35,7 +35,7 @@ graph TD;
   fortytwo[fortytwo]-->|tx:4279|mag
 
   fortytwo[fortytwo]-->|tx:9999|truth42sim
-  truth42sim-->|tx:????|yamcs
+  truth42sim-->|tx:5111|yamcs
 
   fortytwo[fortytwo]-->|tx:4284|fss
 
@@ -48,6 +48,9 @@ graph TD;
   radio-->|ci:5010|nos_fsw
   radio-->|to:5011|nos_fsw
   radio-->|radio:5015|nos_fsw
+
+  yamcs-->|tc:6010|cryptolib-->radio
+
   nos_fsw-->|command:5014|radio
 
   radio-->|tm:6011|yamcs
@@ -56,30 +59,44 @@ graph TD;
   %% camsim-->|60|i2c:2
   %% camsim-->|0|spi
 
-  %% nos_engine_server-->|tcp:12001|time-->gps
+  nos_engine_server-->|tcp:12001|time-->gps
   stdio-terminal-->|udp:5555|x
   udp-terminal-->|udp:5556|x
-  sample-sim-->|uart:16|uart-bus
+  %% sample-sim-->|uart:16|uart-bus
 
   %% actuators
   %% sensors
 
-  subgraph actuators
+  subgraph time_sync
+    time
+
+end
+
+  subgraph reaction_wheels
     rw0;
     rw1;
     rw2;
+  end
+
+  subgraph actuators
+    reaction_wheels
     thruster;
     torquer;
   end
 
   subgraph ground_segment
     yamcs;
-    stdio-terminal;
-    udp-terminal;
+    terminals;
+    cryptolib;
   end
 
   subgraph physics_engine
     fortytwo
+  end
+
+  subgraph terminals
+    stdio-terminal;
+    udp-terminal;
   end
 
   subgraph fsw
@@ -96,7 +113,6 @@ graph TD;
     thruster
     torquer
     radio
-    truth42sim
     sample-sim
     uart-bus
     nos_fsw
@@ -105,6 +121,7 @@ graph TD;
   subgraph space_segment
     physics_engine
     fsw
+    truth42sim
   end
   %% subgraph sensors
   %%   start-tracker
@@ -116,14 +133,19 @@ graph TD;
   classDef k8s fill:#326ce5,stroke:#fff,stroke-width:4px,color:#fff;
   classDef cluster fill:#fff,stroke:#bbb,stroke-width:2px,color:#326ce5;
   classDef rw fill:#326ce5,stroke:#fff,stroke-width:4px,color:#fff;
-  %% classDef tx fill:#ddd,color:#fff;
 
-  class fortytwo,gps,stdio-terminal,udp-terminal,sample-sim,eps,torquer,thruster k8s;
+  class fortytwo,gps,stdio-terminal,udp-terminal,sample-sim,eps,torquer,thruster,camsim,yamcs,cryptolib,css,mag,fss,imu,eps,star-tracker k8s;
+
+  class truth42sim k8s;
+  class nos_engine_server k8s;
+  class nos_fsw k8s;
+
   class rw0,rw1,rw2 rw;
-  %% class tx tx
 
   class client plain;
   class cluster cluster;
+
+  
 ```
 
 ```mermaid
