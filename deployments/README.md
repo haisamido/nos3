@@ -1,4 +1,155 @@
 #
+http://www.stf1.com/NOS3Website/docs/NOS3_Users_Guide_v1.04.pdf
+```mermaid
+graph TD;
+  %% client([client])-. Ingress-managed <br> load balancer .->ingress[Ingress];
+  %% ingress-->|routing rule|service[Service];
+
+  subgraph namespace
+  %% ingress;
+  %% gps-->|tcp:4245|fortytwo[fortytwo]
+  %% time-->message_bus
+
+  rw0-->|rx:4278|fortytwo
+  fortytwo[fortytwo]-->|tx:4277|rw0
+  %% rw0-->|uart:2|uart-bus
+
+  rw1-->|rx:4378|fortytwo
+  fortytwo[fortytwo]-->|tx:4377|rw1
+  %% rw1-->|uart:3|uart-bus
+
+  rw2-->|rx:4478|fortytwo
+  fortytwo[fortytwo]-->|tx:4477|rw2
+  %% rw2-->|uart:4|uart-bus
+
+  torquer-->|rx:4279|fortytwo[fortytwo]
+  thruster-->|rx:4280|fortytwo[fortytwo]
+  %% thruster-->|uart:29|uart-bus
+
+  fortytwo[fortytwo]-->|tx:4245|gps
+  %% gps-->|uart:1|uart-bus
+
+  fortytwo[fortytwo]-->|tx:4277|css
+  %% css-->|64|i2c:2
+  
+  fortytwo[fortytwo]-->|tx:4279|mag
+
+  fortytwo[fortytwo]-->|tx:9999|truth42sim
+  truth42sim-->|tx:????|yamcs
+
+  fortytwo[fortytwo]-->|tx:4284|fss
+
+  fortytwo[fortytwo]-->|tx:4281|imu
+
+  fortytwo[fortytwo]-->|tx:4282|star-tracker
+
+  fortytwo[fortytwo]-->|tx:4283|eps
+
+  radio-->|ci:5010|nos_fsw
+  radio-->|to:5011|nos_fsw
+  radio-->|radio:5015|nos_fsw
+  nos_fsw-->|command:5014|radio
+
+  radio-->|tm:6011|yamcs
+  yamcs-->|tc:8010|radio
+
+  %% camsim-->|60|i2c:2
+  %% camsim-->|0|spi
+
+  %% nos_engine_server-->|tcp:12001|time-->gps
+  stdio-terminal-->|udp:5555|x
+  udp-terminal-->|udp:5556|x
+  sample-sim-->|uart:16|uart-bus
+
+  %% actuators
+  %% sensors
+
+  subgraph actuators
+    rw0;
+    rw1;
+    rw2;
+    thruster;
+    torquer;
+  end
+
+  subgraph ground_segment
+    yamcs;
+    stdio-terminal;
+    udp-terminal;
+  end
+
+  subgraph physics_engine
+    fortytwo
+  end
+
+  subgraph fsw
+    actuators
+    mag
+    mag
+    fss
+    css
+    camsim
+    eps
+    gps
+    star-tracker
+    imu
+    thruster
+    torquer
+    radio
+    truth42sim
+    sample-sim
+    uart-bus
+    nos_fsw
+  end
+
+  subgraph space_segment
+    physics_engine
+    fsw
+  end
+  %% subgraph sensors
+  %%   start-tracker
+  %% end
+
+  end
+
+  classDef plain fill:#ddd,stroke:#fff,stroke-width:4px,color:#000;
+  classDef k8s fill:#326ce5,stroke:#fff,stroke-width:4px,color:#fff;
+  classDef cluster fill:#fff,stroke:#bbb,stroke-width:2px,color:#326ce5;
+  classDef rw fill:#326ce5,stroke:#fff,stroke-width:4px,color:#fff;
+  %% classDef tx fill:#ddd,color:#fff;
+
+  class fortytwo,gps,stdio-terminal,udp-terminal,sample-sim,eps,torquer,thruster k8s;
+  class rw0,rw1,rw2 rw;
+  %% class tx tx
+
+  class client plain;
+  class cluster cluster;
+```
+
+```mermaid
+
+classDiagram
+    Animal <|-- Duck
+    Animal <|-- Fish
+    Animal <|-- Zebra
+    Animal : +int age
+    Animal : +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck{
+      +String beakColor
+      +swim()
+      +quack()
+    }
+    class Fish{
+      -int sizeInFeet
+      -canEat()
+    }
+    class Zebra{
+      +bool is_wild
+      +run()
+    }
+```
 
 ## docker ps
 

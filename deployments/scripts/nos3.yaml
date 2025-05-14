@@ -19,7 +19,7 @@ defaults:
       LOG_CONFIG: &LOG_CONFIG
         /builds/nos3/sims/build/bin/sim_log_config.xml
       CFG_FILE: &CFG_FILE
-        /ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
+        /builds/nos3/sims/build/bin/nos3-simulator.xml
     container: &container
       PATHS: 
         << : *PATHS
@@ -170,7 +170,7 @@ missions:
               #         memory: "128Mi"
               #         cpu: "125m"
   - m02:
-      enabled: true
+      enabled: false
       spacecraft:
         - sc1:
             enabled: true

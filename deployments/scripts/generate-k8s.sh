@@ -400,7 +400,7 @@ ${nodeSelector}
           - name: CFG_FILE
             value: ${CFG_FILE}
           - name: NETWORK
-            value: nos3_sc1
+            value: ${K8S_NAMESPACE}
 # PROVIDER_MISSION_PATH=/ssmo-dev/git/appdat.jsc.nasa.gov/ssmo/missions/ssmo/dev/nos3/
 # CFG_FILE=${PROVIDER_MISSION_PATH}/missions/nos301/spacecraft/sc1/services/nos3/nos3-simulator.xml
 #            value: /builds/nos3/sims/build/bin/nos3-simulator.xml

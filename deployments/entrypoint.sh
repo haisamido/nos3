@@ -31,9 +31,9 @@ PROVIDER_MISSION_PATH=${PROVIDER_GIT_PATH}/${MISSION}
 mkdir -p ${PROVIDER_GIT_PATH} && cd ${PROVIDER_GIT_PATH}
 # the || true permits the continuation even if it ${MISSION} folder exists, 
 # this would happen if path is a mounted docker volume instead.
-git clone ${MISSION_GIT_URL} || true
+#git clone ${MISSION_GIT_URL} || true
 
-cd ${PROVIDER_MISSION_PATH}
+#cd ${PROVIDER_MISSION_PATH}
 
 # Unique to image
 SIM_BIN=${SIM_BIN}
