@@ -22,11 +22,16 @@ Before running the scenario, ensure the following steps are completed:
 
 ### CryptoLib Config Settings
 
-Go to `NOS3/cfg/nos3_defs/toolchain-amd64-nos3.cmake` and change line 34 (`TO_TRANSPORT`), as seen in the picture below, from `udp` to `udp_tf`. This will force NOS3 to format telemetry in a way that CryptoLib can understand.
+This section captures what was updated as part of this scenario and why.
+
+Go to `NOS3/cfg/nos3_defs/toolchain-amd64-nos3.cmake` and change line 34 (`TO_TRANSPORT`), as seen in the picture below, from `udp` to `udp_tf`.
+This will force NOS3 to format telemetry in a way that CryptoLib can understand.
 
 ![Toolchain Config](./_static/command_encryption/command_encryption_toolchain.png)
 
-Next, go to `NOS3/cfg/sims/nos3-simulator.xml` and uncomment lines 554-556 (`CryptoLib TC & TM`), as seen in the picture below. Make sure the other options are commented out. This allows the correct ports to be configured for encrypted commanding and receiving telemetry through CryptoLib.
+Next, go to `NOS3/cfg/sims/nos3-simulator.xml` and uncomment lines 554-556 (`CryptoLib TC & TM`), as seen in the picture below.
+Make sure the other options are commented out.
+This allows the correct ports to be configured for encrypted commanding and receiving telemetry through CryptoLib.
 
 ![Simulator Config](./_static/command_encryption/command_encryption_simulator.png)
 
@@ -57,12 +62,14 @@ To start commanding, navigate to the `NOS3 Flight Software` and  `CryptoLib GSW`
 
 ![Encrypted Commanding Windows](./_static/command_encryption/command_encryption_windows.png)
 
-CryptoLib is configured for clear-mode commanding with debug prints as default. To send a no-op command, select the `CFS_RADIO` target and `CFE_ES_NOOP` command in the `Command Sender` window and send the command. 
+CryptoLib is configured for clear-mode commanding with debug prints as default.
+To send a no-op command, select the `CFS_RADIO` target and `CFE_ES_NOOP` command in the `Command Sender` window and send the command. 
 
 ![CryptoLib NO-OP Command](./_static/command_encryption/noop-command.png)
 ![CryptoLib NO-OP Received](./_static/command_encryption/noop-received.png)
 
-To send an encrypted command, type `vcid 2` in the CryptoLib window. This switches the virtual channel that is being used. Now, repeat the previous command.
+To send an encrypted command, type `vcid 2` in the CryptoLib window.
+This switches the virtual channel that is being used. Now, repeat the previous command.
 
 ![CryptoLib Encrypted Command](./_static/command_encryption/encrypted_noop.png)
 
@@ -72,7 +79,8 @@ To send an authenticated command, type `vcid 3` in the CryptoLib window and repe
 
 ### Enabling Telemetry Output
 
-To enable telemetry output through CryptoLib, select the `CFS_RADIO` target and `TO_ENABLE_OUTPUT` command in the `Command Sender` window and send the command. This will cause packets to be decrypted through Cryptolib. 
+To enable telemetry output through CryptoLib, select the `CFS_RADIO` target and `TO_ENABLE_OUTPUT` command in the `Command Sender` window and send the command.
+This will cause packets to be decrypted through CryptoLib. 
 
 > To disable the debug output, type `tm` in the CryptoLib window.
 
