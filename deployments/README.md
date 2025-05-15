@@ -1,5 +1,5 @@
 #
-http://www.stf1.com/NOS3Website/docs/NOS3_Users_Guide_v1.04.pdf
+
 ```mermaid
 graph TD;
   %% client([client])-. Ingress-managed <br> load balancer .->ingress[Ingress];
@@ -146,31 +146,6 @@ end
   class cluster cluster;
 
   
-```
-
-```mermaid
-
-classDiagram
-    Animal <|-- Duck
-    Animal <|-- Fish
-    Animal <|-- Zebra
-    Animal : +int age
-    Animal : +String gender
-    Animal: +isMammal()
-    Animal: +mate()
-    class Duck{
-      +String beakColor
-      +swim()
-      +quack()
-    }
-    class Fish{
-      -int sizeInFeet
-      -canEat()
-    }
-    class Zebra{
-      +bool is_wild
-      +run()
-    }
 ```
 
 ## docker ps
