@@ -37,7 +37,7 @@
             <enable>true</enable>
         </fss>
         <gps>
-            <enable>true</enable>
+            <enable>false</enable>
         </gps>
         <imu>
             <enable>true</enable>
