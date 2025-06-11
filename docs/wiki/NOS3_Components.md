@@ -39,6 +39,7 @@ Note that it is assumed telemetry messages are also within range, but just follo
   * Protocol(s): streaming UART
   * MSGID range: 0x1870 - 0x1871
   * Perf_IDs: 48
+  * F' Base ID: WIP
 * Inertial Measurement Unit (IMU)
   * Protocol(s): CAN
   * MSGID range: 0x1925 - 0x1926
