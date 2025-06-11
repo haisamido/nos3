@@ -19,67 +19,67 @@ Note that it is assumed telemetry messages are also within range, but just follo
   * Protocol(s): I2C and SPI
   * MSGID range: 0x18C8 - 0x18CA
   * Perf_IDs: 105, 106  
-  * F' Base ID: 0xF900
+  * Fprime Base ID: 0xF900
 * Coarse Sun Sensors (CSS)
   * Protocol(s): I2C
   * MSGID range: 0x1910 - 0x1911
   * Perf_IDs: 600, 601
-  * F' Base ID: 0xE300
+  * Fprime Base ID: 0xE300
 * Electrical Power System (EPS)
   * Protocol(s): I2C
   * MSGID range: 0x191A - 0x191B
   * Perf_IDs: 401
-  * F' Base ID: 0xE200
+  * Fprime Base ID: 0xE200
 * Fine Sun Sensors (FSS)
   * Protocol(s): SPI
   * MSGID range: 0x1920 - 0x1921
   * Perf_IDs: 510, 511
-  * F' Base ID: 0xE400
+  * Fprime Base ID: 0xE400
 * Global Positioning System (GPS) - Novatel OEM615
   * Protocol(s): streaming UART
   * MSGID range: 0x1870 - 0x1871
   * Perf_IDs: 48
-  * F' Base ID: WIP
+  * Fprime Base ID: WIP
 * Inertial Measurement Unit (IMU)
   * Protocol(s): CAN
   * MSGID range: 0x1925 - 0x1926
   * Perf_IDs: 530, 531
-  * F' Base ID: 0xE600
+  * Fprime Base ID: 0xE600
 * Magnetometer
   * Protocol(s): SPI
   * MSGID range: 0x192A - 0x192B
   * Perf_IDs: 540, 541
-  * F' Base ID: 0xEF00
+  * Fprime Base ID: 0xEF00
 * Radio
   * Protocol(s): Sockets
   * MSGID range: 0x1930 - 0x1931
   * Perf_IDs: 520
-  * F' Base ID: 0xE100
+  * Fprime Base ID: 0xE100
 * Reaction Wheel
   * Protocol(s): UART
   * MSGID range: 0x1992 - 0x1993
   * Perf_IDs: 77
-  * F' Base ID: 0xE700
+  * Fprime Base ID: 0xE700
 * Sample
   * Protocol(s): UART
   * MSGID range: 0x18FA - 0x18FB
   * Perf_IDs: 500
-  * F' Base ID: 0x0F00
+  * Fprime Base ID: 0x0F00
 * Star Tracker
   * Protocol(s): SpaceWire
   * MSGID range: 0x1935 - 0x1936
   * Perf_IDs: 550
-  * F' Base ID: 0xE000
+  * Fprime Base ID: 0xE000
 * Torquers
   * Protocol(s): PWM via HWLIB's TRQ commands
   * MSGID range: 0x193A - 0x193B
   * Perf_IDs: 505
-  * F' Base ID: 0xE900
+  * Fprime Base ID: 0xE900
 * Thrusters
   * Protocol(s):  UART
   * MSGID range: 0x18EA - 0x18EB
   * Perf IDs: 508
-  * F' Base ID: 0xE500
+  * Fprime Base ID: 0xE500
 
 ### Component Development
 
