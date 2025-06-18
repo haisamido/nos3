@@ -18,6 +18,33 @@
 #include "lc_msgids.h"
 #include "mgr_msgids.h"
 #include "mgr_app.h"
+
+#include "generic_reaction_wheel_msgids.h"
+#include "generic_reaction_wheel_msg.h"
+#include "generic_reaction_wheel_events.h"
+#include "generic_reaction_wheel_app.h"
+
+#include "generic_css_msg.h"
+#include "generic_css_msgids.h"
+#include "generic_css_app.h"
+
+#include "generic_fss_msg.h"
+#include "generic_fss_msgids.h"
+#include "generic_fss_app.h"
+
+#include "generic_mag_msg.h"
+#include "generic_mag_msgids.h"
+#include "generic_mag_app.h"
+
+#include "generic_star_tracker_msg.h"
+#include "generic_star_tracker_msgids.h"
+#include "generic_star_tracker_app.h"
+
+
+
+
+
+
 // #include "cpu1_msgids.h"
 // #include "default_cfe_es_fcncodes.h"
 
@@ -59,7 +86,44 @@ typedef struct
     SAMPLE_NoArgs_cmd_t cmd1;
     /* 2 - Disable Instrument Switch on EPS*/
     SC_RtsEntryHeader_t hdr2;
-    SC_RtsCmd_t cmd2;
+    GENERIC_RW_NoArgsCmd_t cmd2;
+
+    /* 3 - Disable RW 0*/
+    SC_RtsEntryHeader_t hdr3;
+    GENERIC_RW_Cmd_t cmd3;
+
+    /* 3 - Enable RW 0*/
+    SC_RtsEntryHeader_t hdr4;
+    GENERIC_RW_Cmd_t cmd4;
+
+    /* 5 - Enable Star Tracker Switch 7 on EPS*/
+    SC_RtsEntryHeader_t hdr5;
+    GENERIC_EPS_Switch_cmd_t cmd5;
+
+    /* 6 - Disable Star Tracker Switch 7 on EPS*/
+    SC_RtsEntryHeader_t hdr6;
+    GENERIC_EPS_Switch_cmd_t cmd6;
+
+    /* 7 - Disable Instrument Application*/
+    SC_RtsEntryHeader_t hdr7;
+    GENERIC_CSS_NoArgs_cmd_t cmd7;
+
+    /* 8 - Disable Instrument Application*/
+    SC_RtsEntryHeader_t hdr8;
+    GENERIC_FSS_NoArgs_cmd_t cmd8;
+
+    /* 9 - Disable Instrument Application*/
+    SC_RtsEntryHeader_t hdr9;
+    GENERIC_MAG_NoArgs_cmd_t cmd9;
+
+    /* 10 - Disable Instrument Application*/
+    SC_RtsEntryHeader_t hdr10;
+    GENERIC_STAR_TRACKER_NoArgs_cmd_t cmd10;
+
+    /* 1 - Start RTS 37*/
+    SC_RtsEntryHeader_t hdr11;
+    SC_RtsCmd_t cmd11;
+
 } SC_RtsStruct037_t;
 
 /* Define the union to size the table correctly */
@@ -78,12 +142,55 @@ SC_RtsTable037_t SC_Rts037 = {
         /* 1 - Disable Instrument Application */
         .hdr1.TimeTag = 1,
         .cmd1.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd1), SAMPLE_DISABLE_CC, 0x00),
-
-
-        /* 3 - Start RTS 37 (Random Errors) */
+        
+        /* 1 - Disable RW Application */
         .hdr2.TimeTag = 10,
-        .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(SC_CMD_MID, SC_MEMBER_SIZE(cmd2), SC_START_RTS_CC, 0x00),
-        .cmd2.RtsId = 37,
+        .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_RW_APP_CMD_MID, SC_MEMBER_SIZE(cmd2), GENERIC_RW_APP_NOOP_CC, 0x00),
+
+
+        /* 3 - Set RW 0 to disable */
+        .hdr3.TimeTag = 5,
+        .cmd3.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_RW_APP_CMD_MID, SC_MEMBER_SIZE(cmd3), GENERIC_RW_DISABLE_CC, 0x00),
+        .cmd3.wheel_number = 0,
+
+        /* 4 - Set RW 0 to enable */
+        .hdr4.TimeTag = 5,
+        .cmd4.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_RW_APP_CMD_MID, SC_MEMBER_SIZE(cmd4), GENERIC_RW_ENABLE_CC, 0x00),
+        .cmd4.wheel_number = 0,
+
+        /* 6 - Enable Star Tracker Switch 7 on EPS*/
+        .hdr5.TimeTag = 1,
+        .cmd5.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_EPS_CMD_MID, SC_MEMBER_SIZE(cmd5), GENERIC_EPS_SWITCH_CC, 0x00),
+        .cmd5.SwitchNumber = 7,
+        .cmd5.State = 0xaa,
+
+        /* 6 - Disable Star Tracker Switch 7 on EPS*/
+        .hdr6.TimeTag = 30,
+        .cmd6.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_EPS_CMD_MID, SC_MEMBER_SIZE(cmd6), GENERIC_EPS_SWITCH_CC, 0x00),
+        .cmd6.SwitchNumber = 7,
+        .cmd6.State = 0x00,
+
+        /* 7 - Disable Instrument Application */
+        .hdr7.TimeTag = 1,
+        .cmd7.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_CSS_CMD_MID, SC_MEMBER_SIZE(cmd7), GENERIC_CSS_DISABLE_CC, 0x00),
+
+        /* 8 - Disable Instrument Application */
+        .hdr8.TimeTag = 1,
+        .cmd8.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_FSS_CMD_MID, SC_MEMBER_SIZE(cmd8), GENERIC_FSS_DISABLE_CC, 0x00),
+
+        /* 9 - Disable Instrument Application */
+        .hdr9.TimeTag = 1,
+        .cmd9.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_MAG_CMD_MID, SC_MEMBER_SIZE(cmd9), GENERIC_MAG_DISABLE_CC, 0x00),
+
+        /* 10 - Disable Instrument Application */
+        .hdr10.TimeTag = 1,
+        .cmd10.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_STAR_TRACKER_CMD_MID, SC_MEMBER_SIZE(cmd10), GENERIC_STAR_TRACKER_DISABLE_CC, 0x00),
+
+
+        /* 11 - Start RTS 37 (Random Errors) */
+        .hdr11.TimeTag = 10,
+        .cmd11.CmdHeader = CFE_MSG_CMD_HDR_INIT(SC_CMD_MID, SC_MEMBER_SIZE(cmd11), SC_START_RTS_CC, 0x00),
+        .cmd11.RtsId = 37,
 
 
         // /* 12 - Disable Instrument Switch on EPS*/
