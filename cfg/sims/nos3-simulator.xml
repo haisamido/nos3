@@ -657,7 +657,7 @@
         </simulator>
 
         <simulator>
-            <name>blackboard_sim</name>
+            <name>blackboard-sim</name>
             <active>true</active>
             <library>libblackboard_sim.so</library>
             <hardware-model>

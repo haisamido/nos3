@@ -159,7 +159,6 @@ FALSE                                   ! Echo to stdout
 "Orb"                                   ! Prefix 1
 **********************************  Blackboard IPC  *****************************
 TX                                      ! IPC Mode (OFF,TX,RX,TXRX,ACS,WRITEFILE,READFILE)
-0                                       ! AC.ID for ACS mode
 "Blackboard.42"                         ! File name for WRITE or READ
 SERVER                                  ! Socket Role (SERVER,CLIENT,GMSEC_CLIENT)
 fortytwo       4285                     ! Server Host Name, Port 
