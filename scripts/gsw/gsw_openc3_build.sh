@@ -15,17 +15,17 @@ if [ ! -d $USER_NOS3_DIR ]; then
     exit 1
 fi
 
-echo "Clone openc3-cosmos into local user directory..."
+echo "Clone openc3-nos3 into local user directory..."
 cd $USER_NOS3_DIR
-git clone https://github.com/nasa-itc/openc3-nos3.git --depth 1 -b main $USER_NOS3_DIR/cosmos
+git clone https://github.com/nasa-itc/openc3-nos3.git $USER_NOS3_DIR/openc3
 echo ""
 
-echo "Prepare openc3-cosmos containers..."
+echo "Prepare openc3 containers..."
 cd $OPENC3_DIR
 $OPENC3_PATH run
 echo ""
 
-#echo "Set a password in openc3-cosmos via firefox..."
+#echo "Set a password in openc3 via firefox..."
 #echo "  Refresh webpage if error page shown."
 #echo ""
 #sleep 5
@@ -47,7 +47,7 @@ fi
 # Start generating the plugin
 mkdir build
 cd build
-$OPENC3_PATH cli generate plugin nos3
+$OPENC3_CLI generate plugin nos3
 if [ ! -d "openc3-cosmos-nos3" ]
 then
     echo ""
@@ -80,7 +80,7 @@ done
 cd ..
 
 # Copy lib
-cp -r ../../lib .
+cp -r $GSW_DIR/lib .
 
 # Create plugin.txt
 echo "Create plugin..."
@@ -139,7 +139,7 @@ echo ""
 
 # Build plugin
 echo "Build plugin..."
-$OPENC3_PATH cli rake build VERSION=1.0.$DATE
+$OPENC3_CLI rake build VERSION=1.0.$DATE
 if [ ! -f "openc3-cosmos-nos3-1.0.$DATE.gem" ]
 then
     echo ""
@@ -150,14 +150,14 @@ fi
 echo ""
 
 ## Install plugin
-#echo "Install plugin..."
-#cd $GSW_BIN
-#$OPENC3_PATH cli geminstall ./openc3-cosmos-nos3-1.0.$DATE.gem
-#echo ""
+echo "Install plugin..."
+cd $OPENC3_DIR/build/openc3-cosmos-nos3
+$OPENC3_CLIROOT geminstall ./openc3-cosmos-nos3-1.0.$DATE.gem
+echo ""
 
 # Load plugin
 echo "Load plugin..."
-$OPENC3_PATH cliroot load openc3-cosmos-nos3-1.0.$DATE.gem
+$OPENC3_CLIROOT load openc3-cosmos-nos3-1.0.$DATE.gem
 echo ""
 
 ## Set permissions on build files

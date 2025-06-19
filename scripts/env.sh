@@ -6,7 +6,6 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 BASE_DIR=$(cd `dirname $SCRIPT_DIR` && pwd)
 FSW_DIR=$BASE_DIR/fsw/build/exe/cpu1
-GSW_BIN=$BASE_DIR/gsw/cosmos/build/openc3-cosmos-nos3
 GSW_DIR=$BASE_DIR/gsw/cosmos
 SIM_DIR=$BASE_DIR/sims/build
 SIM_BIN=$SIM_DIR/bin
@@ -23,8 +22,10 @@ USERDIR=$(cd ~/ && pwd)
 USER_NOS3_DIR=$(cd ~/ && pwd)/.nos3
 USER_FPRIME_PATH=$USERDIR/.cookiecutter_replay
 
-OPENC3_DIR=$USER_NOS3_DIR/cosmos
+OPENC3_DIR=$USER_NOS3_DIR/openc3
 OPENC3_PATH=$OPENC3_DIR/openc3.sh
+OPENC3_CLI="$OPENC3_DIR/openc3.sh cli"
+OPENC3_CLIROOT="$OPENC3_DIR/openc3.sh cliroot"
 
 INFLUXDB_DB=ait
 INFLUXDB_ADMIN_USER=ait
@@ -55,7 +56,6 @@ DBOX="ivvitc/nos3-64:20250514"
 #echo "Base directory   = " $BASE_DIR
 #echo "DFLAGS           = " $DFLAGS
 #echo "FSW directory    = " $FSW_DIR
-#echo "GSW bin          = " $GSW_BIN
 #echo "GSW directory    = " $GSW_DIR
 #echo "Sim directory    = " $SIM_BIN
 #echo "Sim list         = " $SIMS
