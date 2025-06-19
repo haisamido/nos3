@@ -40,11 +40,6 @@
 #include "generic_star_tracker_msgids.h"
 #include "generic_star_tracker_app.h"
 
-
-
-
-
-
 // #include "cpu1_msgids.h"
 // #include "default_cfe_es_fcncodes.h"
 
@@ -140,68 +135,56 @@ typedef union
 SC_RtsTable037_t SC_Rts037 = {    
 .rts = {
         /* 1 - Disable Instrument Application */
-        .hdr1.TimeTag = 1,
+        .hdr1.TimeTag = 10,
         .cmd1.CmdHeader = CFE_MSG_CMD_HDR_INIT(SAMPLE_CMD_MID, SC_MEMBER_SIZE(cmd1), SAMPLE_DISABLE_CC, 0x00),
         
-        /* 1 - Disable RW Application */
-        .hdr2.TimeTag = 10,
+        /* 1 - RW noop command */
+        .hdr2.TimeTag = 30,
         .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_RW_APP_CMD_MID, SC_MEMBER_SIZE(cmd2), GENERIC_RW_APP_NOOP_CC, 0x00),
 
-
         /* 3 - Set RW 0 to disable */
-        .hdr3.TimeTag = 5,
+        .hdr3.TimeTag = 10,
         .cmd3.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_RW_APP_CMD_MID, SC_MEMBER_SIZE(cmd3), GENERIC_RW_DISABLE_CC, 0x00),
         .cmd3.wheel_number = 0,
 
-        /* 4 - Set RW 0 to enable */
-        .hdr4.TimeTag = 5,
-        .cmd4.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_RW_APP_CMD_MID, SC_MEMBER_SIZE(cmd4), GENERIC_RW_ENABLE_CC, 0x00),
-        .cmd4.wheel_number = 0,
-
         /* 6 - Enable Star Tracker Switch 7 on EPS*/
-        .hdr5.TimeTag = 1,
+        .hdr5.TimeTag = 30,
         .cmd5.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_EPS_CMD_MID, SC_MEMBER_SIZE(cmd5), GENERIC_EPS_SWITCH_CC, 0x00),
         .cmd5.SwitchNumber = 7,
         .cmd5.State = 0xaa,
 
         /* 6 - Disable Star Tracker Switch 7 on EPS*/
-        .hdr6.TimeTag = 30,
+        .hdr6.TimeTag = 360,
         .cmd6.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_EPS_CMD_MID, SC_MEMBER_SIZE(cmd6), GENERIC_EPS_SWITCH_CC, 0x00),
         .cmd6.SwitchNumber = 7,
         .cmd6.State = 0x00,
 
         /* 7 - Disable Instrument Application */
-        .hdr7.TimeTag = 1,
+        .hdr7.TimeTag = 10,
         .cmd7.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_CSS_CMD_MID, SC_MEMBER_SIZE(cmd7), GENERIC_CSS_DISABLE_CC, 0x00),
 
         /* 8 - Disable Instrument Application */
-        .hdr8.TimeTag = 1,
+        .hdr8.TimeTag = 10,
         .cmd8.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_FSS_CMD_MID, SC_MEMBER_SIZE(cmd8), GENERIC_FSS_DISABLE_CC, 0x00),
 
+        /* 4 - Set RW 0 to enable */
+        .hdr4.TimeTag = 120,
+        .cmd4.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_RW_APP_CMD_MID, SC_MEMBER_SIZE(cmd4), GENERIC_RW_ENABLE_CC, 0x00),
+        .cmd4.wheel_number = 0,
+
         /* 9 - Disable Instrument Application */
-        .hdr9.TimeTag = 1,
+        .hdr9.TimeTag = 10,
         .cmd9.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_MAG_CMD_MID, SC_MEMBER_SIZE(cmd9), GENERIC_MAG_DISABLE_CC, 0x00),
 
         /* 10 - Disable Instrument Application */
-        .hdr10.TimeTag = 1,
+        .hdr10.TimeTag = 10,
         .cmd10.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_STAR_TRACKER_CMD_MID, SC_MEMBER_SIZE(cmd10), GENERIC_STAR_TRACKER_DISABLE_CC, 0x00),
 
 
         /* 11 - Start RTS 37 (Random Errors) */
-        .hdr11.TimeTag = 10,
+        .hdr11.TimeTag = 20,
         .cmd11.CmdHeader = CFE_MSG_CMD_HDR_INIT(SC_CMD_MID, SC_MEMBER_SIZE(cmd11), SC_START_RTS_CC, 0x00),
         .cmd11.RtsId = 37,
-
-
-        // /* 12 - Disable Instrument Switch on EPS*/
-        // .hdr12.TimeTag = 1,
-        // .cmd12.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_EPS_CMD_MID, SC_MEMBER_SIZE(cmd12), GENERIC_EPS_SWITCH_CC, 0x00),
-        // .cmd12.SwitchNumber = 0,
-        // .cmd12.State = 0x00,
-        // /* 13 - Restart CFS*/
-        // .hdr13.TimeTag = 1,
-        // .cmd13.CommandHeader = CFE_MSG_CMD_HDR_INIT(CFE_ES_CMD_MID, SC_MEMBER_SIZE(cmd13), CFE_ES_RESTART_CC, 0x00),
-        // .cmd13.Payload.RestartType = 1,
         
     }
 };
