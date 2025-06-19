@@ -169,19 +169,19 @@ SC_RtsTable037_t SC_Rts037 = {
         .cmd7.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_CSS_CMD_MID, SC_MEMBER_SIZE(cmd7), GENERIC_CSS_DISABLE_CC, 0x00),
 
         /* 8 - Disable Instrument Application */
-        .hdr8.TimeTag = 10,
+        .hdr8.TimeTag = 5,
         .cmd8.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_FSS_CMD_MID, SC_MEMBER_SIZE(cmd8), GENERIC_FSS_DISABLE_CC, 0x00),
 
         /* 9 - Disable Instrument Application */
-        .hdr9.TimeTag = 10,
+        .hdr9.TimeTag = 5,
         .cmd9.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_MAG_CMD_MID, SC_MEMBER_SIZE(cmd9), GENERIC_MAG_DISABLE_CC, 0x00),
 
         /* 10 - Disable Instrument Application */
-        .hdr10.TimeTag = 10,
+        .hdr10.TimeTag = 5,
         .cmd10.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_STAR_TRACKER_CMD_MID, SC_MEMBER_SIZE(cmd10), GENERIC_STAR_TRACKER_DISABLE_CC, 0x00),
 
         /* 11 - Start RTS 37 (Random Errors) */
-        .hdr11.TimeTag = 20,
+        .hdr11.TimeTag = 15,
         .cmd11.CmdHeader = CFE_MSG_CMD_HDR_INIT(SC_CMD_MID, SC_MEMBER_SIZE(cmd11), SC_START_RTS_CC, 0x00),
         .cmd11.RtsId = 37,
         
