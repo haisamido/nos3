@@ -81,7 +81,7 @@ typedef struct
     SAMPLE_NoArgs_cmd_t cmd1;
     /* 2 - Disable Instrument Switch on EPS*/
     SC_RtsEntryHeader_t hdr2;
-    GENERIC_RW_NoArgsCmd_t cmd2;
+    GENERIC_RW_Cmd_t cmd2;
 
     /* 3 - Disable RW 0*/
     SC_RtsEntryHeader_t hdr3;
@@ -140,7 +140,8 @@ SC_RtsTable037_t SC_Rts037 = {
         
         /* 2 - RW noop command */
         .hdr2.TimeTag = 30,
-        .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_RW_APP_CMD_MID, SC_MEMBER_SIZE(cmd2), GENERIC_RW_APP_NOOP_CC, 0x00),
+        .cmd2.CmdHeader = CFE_MSG_CMD_HDR_INIT(GENERIC_RW_APP_CMD_MID, SC_MEMBER_SIZE(cmd2), GENERIC_RW_ENABLE_CC, 0x00),
+        .cmd3.wheel_number = 2,
 
         /* 3 - Set RW 0 to disable */
         .hdr3.TimeTag = 10,
