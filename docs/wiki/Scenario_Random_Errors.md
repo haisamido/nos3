@@ -1,20 +1,23 @@
 # Scenario - Ground Operations with Random Errors
 
-This scenario was designed as a lab exercise. You are the ground operator in charge of commanding and monitoring the spacecraft. You are performing normal duties when you notice anomalies on board the spacecraft. This exercise is intended to only use COSMOS GSW in order to successfully identify, maintain, and ultimately provide a solution to make sure your spacecraft is in a nominal state as expected. 
+This scenario was designed as a lab exercise. You are the ground operator in charge of commanding and monitoring the spacecraft. You are performing normal duties when you notice anomalies on board the spacecraft. This exercise is intended to only use COSMOS GSW in order to successfully maintain your spacecraft, identifying errors and providing solutions to make sure your spacecraft is in a nominal state as expected. 
 
 This scenario was last updated on 6/20/2025 and leveraged the `dev` branch at the time.
 
 ## Learning Goals
 
-By the end of this scenario, you should be able to:
-* Utilize COSMOS GSW effectively to command the spacecraft, monitor telemetry, and debug anomalies while the spacecraft is in orbit.
+By the end of this scenario, you should be able to use COSMOS GSW effectively to:
+* Command the spacecraft. 
+* Monitor telemetry. 
+* Debug anomalies.
+All this while the spacecraft is in a simulated orbit.
 
 ## Prerequisites
 
-Before running the scenario, ensure the following steps are completed:
-* [Getting Started](./Getting_Started.md)
-  * [Installation](./Getting_Started.md#installation)
-  * [Running](./Getting_Started.md#running)
+Before running the scenario, complete the following steps:
+* [Getting Started](./NOS3_Getting_Started.md)
+  * [Installation](./NOS3_Getting_Started.md#installation)
+  * [Running](./NOS3_Getting_Started.md#running)
 * It is assumed for this scenario that the user understands how to command the Spacecraft and verify telemetry with COSMOS.
 
 ## Walkthrough
