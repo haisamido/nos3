@@ -1,6 +1,6 @@
 # Scenario - Ground Operations with Random Errors
 
-This scenario was designed as a lab exercise. You are the ground operator in charge of commanding and monitoring the spacecraft. You are performing normal duties when you notice anomalies on board the spacecraft. This exercise is intended to only use COSMOS GSW in order to successfully maintain your spacecraft, identifying errors and providing solutions to make sure your spacecraft is in a nominal state as expected. 
+This scenario was designed as a lab exercise. You are the ground operator in charge of commanding and monitoring the spacecraft. You are performing normal duties when you notice anomalies on board the spacecraft. This exercise is intended to only use COSMOS GSW in order to successfully maintain your spacecraft, identify errors and provide solutions to make sure your spacecraft is in a nominal state as expected. 
 
 This scenario was last updated on 6/20/2025 and leveraged the `dev` branch at the time.
 
