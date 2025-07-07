@@ -42,4 +42,5 @@ python3 "$SCRIPT_DIR/cfg/configure.py" "$CONFIG_FILE"
 
 # Configure Cosmos Targets
 python3 $BASE_DIR/scripts/cfg/declare_cosmos_target.py
-python3 $BASE_DIR/scripts/cfg/configure_cosmos_target.py $i
+python3 $BASE_DIR/scripts/cfg/configure_cosmos_target.py
+python3 $BASE_DIR/scripts/cfg/configure_test_runner.py
