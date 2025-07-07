@@ -2,7 +2,7 @@
 
 This scenario was developed to capture the NASA Operational Simulator for Small Satellites (NOS3) installation process.
 
-This scenario was last updated on 05/28/2025 and leveraged the `dev` branch [900f0e9].
+This scenario was last updated on 05/28/2025 and leveraged the `dev` branch [a3e7c100].
 
 ## Learning Goals
 By the end of this scenario, you should be able to:
@@ -12,8 +12,8 @@ By the end of this scenario, you should be able to:
 ## Prerequisites
 
 There are no prerequisites for this scenario, but reading the Installation instructions may help: 
-* [Getting Started](./Getting_Started.md)
-  * [Installation](./Getting_Started.md#installation)
+* [Getting Started](./NOS3_Getting_Started.md)
+  * [Installation](./NOS3_Getting_Started.md#installation)
 
 ## Walkthrough
 
@@ -112,6 +112,10 @@ Now, clone NOS3 directly into the VM:
 * `git clone https://github.com/nasa/nos3`
 * `cd nos3`
 * `git submodule update --init --recursive`
+
+Before NOS3 can be run, it has to have the containers and such things downloaded.  For the user's convenience, we have a command `make prep` which does this all automatically.  As such, after cloning NOS3, run:
+* `make prep`
+* Ensure that everything runs without trouble and that no warnings or errors are evident.
 
 #### Python setup
 
