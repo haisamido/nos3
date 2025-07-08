@@ -62,7 +62,7 @@ all: ## Build everything: config, fsw, sim, gsw
 
 build-cryptolib: ## Build CryptoLib Component
 	mkdir -p $(GSWBUILDDIR)
-	cd $(GSWBUILDDIR) && cmake $(PREP_OPTS) -DSUPPORT=1 ../../components/cryptolib
+	cd $(GSWBUILDDIR) && cmake $(PREP_OPTS) -DSA_FILE=OFF -DSUPPORT=1 -DCRYPTO_LIBGCRYPT=1 -DSA_INTERNAL=1 -DMC_INTERNAL=1 -DKEY_INTERNAL=1 ../../components/cryptolib
 	$(MAKE) --no-print-directory -C $(GSWBUILDDIR)
 
 build-fsw: ## Build the flight software (cFS or F')
