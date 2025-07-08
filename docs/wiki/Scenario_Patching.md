@@ -1,9 +1,9 @@
 # Scenario - Patching an App or Table
 
 This scenario was developed to explain and demonstrate the process by which a satellite operator could patch an app or table onboard a satellite, using NASA Operational Simulator for Small Satellites (NOS3).
-It demonstrates the use of NOS3 to test a patch, and subsequently the use of ground software (GSW) to go from merely commanding to sending up updated code for an app or table. 
+It demonstrates the use of NOS3 to test a patch, and subsequently the use of ground software (GSW) to go from merely commanding to sending updated code for an app or table. 
 
-This scenario was last updated on 5/7/25 and leveraged the `dev` branch at the time [57fc16c].
+This scenario was last updated on 06/09/2025 and leveraged the `dev` branch at the time [a3e7c100].
 
 ## Learning Goals
 
@@ -13,10 +13,10 @@ By the end of this scenario, you should be able to:
 
 ## Prerequisites
 
-Before running the scenario, ensure the following has been completed:
-* [Getting Started](./Getting_Started.md)
-  * [Installation](./Getting_Started.md#installation)
-  * [Running](./Getting_Started.md#running)
+Before running the scenario, complete the following steps:
+* [Getting Started](./NOS3_Getting_Started.md)
+  * [Installation](./NOS3_Getting_Started.md#installation)
+  * [Running](./NOS3_Getting_Started.md#running)
 
 It may also be helpful to have gone through both the [Scenario - Nominal Operations](./Scenario_Nominal_Ops.md) and [Scenario - cFS](./Scenario_cFS.md) prior to this one.
 
@@ -67,7 +67,7 @@ First make sure the compiled RTS file is saved somewhere on your computer so you
  * `cp ./fsw/build/exe/cpu1/cf/sc_rts006.tbl /tmp/nos3/sc_rts006.tbl` (or any path that is not in Git for the temporary storage location)
 
 Next, we will want to actually send the changed file up to the spacecraft.
-We have to first ensure that the simulation does not launch with the new file, which we can do via the command
+We have to first ensure that the simulation does not launch with the new file, which we can do via the following commands:
  * `make clean`
  * `git reset --hard --recurse-submodules`
 

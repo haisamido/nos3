@@ -20,7 +20,7 @@ These levels of requirements include requirements, rationale, and traceability b
 The below requirements would not be complete enough for a standard NASA mission, but serve well enough for STF.
 
 * Level 0 - Mission Objectives
-  * L0-01: STF shall collect science over the United States: Continental United States (CONUS), Alaska (AK), and Hawaii (HI).
+  * L0-01: STF shall collect science over the United States: Contiguous United States (CONUS), Alaska (AK), and Hawaii (HI).
   * L0-02: STF shall limit science collection to near the United States.
   * L0-03: STF shall have automated on-board science with fault detection and correction.
   * L0-04: STF shall collect science data for a duration of at least 3 months.
@@ -88,7 +88,7 @@ This document was written in a time of flux in determining these steps and as su
 
 A spacecraft operator is a trained professional responsible for day-to-day management, control, and monitoring of a spacecraft.
 While traditionally spacecraft have required operators, a recently push for "lights out" operations has been noted.
-This "lights out" or autonomous operation is the goal of the STF mission, but is to developed once the vehicle is on orbit and procedures are proven.
+This "lights out" or autonomous operation is the goal of the STF mission, but would be developed after the vehicle is on orbit and any procedures are proven.
 Notifications to spacecraft operators would be generated for them to get to a console to resolve any issues as they arise.
 
 ### Spacecraft Modes
@@ -124,7 +124,7 @@ A spacecraft operator will need to investigate the cause and take any desired ac
 ### Science Mode
 
 Science Mode is based on data collection above specific regions of interest. 
-In this example, we are interested in turning on our Sample Instrument over three different regions: Alaska, Hawaii, and the Continental US (CONUS).
+In this example, we are interested in turning on our Sample Instrument over three different regions: Alaska, Hawaii, and the Contiguous US (CONUS).
 We achieve the region bounds by drawing boxes over our regions of interest, and using GPS coordinates to know when it is appropriate to automatically turn on the instrument, and then when to halt doing science as we exit an area of interest.
 Therefore, Science Mode requires Latitude and Longitudes from the GPS to function appropriately.
 
