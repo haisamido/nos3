@@ -70,16 +70,16 @@
 			<enable>true</enable>
 		</torquer>
 		<thruster>
-			<enable>true</enable>
+			<enable>false</enable>
 		</thruster>
 	</components>
 	<gui>
 		<enable>true</enable>
 	</gui>
 	<orbit>
-		<tipoff_x>0.0</tipoff_x>
-		<tipoff_y>0.0</tipoff_y>
-		<tipoff_z>0.0</tipoff_z>
+		<tipoff_x>0.2</tipoff_x>
+		<tipoff_y>2.0</tipoff_y>
+		<tipoff_z>-2.0</tipoff_z>
 	</orbit>
 	<sim>
 		<sim_truth_interface>true</sim_truth_interface>
