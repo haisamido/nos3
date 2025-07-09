@@ -17,7 +17,7 @@
 
     <!-- Spacecraft 1 Configuration - options are as follows -->
     <!-- sc-minimal-config.xml (only cFS heritage applications and the sample app) -->
-    <!-- sc-mission-config.xml (default, minimal + generic components and ADCS, but no thruster) -->
+    <!-- sc-mission-config.xml (default, minimal + generic components and ADCS) -->
     <!-- sc-research-config.xml (mission + research integrations, arducam, and generic-thruster) -->
     <!-- sc-fprime-config.xml (only configuration supporting F') -->
     <sc-1-cfg>spacecraft/sc-mission-config.xml</sc-1-cfg>
