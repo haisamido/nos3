@@ -8,6 +8,8 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source $SCRIPT_DIR/../env.sh
 
+GROUND_SOFTWARE=$(sed -n 's:.*<gsw>\(.*\)</gsw>.*:\1:p' ./cfg/nos3-mission.xml)
+
 # Check that local NOS3 directory exists
 if [ ! -d $USER_NOS3_DIR ]; then
     echo ""
@@ -28,4 +30,4 @@ fi
 mkdir -p $BASE_DIR/gsw/build
 
 # Build
-$DFLAGS_CPUS -v $BASE_DIR:$BASE_DIR -e LD_LIBRARY_PATH="/usr/local/lib" --name "nos_build_cryptolib" -w $BASE_DIR $DBOX make -j$NUM_CPUS build-cryptolib
+$DFLAGS_CPUS -v $BASE_DIR:$BASE_DIR -e LD_LIBRARY_PATH="/usr/local/lib" -e GROUND_SOFTWARE=$GROUND_SOFTWARE --name "nos_build_cryptolib" -w $BASE_DIR $DBOX make -j$NUM_CPUS build-cryptolib
