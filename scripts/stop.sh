@@ -39,4 +39,6 @@ rm -rf /tmp/gpio*
 yes | rm $GSW_DIR/Gemfile > /dev/null 2>&1
 yes | rm $GSW_DIR/Gemfile.lock > /dev/null 2>&1
 
+rm /dev/shm/Blackboard
+
 exit 0
