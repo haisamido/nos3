@@ -4,7 +4,7 @@ services:
   nos3-fortytwo:
     image: ghcr.io/haisamido/nos3-base-fortytwo:dev
     attach: true
-    container_name: sc_1_fortytwo
+    container_name: sc01-fortytwo
     hostname: fortytwo
     working_dir: "/opt/nasa-itc/"
     command: '/entrypoint.sh'
@@ -18,10 +18,10 @@ services:
     environment:
       DISPLAY: ":1"
     networks:
-      nos3_sc_1:
+      nos3-sc01:
         aliases: 
           - fortytwo
-      nos3_core:
+      nos3-core:
 
   nos3-fsw:
     image: ghcr.io/haisamido/nos3-base-fsw-uart:dev
@@ -29,7 +29,7 @@ services:
     depends_on:
       nos3-fortytwo:
         condition: service_started
-    container_name: sc_1_nos_fsw
+    container_name: sc01-nos-fsw
     hostname: nos-fsw
     working_dir: /home/nos3/builds/nos3/
     volumes:
@@ -44,10 +44,10 @@ services:
     environment:
       HEALTHCHECK_PORT: 60000
     networks:
-      nos3_sc_1:
+      nos3-sc01:
         aliases: 
-          - nos_fsw
-      nos3_core:
+          - nos-fsw
+      nos3-core:
 
   nos3-nos_engine_server:
     image: ghcr.io/haisamido/nos3-base:dev
@@ -65,11 +65,11 @@ services:
     environment:
       HEALTHCHECK_PORT: 60000
     networks:
-      nos3_sc_1:
+      nos3-sc01:
         aliases: 
           - nos_engine_server
           - sc01-nos-engine-server
-      nos3_core:
+      nos3-core:
 
   nos3-gps:
     image: ghcr.io/haisamido/nos3-base:dev
@@ -79,8 +79,8 @@ services:
         condition: service_started
       nos3-fsw:
         condition: service_started
-    container_name: sc_1_gps_sim
-    hostname: sc_1_gps_sim
+    container_name: sc01-gps-sim
+#    hostname: sc01-gps-sim 
     working_dir: /home/nos3/builds/nos3/sims/build/bin
     command: "./nos3-single-simulator -f ./nos3-simulator.xml gps"
     volumes:
@@ -88,10 +88,10 @@ services:
     environment:
       HEALTHCHECK_PORT: 60000
     networks:
-      nos3_sc_1:
+      nos3-sc01:
         aliases: 
           - gps
-      nos3_core:
+      nos3-core:
 
   nos3-time:
     image: ghcr.io/haisamido/nos3-base:dev
@@ -99,8 +99,8 @@ services:
     depends_on:
       nos3-nos_engine_server:
         condition: service_started
-    container_name: nos_time_driver
-    hostname: sc1-time-driver
+    container_name: nos-time-driver
+    hostname: nos-time-driver
     working_dir: /home/nos3/builds/nos3/sims/build/bin
     command: "./nos3-single-simulator -f ./nos3-simulator.xml time"
     volumes:
@@ -111,10 +111,10 @@ services:
     environment:
       HEALTHCHECK_PORT: 60000
     networks:
-      nos3_sc_1:
+      nos3-sc01:
         aliases: 
-          - nos_time_driver
-      nos3_core:
+          - sc01-nos-time-driver
+      nos3-core:
 
   nos3-gsw:
     image: ghcr.io/haisamido/nos3-base-yamcs:dev
@@ -149,11 +149,11 @@ services:
       DEPLOYMENT_ENVIRO: ""
       HEALTHCHECK_PORT: 60000
     networks:
-      nos3_sc_1:
+      nos3-sc01:
         aliases: 
           - cosmos
           - yamcs
-      nos3_core:
+      nos3-core:
 
   nos3-truth42sim:
     image: ghcr.io/haisamido/nos3-base:dev
@@ -169,7 +169,7 @@ services:
         condition: service_started
       nos3-fsw:
         condition: service_started
-    container_name: sc_1_truth42sim
+    container_name: sc01-truth42sim
     hostname: truth42sim
     working_dir: /home/nos3/builds/nos3/sims/build/bin
     command: "./nos3-single-simulator -f ./nos3-simulator.xml truth42sim"
@@ -181,14 +181,14 @@ services:
     environment:
       HEALTHCHECK_PORT: 60000
     networks:
-      - nos3_sc_1
-      - nos3_core
+      - nos3-sc01
+      - nos3-core
 
   nos3-nos_terminal:
     image: ghcr.io/haisamido/nos3-base:dev
     attach: true
-    container_name: nos_terminal
-    hostname: nos_terminal
+    container_name: nos-terminal
+    hostname: nos-terminal
     working_dir: /home/nos3/builds/nos3/sims/build/bin
     command: "./nos3-single-simulator -f ./nos3-simulator.xml  truth42sim"
     volumes:
@@ -199,16 +199,16 @@ services:
     environment:
       HEALTHCHECK_PORT: 60000
     networks:
-      nos3_sc_1:
+      nos3-sc01:
         aliases: 
           - nos-terminal
-      nos3_core:
+      nos3-core:
 
   nos3-nos_udp_terminal:
     image: ghcr.io/haisamido/nos3-base:dev
     attach: true
-    container_name: nos_udp_terminal
-    hostname: nos_udp_terminal
+    container_name: nos-udp-terminal
+    hostname: nos-udp-terminal
     working_dir: /home/nos3/builds/nos3/sims/build/bin
     command: "./nos3-single-simulator -f ./nos3-simulator.xml  truth42sim"
     volumes:
@@ -219,12 +219,12 @@ services:
     environment:
       HEALTHCHECK_PORT: 60000
     networks:
-      nos3_sc_1:
+      nos3-sc01:
         aliases: 
           - nos-udp-terminal
-      nos3_core:
+      nos3-core:
   
 networks:
-  nos3_core:
+  nos3-core:
     driver: bridge
-  nos3_sc_1:
+  nos3-sc01:
