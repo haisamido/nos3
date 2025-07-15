@@ -19,6 +19,16 @@ K8S_DIR=./kubernetes
 
 # Generally this is empty unless in specific environments
 ENVIRO_FILE=./.env
+
+# ./.env file content would be something like:
+# # DO NOT PUT ANY SENSITIVE CONFIGURATIONS HERE
+# MAVEN_SETTINGS_FILE=
+# MAVEN_HTTPS_PROXY=
+# HTTPS_PROXY=
+# HTTP_PROXY=
+# NO_PROXY=
+# HEALTHCHECK_PORT=60000
+
 VOLUME_MAVEN_SETTINGS_PATH=""
 
 # To set default settings.xml and essentially empty for mvn
