@@ -42,6 +42,8 @@ services:
     cap_add:
       - sys_nice
     environment:
+      BASE_DIR: /home/nos3/builds/nos3
+      FSW_DIR: /home/nos3/builds/nos3/fsw/build/exe/cpu1
       HEALTHCHECK_PORT: 60000
     networks:
       nos3-sc01:

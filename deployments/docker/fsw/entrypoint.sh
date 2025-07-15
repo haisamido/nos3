@@ -16,9 +16,16 @@
 pkill -f fsw_respawn.sh || true
 pkill -f core-cpu1 || true
 
-export LD_LIBRARY_PATH=/home/nos3/builds/nos3/fsw/build/exe/cpu1/cf/:${LD_LIBRARY_PATH}
+export LD_LIBRARY_PATH=${FSW_DIR}/cf/:${LD_LIBRARY_PATH}
 
-cd /home/nos3/builds/nos3/fsw/build/exe/cpu1/ && \
-    ./core-cpu1 -R PO 2>&1 | tee -a /home/nos3/builds/nos3/core-cpu1.log &
+mkdir -p $FSW_DIR/data
+mkdir -p $FSW_DIR/data/cam
+mkdir -p $FSW_DIR/data/evs
+mkdir -p $FSW_DIR/data/hk
+mkdir -p $FSW_DIR/data/inst
+touch -p $FSW_DIR/data/dummy.txt
+
+cd ${FSW_DIR} && \
+    ./core-cpu1 -R PO 2>&1 | tee -a ${BASE_DIR}/core-cpu1.log &
 
 tail -f /dev/null
