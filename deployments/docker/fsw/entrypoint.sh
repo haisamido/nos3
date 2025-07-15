@@ -23,8 +23,11 @@ mkdir -p $FSW_DIR/data/cam
 mkdir -p $FSW_DIR/data/evs
 mkdir -p $FSW_DIR/data/hk
 mkdir -p $FSW_DIR/data/inst
-touch -p $FSW_DIR/data/dummy.txt
+touch $FSW_DIR/data/dummy.txt
+echo "1234567890" > $FSW_DIR/data/dummy.txt
+truncate -s 1M $FSW_DIR/data/dummy.txt
 
+#
 cd ${FSW_DIR} && \
     ./core-cpu1 -R PO 2>&1 | tee -a ${BASE_DIR}/core-cpu1.log &
 
