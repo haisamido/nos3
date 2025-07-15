@@ -37,9 +37,11 @@ ENV MAVEN_HTTPS_PROXY=${MAVEN_HTTPS_PROXY}
 #------------------------------------------------------------------------------
 WORKDIR /home/${NOS3_USER}/builds/nos3
 
-COPY settings.xml ${MAVEN_SETTINGS_FILE}
-
 RUN ./scripts/gsw/gsw_${GSW_SOFTWARE}_build.sh
+
+COPY settings.xml /home/${NOS3_USER}/.nos3/${GSW_SOFTWARE}/settings.xml
+
+RUN chown ${NOS3_USER}:${NOS3_USER} /home/${NOS3_USER}/.nos3/${GSW_SOFTWARE}/settings.xml
 
 RUN cd /home/${NOS3_USER}/.nos3/${GSW_SOFTWARE} && \
   mvn ${MAVEN_HTTPS_PROXY} package yamcs:bundle

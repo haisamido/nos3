@@ -31,19 +31,18 @@ ENVIRO_FILE=./.env
 
 VOLUME_MAVEN_SETTINGS_PATH=""
 
-# To set default settings.xml and essentially empty for mvn
+# To set default settings.xml and essentially empty for mvn, unless in vmmoc
 $(shell echo "<settings><proxies></proxies></settings>" > ${DOCKER_DIR}/yamcs/settings.xml)
+export MAVEN_HTTPS_PROXY="--settings ./settings.xml"
 
 #---
 ifndef DEPLOYMENT_ENVIRO
 $(warning DEPLOYMENT_ENVIRO is not set. Therefore, assuming not in vmmoc, and proceeding without vmmoc specific definitions)
 else
-
 ifeq (${DEPLOYMENT_ENVIRO},vmmoc)
 $(info DEPLOYMENT_ENVIRO is set to vmmoc. Proceeding with vmmoc specific configurations)
 export ENVIRO_FILE=/opt/neo/etc/environment
 include ${ENVIRO_FILE}
-export VOLUME_MAVEN_SETTINGS_PATH=-v ${MAVEN_SETTINGS_FILE}:${MAVEN_SETTINGS_FILE}
 $(shell cp -f ${MAVEN_SETTINGS_FILE} ${DOCKER_DIR}/yamcs/settings.xml)
 else
 $(error DEPLOYMENT_ENVIRO is set to ${DEPLOYMENT_ENVIRO}, which is not expected. Exiting!)

@@ -134,6 +134,7 @@ services:
     command: "/entrypoint.sh"
     volumes:
       - ${PWD}/yamcs/entrypoint.sh:/entrypoint.sh
+      - ${PWD}/yamcs/settings.xml:/home/nos3/.nos3/yamcs/settings.xml
     ports:
       - "8090:8090"
     tty: true
@@ -145,7 +146,7 @@ services:
       # YAMCS_ETC_DIR:
       # YAMCS_CACHE_DIR:
       MAVEN_REPO_LOCAL: "/home/nos3/.nos3/.m2/repository"
-      MAVEN_HTTPS_PROXY: ""
+      MAVEN_HTTPS_PROXY: "--settings ./settings.xml"
       HTTPS_PROXY: ""
       HTTP_PROXY: ""
       DEPLOYMENT_ENVIRO: ""
