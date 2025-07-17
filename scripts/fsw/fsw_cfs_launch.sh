@@ -113,6 +113,9 @@ do
     # Replace `--tab` with `--window-with-profile=KeepOpen` once you've created this gnome-terminal profile manually
     gnome-terminal --title=$SC_NUM" - NOS3 Flight Software" -- $DFLAGS -v $BASE_DIR:$BASE_DIR --name $SC_NUM"-nos-fsw" -h nos-fsw --network=$SC_NETNAME -w $FSW_DIR --sysctl fs.mqueue.msg_max=10000 --ulimit rtprio=99 --cap-add=sys_nice $DBOX $SCRIPT_DIR/fsw/fsw_respawn.sh &
     #gnome-terminal --window-with-profile=KeepOpen --title=$SC_NUM" - NOS3 Flight Software" -- $DFLAGS -v $BASE_DIR:$BASE_DIR --name $SC_NUM"-nos-fsw" -h nos-fsw --network=$SC_NETNAME -w $FSW_DIR --sysctl fs.mqueue.msg_max=10000 --ulimit rtprio=99 --cap-add=sys_nice $DBOX $FSW_DIR/core-cpu1 -R PO &
+    # cd ${BASE_DIR}/deployments/docker/ && \
+    #   docker compose down nos3-fsw || true && docker compose up -d nos3-fsw
+    # cd - 
     echo ""
 
     echo $SC_NUM " - Simulators..."
@@ -170,14 +173,18 @@ done
 
 echo "NOS Time Driver..."
 sleep 8
-gnome-terminal --tab --title="NOS Time Driver"   -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name nos-time-driver --network=nos3-core -w $SIM_BIN $DBOX ./nos3-single-simulator $GND_CFG_FILE time
+#gnome-terminal --tab --title="NOS Time Driver"   -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name nos-time-driver --network=nos3-core -w $SIM_BIN $DBOX ./nos3-single-simulator $GND_CFG_FILE time
+cd ${BASE_DIR}/deployments/docker/ && \
+    docker compose down nos3-time || true && docker compose up -d nos3-time
+cd - 
+
 sleep 1
 for (( i=1; i<=$SATNUM; i++ ))
 do
     export SC_NUM="sc0"$i
     export SC_NETNAME="nos3-"$SC_NUM
     export TIMENAME=$SC_NUM"-nos-time-driver"
-    $DNETWORK connect --alias nos-time-driver $SC_NETNAME nos-time-driver
+#    $DNETWORK connect --alias nos-time-driver $SC_NETNAME nos-time-driver
 done
 echo ""
 
