@@ -56,7 +56,7 @@ echo ""
 
 echo "Launch GSW..."
 echo ""
-source $BASE_DIR/cfg/build/gsw_launch.sh
+#source $BASE_DIR/cfg/build/gsw_launch.sh
 
 echo "Create NOS interfaces..."
 export GND_CFG_FILE="-f nos3-simulator.xml"
@@ -87,15 +87,21 @@ do
     $DNETWORK create $SC_NETNAME 2> /dev/null
     echo ""
 
+    source $BASE_DIR/cfg/build/gsw_launch.sh
+
     echo $SC_NUM " - Connect GSW " "${GSW:-cosmos-openc3-operator-1}" " to spacecraft network..."
     $DNETWORK connect  $SC_NETNAME "${GSW:-cosmos-openc3-operator-1}" --alias cosmos --alias active-gs
     echo ""
 
     echo $SC_NUM " - 42..."
-    rm -rf $USER_NOS3_DIR/42/NOS3InOut
-    cp -r $BASE_DIR/cfg/build/InOut $USER_NOS3_DIR/42/NOS3InOut
-    xhost +local:*
-    gnome-terminal --tab --title=$SC_NUM" - 42" -- $DFLAGS -e DISPLAY=$DISPLAY -v $USER_NOS3_DIR:$USER_NOS3_DIR -v /tmp/.X11-unix:/tmp/.X11-unix:ro --name $SC_NUM"-fortytwo" -h fortytwo --network=$SC_NETNAME -w $USER_NOS3_DIR/42 -t $DBOX $USER_NOS3_DIR/42/42 NOS3InOut
+    # rm -rf $USER_NOS3_DIR/42/NOS3InOut
+    # cp -r $BASE_DIR/cfg/build/InOut $USER_NOS3_DIR/42/NOS3InOut
+    # xhost +local:*
+    # gnome-terminal --tab --title=$SC_NUM" - 42" -- $DFLAGS -e DISPLAY=$DISPLAY -v $USER_NOS3_DIR:$USER_NOS3_DIR -v /tmp/.X11-unix:/tmp/.X11-unix:ro --name $SC_NUM"-fortytwo" -h fortytwo --network=$SC_NETNAME -w $USER_NOS3_DIR/42 -t $DBOX $USER_NOS3_DIR/42/42 NOS3InOut
+    cd ${BASE_DIR}/deployments/docker/ && \
+      docker compose down nos3-fortytwo
+      docker compose up -d nos3-fortytwo
+    cd -
     echo ""
 
     echo $SC_NUM " - OnAIR..."

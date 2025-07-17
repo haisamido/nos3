@@ -9,7 +9,10 @@ source $SCRIPT_DIR/env.sh
 
 # export MAVEN_HTTPS_PROXY="--settings ./settings.xml"
 
-gnome-terminal --tab --title="YAMCS" -- $DFLAGS  -e COMPONENT_DIR=$COMPONENT_DIR -v $BASE_DIR:$BASE_DIR -v $USER_NOS3_DIR:$USER_NOS3_DIR -p 8090:8090 -p 5012:5012 --name cosmos-openc3-operator-1 -h cosmos --network=nos3-core --network-alias=cosmos -w $USER_NOS3_DIR/yamcs $DBOX mvn ${MAVEN_HTTPS_PROXY} -Dmaven.repo.local=$USER_NOS3_DIR/.m2/repository -DCOMPONENT_DIR=$COMPONENT_DIR yamcs:run
+#gnome-terminal --tab --title="YAMCS" -- $DFLAGS  -e COMPONENT_DIR=$COMPONENT_DIR -v $BASE_DIR:$BASE_DIR -v $USER_NOS3_DIR:$USER_NOS3_DIR -p 8090:8090 -p 5012:5012 --name cosmos-openc3-operator-1 -h cosmos --network=nos3-core --network-alias=cosmos -w $USER_NOS3_DIR/yamcs $DBOX mvn ${MAVEN_HTTPS_PROXY} -Dmaven.repo.local=$USER_NOS3_DIR/.m2/repository -DCOMPONENT_DIR=$COMPONENT_DIR yamcs:run
+cd ${BASE_DIR}/deployments/docker/ && \
+    docker compose down nos3-gsw || true && docker compose up -d nos3-gsw
+cd -
 
 pidof firefox > /dev/null
 if [ $? -eq 1 ]

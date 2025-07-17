@@ -20,8 +20,6 @@ services:
       DISPLAY: ":1"
     networks:
       nos3-sc01-00:
-        aliases: 
-          - fortytwo
       nos3-core-00:
 
 #   nos3-fsw:
@@ -154,12 +152,10 @@ services:
       DEPLOYMENT_ENVIRO: ""
       HEALTHCHECK_PORT: 60000
     networks:
-      nos3-sc01-00:
+      nos3-core-00:
         aliases: 
-          - cosmos
           - active-gs
           - yamcs
-      nos3-core-00:
 
   # nos3-truth42sim:
   #   image: ghcr.io/haisamido/nos3-base:dev
