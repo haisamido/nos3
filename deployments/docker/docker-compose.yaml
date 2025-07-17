@@ -200,25 +200,23 @@ services:
       nos3-sc01-00:
       nos3-core-00:
 
-  # nos3-nos_udp_terminal:
-  #   image: ghcr.io/haisamido/nos3-base:dev
-  #   attach: true
-  #   container_name: nos-udp-terminal
-  #   hostname: nos-udp-terminal
-  #   working_dir: /home/nos3/builds/nos3/sims/build/bin
-  #   command: "./nos3-single-simulator -f ./nos3-simulator.xml  truth42sim"
-  #   volumes:
-  #     - ${PWD}/../nos3/cfg/sims/nos3-simulator.xml:/home/nos3/builds/nos3/sims/build/bin/nos3-simulator.xml
-  #   tty: true
-  #   stdin_open: true
-  #   privileged: true
-  #   environment:
-  #     HEALTHCHECK_PORT: 60000
-  #   networks:
-  #     nos3-sc01:
-  #       aliases: 
-  #         - nos-udp-terminal
-  #     nos3-core:
+  nos3-nos-udp-terminal:
+    image: ghcr.io/haisamido/nos3-base:dev
+    attach: true
+    container_name: nos-udp-terminal
+    hostname: nos-udp-terminal
+    working_dir: /home/nos3/builds/nos3/sims/build/bin
+    command: "./nos3-single-simulator -f ./nos3-simulator.xml udp-terminal"
+    volumes:
+      - ${PWD}/../nos3/cfg/sims/nos3-simulator.xml:/home/nos3/builds/nos3/sims/build/bin/nos3-simulator.xml
+    tty: true
+    stdin_open: true
+    privileged: true
+    environment:
+      HEALTHCHECK_PORT: 60000
+    networks:
+      nos3-sc01-00:
+      nos3-core-00:
   
 networks:
   nos3-core-00:

@@ -61,7 +61,7 @@ echo ""
 echo "Create NOS interfaces..."
 export GND_CFG_FILE="-f nos3-simulator.xml"
 #gnome-terminal --tab --title="NOS Terminal"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name "nos-terminal"        --network=nos3-core -w $SIM_BIN $DBOX ./nos3-single-simulator $GND_CFG_FILE stdio-terminal
-gnome-terminal --tab --title="NOS UDP Terminal"  -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name "nos-udp-terminal"    --network=nos3-core -w $SIM_BIN $DBOX ./nos3-single-simulator $GND_CFG_FILE udp-terminal
+#gnome-terminal --tab --title="NOS UDP Terminal"  -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name "nos-udp-terminal"    --network=nos3-core -w $SIM_BIN $DBOX ./nos3-single-simulator $GND_CFG_FILE udp-terminal
 gnome-terminal --tab --title="NOS CmdBus Bridge"  -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name "nos-sim-bridge"      --network=nos3-core -w $SIM_BIN $DBOX ./nos3-sim-cmdbus-bridge $GND_CFG_FILE
 
 echo ""
@@ -133,7 +133,11 @@ do
       docker compose down nos3-nos-terminal || true && docker compose up -d nos3-nos-terminal 
     cd - 
 
-    $DNETWORK connect $SC_NETNAME nos-udp-terminal
+#    $DNETWORK connect $SC_NETNAME nos-udp-terminal
+    cd ${BASE_DIR}/deployments/docker/ && \
+      docker compose down nos3-nos-udp-terminal || true && docker compose up -d nos3-nos-udp-terminal
+    cd - 
+
     $DNETWORK connect $SC_NETNAME nos-sim-bridge
 
     # Component simulators
