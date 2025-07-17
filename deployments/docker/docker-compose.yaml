@@ -238,6 +238,27 @@ services:
           - rw-sim0
       nos3-core-00:
 
+  nos3-rw-sim1:
+    image: ghcr.io/haisamido/nos3-base:dev
+    attach: true
+    # depends_on:
+    #   nos3-fortytwo:
+    #     condition: service_started
+      # nos3-fsw:
+      #   condition: service_started
+    container_name: sc01-rw-sim1
+    working_dir: /home/nos3/builds/nos3/sims/build/bin
+    command: "./nos3-single-simulator -f ./nos3-simulator.xml generic-reactionwheel-sim1"
+    volumes:
+      - ${PWD}/../nos3/cfg/sims/nos3-simulator.xml:/home/nos3/builds/nos3/sims/build/bin/nos3-simulator.xml
+    environment:
+      HEALTHCHECK_PORT: 60000
+    networks:
+      nos3-sc01-00:
+        aliases:
+          - rw-sim1
+      nos3-core-00:
+
   nos3-time:
     image: ghcr.io/haisamido/nos3-base:dev
     attach: true
