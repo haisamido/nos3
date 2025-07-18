@@ -19,6 +19,7 @@
     "/GENERIC_REACTION_WHEEL/GENRW_HK_TLM_T/MOMENTUM_NMS_2",
     "/GENERIC_RADIO/GENERIC_RADIO_HK_TLM/FORWARD_COUNT",
     "/yamcs/cosmos/links/radio-in/dataInCount",
-    "/yamcs/cosmos/links/radio-out/dataInCount"
+    "/yamcs/cosmos/links/radio-out/dataInCount",
+    "/SAMPLE/SAMPLE_HK_TLM/DEVICE_ENABLED"
   ]
 }
