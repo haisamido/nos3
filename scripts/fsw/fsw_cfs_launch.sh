@@ -157,8 +157,8 @@ do
 
       cd $SIM_BIN
       echo $SC_NUM " - OnAIR..."
-      gnome-terminal --tab --title=$SC_NUM" - OnAIR" -- $DFLAGS -v $BASE_DIR:$BASE_DIR --name $SC_NUM"-onair" --network=$SC_NETNAME -w $FSW_DIR -t $DBOX $SCRIPT_DIR/fsw/onair_launch.sh
-      #cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-onair || true && docker compose up -d nos3-onair && cd -
+      #gnome-terminal --tab --title=$SC_NUM" - OnAIR" -- $DFLAGS -v $BASE_DIR:$BASE_DIR --name $SC_NUM"-onair" --network=$SC_NETNAME -w $FSW_DIR -t $DBOX $SCRIPT_DIR/fsw/onair_launch.sh
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-onair || true && docker compose up -d nos3-onair && cd -
       echo ""
       
       echo $SC_NUM " - Flight Software..."
@@ -169,64 +169,65 @@ do
       echo $SC_NUM " - Simulators..."
       cd $SIM_BIN
       gnome-terminal --tab --title=$SC_NUM" - NOS Engine Server" -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-nos-engine-server"  -h nos-engine-server --network=$SC_NETNAME -w $SIM_BIN $DBOX /usr/bin/nos_engine_server_standalone -f $SIM_BIN/nos_engine_server_config.json
-      gnome-terminal --tab --title=$SC_NUM" - 42 Truth Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-truth42sim"          -h truth42sim --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE  truth42sim
-
-#      cd ${BASE_DIR}/deployments/docker/
+#      gnome-terminal --tab --title=$SC_NUM" - 42 Truth Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-truth42sim"          -h truth42sim --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE  truth42sim
       # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-nos_engine_server || true && docker compose up -d nos3-nos_engine_server && cd -
-#      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-truth42sim || true && docker compose up -d nos3-truth42sim && cd -
-
-      #echo "Create NOS interfaces..."
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-nos-terminal     || true && docker compose up -d nos3-nos-terminal && cd - 
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-nos-udp-terminal || true && docker compose up -d nos3-nos-udp-terminal && cd -
-
-      # gnome-terminal --tab --title="NOS CmdBus Bridge"  -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name "nos-sim-bridge"      --network=nos3-core -w $SIM_BIN $DBOX ./nos3-sim-cmdbus-bridge $GND_CFG_FILE
-      # #cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-nos-sim-bridge   || true && docker compose up -d nos3-nos-sim-bridge && cd -
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-truth42sim || true && docker compose up -d nos3-truth42sim && cd -
 
       echo "Create NOS interfaces..."
-      gnome-terminal --tab --title="NOS Terminal"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name "nos-terminal"        --network=nos3-core -w $SIM_BIN $DBOX ./nos3-single-simulator $GND_CFG_FILE stdio-terminal
-      gnome-terminal --tab --title="NOS UDP Terminal"  -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name "nos-udp-terminal"    --network=nos3-core -w $SIM_BIN $DBOX ./nos3-single-simulator $GND_CFG_FILE udp-terminal
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-nos-terminal     || true && docker compose up -d nos3-nos-terminal && cd - 
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-nos-udp-terminal || true && docker compose up -d nos3-nos-udp-terminal && cd -
+
       gnome-terminal --tab --title="NOS CmdBus Bridge"  -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name "nos-sim-bridge"      --network=nos3-core -w $SIM_BIN $DBOX ./nos3-sim-cmdbus-bridge $GND_CFG_FILE
+      # #cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-nos-sim-bridge   || true && docker compose up -d nos3-nos-sim-bridge && cd -
+
+      # echo "Create NOS interfaces..."
+      # gnome-terminal --tab --title="NOS Terminal"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name "nos-terminal"        --network=nos3-core -w $SIM_BIN $DBOX ./nos3-single-simulator $GND_CFG_FILE stdio-terminal
+      # gnome-terminal --tab --title="NOS UDP Terminal"  -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name "nos-udp-terminal"    --network=nos3-core -w $SIM_BIN $DBOX ./nos3-single-simulator $GND_CFG_FILE udp-terminal
+      # gnome-terminal --tab --title="NOS CmdBus Bridge"  -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name "nos-sim-bridge"      --network=nos3-core -w $SIM_BIN $DBOX ./nos3-sim-cmdbus-bridge $GND_CFG_FILE
 
       $DNETWORK connect $SC_NETNAME nos-terminal
       $DNETWORK connect $SC_NETNAME nos-udp-terminal
       $DNETWORK connect $SC_NETNAME nos-sim-bridge
 
       # Component simulators
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-camsim      || true && docker compose up -d nos3-camsim && cd -
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-css-sim     || true && docker compose up -d nos3-css-sim && cd -
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-eps-sim     || true && docker compose up -d nos3-eps-sim && cd -
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-fss-sim     || true && docker compose up -d nos3-fss-sim && cd -
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-gps-sim     || true && docker compose up -d nos3-gps-sim && cd -
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-imu-sim     || true && docker compose up -d nos3-imu-sim && cd -
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-mag-sim     || true && docker compose up -d nos3-mag-sim && cd -
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-rw-sim0     || true && docker compose up -d nos3-rw-sim0 && cd -
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-rw-sim1     || true && docker compose up -d nos3-rw-sim1 && cd -
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-rw-sim2     || true && docker compose up -d nos3-rw-sim2 && cd -
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-radio-sim   || true && docker compose up -d nos3-radio-sim && cd -
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-sample-sim  || true && docker compose up -d nos3-sample-sim && cd -
-      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-startrk-sim || true && docker compose up -d nos3-startrk-sim && cd -
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-camsim       || true && docker compose up -d nos3-camsim && cd -
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-css-sim      || true && docker compose up -d nos3-css-sim && cd -
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-eps-sim      || true && docker compose up -d nos3-eps-sim && cd -
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-fss-sim      || true && docker compose up -d nos3-fss-sim && cd -
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-gps-sim      || true && docker compose up -d nos3-gps-sim && cd -
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-imu-sim      || true && docker compose up -d nos3-imu-sim && cd -
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-mag-sim      || true && docker compose up -d nos3-mag-sim && cd -
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-rw-sim0      || true && docker compose up -d nos3-rw-sim0 && cd -
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-rw-sim1      || true && docker compose up -d nos3-rw-sim1 && cd -
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-rw-sim2      || true && docker compose up -d nos3-rw-sim2 && cd -
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-radio-sim    || true && docker compose up -d nos3-radio-sim && cd -
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-sample-sim   || true && docker compose up -d nos3-sample-sim && cd -
+      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-startrk-sim  || true && docker compose up -d nos3-startrk-sim && cd -
+      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-thruster-sim || true && docker compose up -d nos3-thruster-sim && cd -
+      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-torquer-sim  || true && docker compose up -d nos3-torquer-sim && cd -
+      echo ""
 
       cd $SIM_BIN
-      gnome-terminal --tab --title=$SC_NUM" - CAM Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-cam-sim"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE camsim
-      gnome-terminal --tab --title=$SC_NUM" - CSS Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-css-sim"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-css-sim
-      gnome-terminal --tab --title=$SC_NUM" - EPS Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-eps-sim"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-eps-sim
-      gnome-terminal --tab --title=$SC_NUM" - FSS Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-fss-sim"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-fss-sim
-      gnome-terminal --tab --title=$SC_NUM" - GPS Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-gps-sim"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE gps
-      gnome-terminal --tab --title=$SC_NUM" - IMU Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-imu-sim"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-imu-sim
-      gnome-terminal --tab --title=$SC_NUM" - MAG Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-mag-sim"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-mag-sim
-      gnome-terminal --tab --title=$SC_NUM" - RW 0 Sim"     -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-rw-sim0"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-reactionwheel-sim0
-      gnome-terminal --tab --title=$SC_NUM" - RW 1 Sim"     -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-rw-sim1"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-reactionwheel-sim1
-      gnome-terminal --tab --title=$SC_NUM" - RW 2 Sim"     -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-rw-sim2"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-reactionwheel-sim2
-      gnome-terminal --tab --title=$SC_NUM" - Radio Sim"    -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-radio-sim"    -h radio-sim --network=$SC_NETNAME --network-alias=radio-sim -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-radio-sim
-      gnome-terminal --tab --title=$SC_NUM" - Sample Sim"   -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-sample-sim"   --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE sample-sim
-      gnome-terminal --tab --title=$SC_NUM" - StarTrk Sim"  -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-startrk-sim"  --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-star-tracker-sim
-      gnome-terminal --tab --title=$SC_NUM" - Thruster Sim" -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-thruster-sim" --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-thruster-sim
-      gnome-terminal --tab --title=$SC_NUM" - Torquer Sim"  -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-torquer-sim"  -h trq-sim --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-torquer-sim
- 
-      cd $SIM_BIN
+      # gnome-terminal --tab --title=$SC_NUM" - CAM Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-cam-sim"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE camsim
+      # gnome-terminal --tab --title=$SC_NUM" - CSS Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-css-sim"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-css-sim
+      # gnome-terminal --tab --title=$SC_NUM" - EPS Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-eps-sim"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-eps-sim
+      # gnome-terminal --tab --title=$SC_NUM" - FSS Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-fss-sim"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-fss-sim
+      # gnome-terminal --tab --title=$SC_NUM" - GPS Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-gps-sim"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE gps
+      # gnome-terminal --tab --title=$SC_NUM" - IMU Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-imu-sim"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-imu-sim
+      # gnome-terminal --tab --title=$SC_NUM" - MAG Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-mag-sim"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-mag-sim
+      # gnome-terminal --tab --title=$SC_NUM" - RW 0 Sim"     -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-rw-sim0"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-reactionwheel-sim0
+      # gnome-terminal --tab --title=$SC_NUM" - RW 1 Sim"     -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-rw-sim1"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-reactionwheel-sim1
+      # gnome-terminal --tab --title=$SC_NUM" - RW 2 Sim"     -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-rw-sim2"      --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-reactionwheel-sim2
+      # gnome-terminal --tab --title=$SC_NUM" - Radio Sim"    -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-radio-sim"    -h radio-sim --network=$SC_NETNAME --network-alias=radio-sim -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-radio-sim
+      # gnome-terminal --tab --title=$SC_NUM" - Sample Sim"   -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-sample-sim"   --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE sample-sim
+      # gnome-terminal --tab --title=$SC_NUM" - StarTrk Sim"  -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-startrk-sim"  --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-star-tracker-sim
       gnome-terminal --tab --title=$SC_NUM" - Thruster Sim" -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-thruster-sim" --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-thruster-sim
       gnome-terminal --tab --title=$SC_NUM" - Torquer Sim"  -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-torquer-sim"  -h trq-sim --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE generic-torquer-sim
       echo ""
+
+      # echo $SC_NUM " - CryptoLib..."
+      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-cryptolib    || true && docker compose up -d nos3-cryptolib && cd -
+      # echo ""
 
       echo $SC_NUM " - CryptoLib..."
       gnome-terminal --tab --title=$SC_NUM" - CryptoLib GSW" -- $DFLAGS -v $BASE_DIR:$BASE_DIR --name $SC_NUM"_cryptolib_gsw"  --network=$SC_NETNAME --network-alias=cryptolib -w $BASE_DIR/gsw/build $DBOX ./support/standalone
@@ -241,6 +242,7 @@ echo "NOS Time Driver..."
 sleep 8
 
 if [[ "${USE_DC}" != "yes" ]]; then
+  cd $SIM_BIN
   gnome-terminal --tab --title="NOS Time Driver"   -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name nos-time-driver --network=nos3-core -w $SIM_BIN $DBOX ./nos3-single-simulator $GND_CFG_FILE time
 
   sleep 1
