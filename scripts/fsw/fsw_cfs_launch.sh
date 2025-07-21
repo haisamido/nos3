@@ -147,8 +147,6 @@ do
       $DNETWORK create $SC_NETNAME 2> /dev/null
       echo ""
 
-      cd ${BASE_DIR}/deployments/docker/
-
       echo "Launch GSW..."
       echo ""
       cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-gsw || true && docker compose up -d nos3-gsw && cd -
@@ -177,7 +175,7 @@ do
       # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-nos_engine_server || true && docker compose up -d nos3-nos_engine_server && cd -
 #      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-truth42sim || true && docker compose up -d nos3-truth42sim && cd -
 
-      echo "Create NOS interfaces..."
+      #echo "Create NOS interfaces..."
       # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-nos-terminal     || true && docker compose up -d nos3-nos-terminal && cd - 
       # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-nos-udp-terminal || true && docker compose up -d nos3-nos-udp-terminal && cd -
 

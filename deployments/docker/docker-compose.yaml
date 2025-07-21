@@ -22,6 +22,26 @@ services:
       nos3-sc01-00:
       nos3-core-00:
 
+  nos3-onair:
+    image: ghcr.io/haisamido/nos3-base:dev
+    attach: true
+    container_name: sc01-onair
+    working_dir: /home/nos3/builds/nos3/fsw/build/exe/cpu1
+    command: "/home/nos3/builds/nos3/scripts/fsw/onair_launch.sh"
+    volumes:
+      - ${PWD}/../nos3/cfg/sims/nos3-simulator.xml:/home/nos3/builds/nos3/sims/build/bin/nos3-simulator.xml
+    tty: true
+    stdin_open: true
+    privileged: true
+    environment:
+      BASE_DIR: /home/nos3/builds/nos3
+      FSW_DIR: /home/nos3/builds/nos3/fsw/build/exe/cpu1
+      HEALTHCHECK_PORT: 60000
+      SCRIPT_DIR:
+    networks:
+      nos3-sc01-00:
+      nos3-core-00:
+
   nos3-fsw:
     image: ghcr.io/haisamido/nos3-base:dev
     attach: true
@@ -321,6 +341,25 @@ services:
       nos3-sc01-00:
       nos3-core-00:
 
+  nos3-startrk-sim:
+    image: ghcr.io/haisamido/nos3-base:dev
+    attach: true
+    # depends_on:
+    #   nos3-fortytwo:
+    #     condition: service_started
+      # nos3-fsw:
+      #   condition: service_started
+    container_name: sc01-startrk-sim
+    working_dir: /home/nos3/builds/nos3/sims/build/bin
+    command: "./nos3-single-simulator -f ./nos3-simulator.xml generic-star-tracker-sim"
+    volumes:
+      - ${PWD}/../nos3/cfg/sims/nos3-simulator.xml:/home/nos3/builds/nos3/sims/build/bin/nos3-simulator.xml
+    environment:
+      HEALTHCHECK_PORT: 60000
+    networks:
+      nos3-sc01-00:
+      nos3-core-00:
+
   nos3-time:
     image: ghcr.io/haisamido/nos3-base:dev
     attach: true
@@ -379,10 +418,11 @@ services:
       DEPLOYMENT_ENVIRO: ""
       HEALTHCHECK_PORT: 60000
     networks:
-      nos3-core-00:
-        aliases: 
+      nos3-sc01-00:
+        aliases:
           - active-gs
           - yamcs
+      nos3-core-00:
 
   nos3-truth42sim:
     image: ghcr.io/haisamido/nos3-base:dev
@@ -448,7 +488,24 @@ services:
     networks:
       nos3-sc01-00:
       nos3-core-00:
-  
+
+  nos3-nos-sim-bridge:
+    image: ghcr.io/haisamido/nos3-base:dev
+    attach: true
+    container_name: nos-sim-bridge
+    working_dir: /home/nos3/builds/nos3/sims/build/bin
+    command: "./nos3-sim-cmdbus-bridge -f ./nos3-simulator.xml"
+    volumes:
+      - ${PWD}/../nos3/cfg/sims/nos3-simulator.xml:/home/nos3/builds/nos3/sims/build/bin/nos3-simulator.xml
+    tty: true
+    stdin_open: true
+    privileged: true
+    environment:
+      HEALTHCHECK_PORT: 60000
+    networks:
+      nos3-sc01-00:
+      nos3-core-00:
+
 networks:
   nos3-core-00:
     external: true
