@@ -32,9 +32,9 @@ mkdir $FSW_DIR/data/cam 2> /dev/null
 mkdir $FSW_DIR/data/evs 2> /dev/null
 mkdir $FSW_DIR/data/hk 2> /dev/null
 mkdir $FSW_DIR/data/inst 2> /dev/null
-touch $FSW_DIR/data/dummy.txt
-echo "1234567890" > $FSW_DIR/data/dummy.txt
-truncate -s 1M $FSW_DIR/data/dummy.txt
+# touch $FSW_DIR/data/dummy.txt
+# echo "1234567890" > $FSW_DIR/data/dummy.txt
+# truncate -s 1M $FSW_DIR/data/dummy.txt
 # GSW Side
 mkdir /tmp/nos3 2> /dev/null
 mkdir /tmp/nos3/data 2> /dev/null
@@ -54,9 +54,10 @@ $DNETWORK create \
     nos3-core
 echo ""
 
-#echo "Launch GSW..."
-#$BASE_DIR/cfg/build/gsw_launch.sh
-#echo ""
+# echo "Launch GSW..."
+# echo ""
+# source $BASE_DIR/cfg/build/gsw_launch.sh
+
 
 echo "Create NOS interfaces..."
 export GND_CFG_FILE="-f nos3-simulator.xml"
@@ -94,7 +95,7 @@ do
     rm -rf $USER_NOS3_DIR/42/NOS3InOut
     cp -r $BASE_DIR/cfg/build/InOut $USER_NOS3_DIR/42/NOS3InOut
     xhost +local:*
-    gnome-terminal --window-with-profile=KeepOpen --title=$SC_NUM" - 42" -- $DFLAGS -e DISPLAY=$DISPLAY -v $USER_NOS3_DIR:$USER_NOS3_DIR -v /tmp/.X11-unix:/tmp/.X11-unix:ro --name $SC_NUM"-fortytwo" -h fortytwo --network=$SC_NETNAME -w $USER_NOS3_DIR/42 -t $DBOX $USER_NOS3_DIR/42/42 NOS3InOut
+    gnome-terminal --tab --title=$SC_NUM" - 42" -- $DFLAGS -e DISPLAY=$DISPLAY -v $USER_NOS3_DIR:$USER_NOS3_DIR -v /tmp/.X11-unix:/tmp/.X11-unix:ro --name $SC_NUM"-fortytwo" -h fortytwo --network=$SC_NETNAME -w $USER_NOS3_DIR/42 -t $DBOX $USER_NOS3_DIR/42/42 NOS3InOut
     echo ""
 
     # Debugging
@@ -107,7 +108,7 @@ do
     echo $SC_NUM " - Simulators..."
     cd $SIM_BIN
     gnome-terminal --tab --title=$SC_NUM" - NOS Engine Server" -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-nos-engine-server"  -h nos-engine-server --network=$SC_NETNAME -w $SIM_BIN $DBOX /usr/bin/nos_engine_server_standalone -f $SIM_BIN/nos_engine_server_config.json
-    #gnome-terminal --tab --title=$SC_NUM" - 42 Truth Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-truth42sim"          -h truth42sim --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE  truth42sim
+    gnome-terminal --tab --title=$SC_NUM" - 42 Truth Sim"      -- $DFLAGS -v $SIM_DIR:$SIM_DIR --name $SC_NUM"-truth42sim"          -h truth42sim --network=$SC_NETNAME -w $SIM_BIN $DBOX ./nos3-single-simulator $SC_CFG_FILE  truth42sim
     
     $DNETWORK connect $SC_NETNAME nos-terminal
     $DNETWORK connect $SC_NETNAME nos-udp-terminal
