@@ -64,7 +64,8 @@ USER ${NOS3_USER}
 # Install the GSW Software
 #------------------------------------------------------------------------------
 WORKDIR /home/${NOS3_USER}/.nos3
-RUN  git clone --recurse-submodules -b ${GIT_BRANCH} -j4 ${GIT_URL} ${GSW_SOFTWARE} && \
+RUN rm -rf /home/${NOS3_USER}/.nos3/${GSW_SOFTWARE}
+RUN git clone --recurse-submodules -b ${GIT_BRANCH} -j4 ${GIT_URL} ${GSW_SOFTWARE} && \
   cd ./${GSW_SOFTWARE} && \
     git fetch && \
     git pull origin 
