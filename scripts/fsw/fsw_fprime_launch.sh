@@ -54,9 +54,9 @@ $DNETWORK create \
     nos3-core
 echo ""
 
-# echo "Launch GSW..."
-# echo ""
-# source $BASE_DIR/cfg/build/gsw_launch.sh
+echo "Launch GSW..."
+echo ""
+source $BASE_DIR/cfg/build/gsw_launch.sh
 
 
 echo "Create NOS interfaces..."
@@ -87,9 +87,9 @@ do
     $DNETWORK create $SC_NETNAME 2> /dev/null
     echo ""
 
-    # echo $SC_NUM " - Connect COSMOS to spacecraft network..."
-    # $DNETWORK connect $SC_NETNAME cosmos-openc3-operator-1 --alias cosmos
-    # echo ""
+    echo $SC_NUM " - Connect COSMOS to spacecraft network..."
+    $DNETWORK connect $SC_NETNAME cosmos-openc3-operator-1 --alias cosmos
+    echo ""
 
     echo $SC_NUM " - 42..."
     rm -rf $USER_NOS3_DIR/42/NOS3InOut
