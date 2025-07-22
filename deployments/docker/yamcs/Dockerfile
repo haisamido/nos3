@@ -5,6 +5,11 @@ ARG IMAGE_TAG=dev
 
 ARG IMAGE_URI=${REGISTRY_HOST}/${IMAGE_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}
 
+#------------------------------------------------------------------------------
+ARG GIT_URL=https://github.com/nasa-itc/yamcs-nos3
+ARG GIT_BRANCH=dev
+
+#------------------------------------------------------------------------------
 ARG NOS3_USER=nos3
 ARG FLIGHT_SOFTWARE=cfs 
 ARG GSW_SOFTWARE=yamcs
@@ -16,33 +21,56 @@ USER root
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG DEPLOYMENT_ENVIRO
+#------------------------------------------------------------------------------
+# Proxy configs
+#------------------------------------------------------------------------------
+ARG MAVEN_HTTPS_PROXY
 ARG HTTPS_PROXY
 ARG HTTP_PROXY
 ARG NO_PROXY
+ARG DEPLOYMENT_ENVIRO
 
-ARG MAVEN_SETTINGS_FILE
-ARG MAVEN_HTTPS_PROXY
-
-ENV DEPLOYMENT_ENVIRO=${DEPLOYMENT_ENVIRO}
+ENV MAVEN_HTTPS_PROXY=${MAVEN_HTTPS_PROXY}
 ENV HTTPS_PROXY=${HTTPS_PROXY}
 ENV HTTP_PROXY=${HTTP_PROXY}
 ENV NO_PROXY=${NO_PROXY}
+ENV DEPLOYMENT_ENVIRO=${DEPLOYMENT_ENVIRO}
 
-ENV MAVEN_SETTINGS_FILE=${MAVEN_SETTINGS_FILE}
-ENV MAVEN_HTTPS_PROXY=${MAVEN_HTTPS_PROXY}
+#------------------------------------------------------------------------------
+# Git Configs
+#------------------------------------------------------------------------------
+ARG GIT_URL
+ARG GIT_BRANCH
+
+ENV GIT_URL=${GIT_URL}
+ENV GIT_BRANCH=${GIT_BRANCH}
+
+#------------------------------------------------------------------------------
+# NOS3 Configs
+#------------------------------------------------------------------------------
+ARG FLIGHT_SOFTWARE
+ARG GSW_SOFTWARE
+ARG NOS3_USER
+
+ENV NOS3_USER=${NOS3_USER}
+ENV FLIGHT_SOFTWARE=${FLIGHT_SOFTWARE}
+ENV GSW_SOFTWARE=${GSW_SOFTWARE}
+#------------------------------------------------------------------------------
+
+  # Switch to the newly created user
+USER ${NOS3_USER}
 
 #------------------------------------------------------------------------------
 # Install the GSW Software
 #------------------------------------------------------------------------------
-WORKDIR /home/${NOS3_USER}/builds/nos3
+WORKDIR /home/${NOS3_USER}/.nos3
+RUN  git clone --recurse-submodules -b ${GIT_BRANCH} -j4 ${GIT_URL} ${GSW_SOFTWARE} && \
+  cd ./${GSW_SOFTWARE} && \
+    git fetch && \
+    git pull origin 
 
-RUN ./scripts/gsw/gsw_${GSW_SOFTWARE}_build.sh
+WORKDIR /home/${NOS3_USER}/.nos3/${GSW_SOFTWARE}
+COPY settings.xml ./settings.xml
 
-COPY settings.xml /home/${NOS3_USER}/.nos3/${GSW_SOFTWARE}/settings.xml
-
-RUN chown ${NOS3_USER}:${NOS3_USER} /home/${NOS3_USER}/.nos3/${GSW_SOFTWARE}/settings.xml
-
-RUN cd /home/${NOS3_USER}/.nos3/${GSW_SOFTWARE} && \
-  mvn ${MAVEN_HTTPS_PROXY} package yamcs:bundle
+RUN mvn ${MAVEN_HTTPS_PROXY} package yamcs:bundle
 #------------------------------------------------------------------------------

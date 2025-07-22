@@ -3,11 +3,6 @@ ARG IMAGE_USERNAME=ivvitc
 ARG IMAGE_NAME=nos3-64
 ARG IMAGE_TAG=20250217
 
-# ARG REGISTRY_HOST=docker.io
-# ARG IMAGE_USERNAME=library
-# ARG IMAGE_NAME=ubuntu
-# ARG IMAGE_TAG=25.04
-
 #ARG IMAGE_URI=${REGISTRY_HOST}/${IMAGE_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}
 
 ARG IMAGE_URI=ghcr.io/haisamido/nos3-base:dev
@@ -51,7 +46,7 @@ ENV FLIGHT_SOFTWARE=${FLIGHT_SOFTWARE}
 
 # COPY ./libuart.c  ${BASE_DIR}/fsw/apps/hwlib/fsw/linux/libuart.c
 
-RUN mv ${BASE_DIR}/fsw/apps/hwlib/fsw/linux/libuart.c ${BASE_DIR}/fsw/apps/hwlib/fsw/linux/libuart.c.orig
+#RUN mv ${BASE_DIR}/fsw/apps/hwlib/fsw/linux/libuart.c ${BASE_DIR}/fsw/apps/hwlib/fsw/linux/libuart.c.orig
 
 WORKDIR ${BASE_DIR}
 

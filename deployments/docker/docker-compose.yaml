@@ -68,26 +68,108 @@ services:
       nos3-sc01-00:
       nos3-core-00:
 
-  # nos3-nos_engine_server:
-  #   image: ghcr.io/haisamido/nos3-base:dev
-  #   attach: true
-  #   depends_on:
-  #     nos3-fortytwo:
-  #       condition: service_started
-  #   container_name: sc01-nos-engine-server
-  #   hostname: nos-engine-server
-  #   working_dir: /home/nos3/builds/nos3/sims/build/bin
-  #   command: "/usr/bin/nos_engine_server_standalone -f ./nos_engine_server_config.json"
-  #   volumes:
-  #     - ${PWD}/../nos3/cfg/sims/nos_engine_server_config.json:/home/nos3/builds/nos3/sims/build/bin/nos_engine_server_config.json
-  #   tty: true
-  #   environment:
-  #     HEALTHCHECK_PORT: 60000
-  #   networks:
-  #     nos3-sc01-00:
-  #     nos3-core-00:
+  nos3-nos-engine-server:
+    image: ghcr.io/haisamido/nos3-base:dev
+    attach: true
+    # depends_on:
+    #   nos3-fortytwo:
+    #     condition: service_started
+    container_name: sc01-nos-engine-server
+    hostname: nos-engine-server
+    working_dir: /home/nos3/builds/nos3/sims/build/bin
+    command: "/usr/bin/nos_engine_server_standalone -f ./nos_engine_server_config.json"
+    volumes:
+      - ${PWD}/../nos3/cfg/sims/nos_engine_server_config.json:/home/nos3/builds/nos3/sims/build/bin/nos_engine_server_config.json
+    tty: true
+    environment:
+      HEALTHCHECK_PORT: 60000
+    networks:
+      nos3-sc01-00:
+        aliases:
+          - sc01-nos-engine-server
+      nos3-core-00:
 
+  nos3-truth42sim:
+    image: ghcr.io/haisamido/nos3-base:dev
+    attach: true
+    # depends_on:
+    #   nos3-fortytwo:
+    #     condition: service_started
+    #   nos3-nos_engine_server:
+    #     condition: service_started
+    #   nos3-gps:
+    #     condition: service_started
+      # nos3-time:
+      #   condition: service_started
+      # nos3-fsw:
+      #   condition: service_started
+    container_name: sc01-truth42sim
+    hostname: truth42sim
+    working_dir: /home/nos3/builds/nos3/sims/build/bin
+    command: "./nos3-single-simulator -f ./nos3-simulator.xml truth42sim"
+    volumes:
+      - ${PWD}/../nos3/cfg/sims/nos3-simulator.xml:/home/nos3/builds/nos3/sims/build/bin/nos3-simulator.xml
+    tty: true
+    stdin_open: true
+    privileged: true
+    environment:
+      HEALTHCHECK_PORT: 60000
+    networks:
+      nos3-sc01-00:
+      nos3-core-00:
 
+  nos3-nos-terminal:
+    image: ghcr.io/haisamido/nos3-base:dev
+    attach: true
+    container_name: nos-terminal
+    hostname: nos-terminal
+    working_dir: /home/nos3/builds/nos3/sims/build/bin
+    command: "./nos3-single-simulator -f ./nos3-simulator.xml stdio-terminal"
+    volumes:
+      - ${PWD}/../nos3/cfg/sims/nos3-simulator.xml:/home/nos3/builds/nos3/sims/build/bin/nos3-simulator.xml
+    tty: true
+    stdin_open: true
+    privileged: true
+    environment:
+      HEALTHCHECK_PORT: 60000
+    networks:
+      nos3-sc01-00:
+      nos3-core-00:
+
+  nos3-nos-udp-terminal:
+    image: ghcr.io/haisamido/nos3-base:dev
+    attach: true
+    container_name: nos-udp-terminal
+    hostname: nos-udp-terminal
+    working_dir: /home/nos3/builds/nos3/sims/build/bin
+    command: "./nos3-single-simulator -f ./nos3-simulator.xml udp-terminal"
+    volumes:
+      - ${PWD}/../nos3/cfg/sims/nos3-simulator.xml:/home/nos3/builds/nos3/sims/build/bin/nos3-simulator.xml
+    tty: true
+    stdin_open: true
+    privileged: true
+    environment:
+      HEALTHCHECK_PORT: 60000
+    networks:
+      nos3-sc01-00:
+      nos3-core-00:
+
+  nos3-nos-sim-bridge:
+    image: ghcr.io/haisamido/nos3-base:dev
+    attach: true
+    container_name: nos-sim-bridge
+    working_dir: /home/nos3/builds/nos3/sims/build/bin
+    command: "./nos3-sim-cmdbus-bridge -f ./nos3-simulator.xml"
+    volumes:
+      - ${PWD}/../nos3/cfg/sims/nos3-simulator.xml:/home/nos3/builds/nos3/sims/build/bin/nos3-simulator.xml
+    tty: true
+    stdin_open: true
+    privileged: true
+    environment:
+      HEALTHCHECK_PORT: 60000
+    networks:
+      nos3-sc01-00:
+      nos3-core-00:
 
   nos3-camsim:
     image: ghcr.io/haisamido/nos3-base:dev
@@ -483,87 +565,7 @@ services:
           - yamcs
       nos3-core-00:
 
-  nos3-truth42sim:
-    image: ghcr.io/haisamido/nos3-base:dev
-    attach: true
-    # depends_on:
-    #   nos3-fortytwo:
-    #     condition: service_started
-    #   nos3-nos_engine_server:
-    #     condition: service_started
-    #   nos3-gps:
-    #     condition: service_started
-      # nos3-time:
-      #   condition: service_started
-      # nos3-fsw:
-      #   condition: service_started
-    container_name: sc01-truth42sim
-    hostname: truth42sim
-    working_dir: /home/nos3/builds/nos3/sims/build/bin
-    command: "./nos3-single-simulator -f ./nos3-simulator.xml truth42sim"
-    volumes:
-      - ${PWD}/../nos3/cfg/sims/nos3-simulator.xml:/home/nos3/builds/nos3/sims/build/bin/nos3-simulator.xml
-    tty: true
-    stdin_open: true
-    privileged: true
-    environment:
-      HEALTHCHECK_PORT: 60000
-    networks:
-      nos3-sc01-00:
-      nos3-core-00:
 
-  nos3-nos-terminal:
-    image: ghcr.io/haisamido/nos3-base:dev
-    attach: true
-    container_name: nos-terminal
-    hostname: nos-terminal
-    working_dir: /home/nos3/builds/nos3/sims/build/bin
-    command: "./nos3-single-simulator -f ./nos3-simulator.xml stdio-terminal"
-    volumes:
-      - ${PWD}/../nos3/cfg/sims/nos3-simulator.xml:/home/nos3/builds/nos3/sims/build/bin/nos3-simulator.xml
-    tty: true
-    stdin_open: true
-    privileged: true
-    environment:
-      HEALTHCHECK_PORT: 60000
-    networks:
-      nos3-sc01-00:
-      nos3-core-00:
-
-  nos3-nos-udp-terminal:
-    image: ghcr.io/haisamido/nos3-base:dev
-    attach: true
-    container_name: nos-udp-terminal
-    hostname: nos-udp-terminal
-    working_dir: /home/nos3/builds/nos3/sims/build/bin
-    command: "./nos3-single-simulator -f ./nos3-simulator.xml udp-terminal"
-    volumes:
-      - ${PWD}/../nos3/cfg/sims/nos3-simulator.xml:/home/nos3/builds/nos3/sims/build/bin/nos3-simulator.xml
-    tty: true
-    stdin_open: true
-    privileged: true
-    environment:
-      HEALTHCHECK_PORT: 60000
-    networks:
-      nos3-sc01-00:
-      nos3-core-00:
-
-  nos3-nos-sim-bridge:
-    image: ghcr.io/haisamido/nos3-base:dev
-    attach: true
-    container_name: nos-sim-bridge
-    working_dir: /home/nos3/builds/nos3/sims/build/bin
-    command: "./nos3-sim-cmdbus-bridge -f ./nos3-simulator.xml"
-    volumes:
-      - ${PWD}/../nos3/cfg/sims/nos3-simulator.xml:/home/nos3/builds/nos3/sims/build/bin/nos3-simulator.xml
-    tty: true
-    stdin_open: true
-    privileged: true
-    environment:
-      HEALTHCHECK_PORT: 60000
-    networks:
-      nos3-sc01-00:
-      nos3-core-00:
 
 networks:
   nos3-core-00:
