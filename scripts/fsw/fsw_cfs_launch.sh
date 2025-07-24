@@ -164,6 +164,7 @@ do
       cd $FSW_DIR
       gnome-terminal --title=$SC_NUM" - NOS3 Flight Software" -- $DFLAGS -v $BASE_DIR:$BASE_DIR --name $SC_NUM"-nos-fsw" -h nos-fsw --network=$SC_NETNAME -w $FSW_DIR --sysctl fs.mqueue.msg_max=10000 --ulimit rtprio=99 --cap-add=sys_nice $DBOX $SCRIPT_DIR/fsw/fsw_respawn.sh &
       # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-fsw || true && docker compose up -d nos3-fsw && cd -
+      #   ^^^ breaks: NOVATEL, RAW BATTERY, FSS_SVB, IMU ACC, RAW MAG
 
       echo $SC_NUM " - Simulators..."
       cd $SIM_BIN
@@ -226,11 +227,9 @@ if [[ "${USE_DC}" != "yes" ]]; then
     export TIMENAME=$SC_NUM"-nos-time-driver"
     $DNETWORK connect --alias nos-time-driver $SC_NETNAME nos-time-driver
   done
-
   echo ""
 else
   cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-time || true && docker compose up -d nos3-time && cd -
-
   echo ""
 fi
 

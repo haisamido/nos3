@@ -18,6 +18,9 @@ services:
       - "30090:80"
     environment:
       DISPLAY: ":1"
+      GIT_URL: "https://github.com/nasa-itc/42.git"
+      GIT_COMMIT: "nos3-main"
+      GIT_FOLDER: "42"
     networks:
       nos3-sc01-00:
       nos3-core-00:
