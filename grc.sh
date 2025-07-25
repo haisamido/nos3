@@ -5,5 +5,5 @@ make stop clean prep config
 make
 cp /opt/neo/etc/settings.xml ~/.nos3/yamcs/
 make stop launch
-sleep 144
+sleep 14400
 make stop
