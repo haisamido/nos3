@@ -388,11 +388,9 @@ services:
   nos3-radio-sim:
     image: ghcr.io/haisamido/nos3-base:dev
     attach: true
-    # depends_on:
-    #   nos3-fortytwo:
-    #     condition: service_started
-      # nos3-fsw:
-      #   condition: service_started
+    depends_on:
+      nos3-cryptolib:
+        condition: service_started
     container_name: sc01-radio-sim
     hostname: radio-sim
     working_dir: /home/nos3/builds/nos3/sims/build/bin
@@ -531,11 +529,13 @@ services:
     image: ghcr.io/haisamido/nos3-base-yamcs:dev
     attach: true
     # depends_on:
-    #   nos3-gps:
+    #   nos3-gps-sim:
     #     condition: service_started
     #   nos3-fsw:
     #     condition: service_started
     #   nos3-truth42sim:
+    #     condition: service_started
+    #   nos3-cryptolib:
     #     condition: service_started
     container_name: cosmos-openc3-operator-1
     hostname: cosmos
@@ -568,12 +568,10 @@ services:
           - yamcs
       nos3-core-00:
 
-
-
 networks:
   nos3-core-00:
-    external: true
+    external: false
     name: nos3-core
   nos3-sc01-00:
-    external: true
+    external: false
     name: nos3-sc01

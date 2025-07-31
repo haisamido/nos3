@@ -152,9 +152,15 @@ do
       cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-gsw || true && docker compose up -d nos3-gsw && cd -
       echo ""
 
+      # echo $SC_NUM " - 42..."
+      # cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-fortytwo || true && docker compose up -d nos3-fortytwo && cd -
+      # echo ""
+
       echo $SC_NUM " - 42..."
-      cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-fortytwo || true && docker compose up -d nos3-fortytwo && cd -
-      echo ""
+      rm -rf $USER_NOS3_DIR/42/NOS3InOut
+      cp -r $BASE_DIR/cfg/build/InOut $USER_NOS3_DIR/42/NOS3InOut
+      xhost +local:*
+      gnome-terminal --tab --title=$SC_NUM" - 42" -- $DFLAGS -e DISPLAY=$DISPLAY -v $USER_NOS3_DIR:$USER_NOS3_DIR -v /tmp/.X11-unix:/tmp/.X11-unix:ro --name $SC_NUM"-fortytwo" -h fortytwo --network=$SC_NETNAME -w $USER_NOS3_DIR/42 -t $DBOX $USER_NOS3_DIR/42/42 NOS3InOut
 
       echo $SC_NUM " - OnAIR..."
       cd ${BASE_DIR}/deployments/docker/ && docker compose down nos3-onair || true && docker compose up -d nos3-onair && cd -
