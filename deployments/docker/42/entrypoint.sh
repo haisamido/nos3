@@ -12,24 +12,29 @@ pkill -9 -f websockify || true
     --web=/usr/share/novnc/ \
     --cert=~/novnc.pem 80 localhost:5901 
     
-export DISPLAY=:${DISPLAY:-1}
+export DISPLAY=${DISPLAY:-:1}
+export DIR=/opt/nasa-itc
+export GIT_FOLDER=${GIT_FOLDER}
 
-DIR=/opt/nasa-itc
+xterm &
 
-xterm&
+rm -rf /opt/nasa-itc/42/NO3InOut/{*.42,*.csv} 
 
-rm -rf ${DIR}/42 || true
-cd ${DIR} && git clone --recurse-submodules -j2 ${GIT_URL} || true && \
-cd ${DIR}/ && \
-  git fetch && \
-  git checkout ${GIT_COMMIT} && \
-  git submodule update && \
-  make clean && \
-  make -j2
+if [ "$RECOMPILE" == "true" ]; then
+  cd /opt/nasa-itc/42 && \
+    git fetch && \
+    git checkout ${GIT_COMMIT} && \
+    git pull origin && \
+    git submodule update && \
+    make clean && \
+    make -j2
+fi
 
-cd ${DIR}/42 && \
-  rm -rf ./InOut/{*.42,*.csv} && \
-  xterm -e ./42 &
-echo "Started 42 in xterm with PID $!"
+STARTUP_FOLDER=${STARTUP_FOLDER:-NO3InOut}
+
+cd /opt/nasa-itc/42 && \
+  xterm -e "./42 ${STARTUP_FOLDER}" &
+
+echo "Started 42 with PID $!"
 
 tail -f /dev/null

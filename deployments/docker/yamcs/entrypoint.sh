@@ -12,9 +12,17 @@ mkdir -p /tmp/nos3/data/hk
 mkdir -p /tmp/nos3/data/inst
 mkdir -p /tmp/nos3/uplink
 
-# cp $BASE_DIR/fsw/build/exe/cpu1/cf/cfe_es_startup.scr /tmp/nos3/uplink/tmp0.so
-# cp $BASE_DIR/fsw/build/exe/cpu1/cf/sample.so /tmp/nos3/uplink/tmp1.so
-
+# Start YAMCS server
 mvn ${MAVEN_HTTPS_PROXY} -Dmaven.repo.local=${MAVEN_REPO_LOCAL} -DCOMPONENT_DIR=${COMPONENT_DIR} yamcs:run
+
+sleep 3
+
+curl -X POST http://localhost:8090/api/links/nos3/radio-out:disable
+sleep 1
+curl -X POST http://localhost:8090/api/links/nos3/radio-out:enable
+
+curl -X POST http://localhost:8090/api/links/nos3/truth42-in:disable
+sleep 1
+curl -X POST http://localhost:8090/api/links/nos3/truth42-in:enable
 
 tail -f /dev/null
