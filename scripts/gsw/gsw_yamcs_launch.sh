@@ -16,5 +16,6 @@ gnome-terminal --tab --title="YAMCS" -- $DFLAGS  -e COMPONENT_DIR=$COMPONENT_DIR
 pidof firefox > /dev/null
 if [ $? -eq 1 ]
 then
-    sleep 30 && firefox localhost:8090 &
+    curl -sf --retry 30 --retry-delay 1 --retry-all-errors --retry-connrefused \
+    http://localhost:8090/ >/dev/null && firefox http://localhost:8090/ &
 fi
