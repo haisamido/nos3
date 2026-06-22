@@ -31,10 +31,10 @@ if [ "$RECOMPILE" == "true" ]; then
     make -j2
 fi
 
-STARTUP_FOLDER=${STARTUP_FOLDER:-NO3InOut}
+STARTUP_FOLDER=${STARTUP_FOLDER:-NOS3InOut}
 
 cd /opt/nasa-itc/42 && \
-  xterm -e "./42 ${STARTUP_FOLDER}" &
+  xterm -e "./42 ${STARTUP_FOLDER} 2>&1 | tee /tmp/42.log" &
 
 echo "Started 42 with PID $!"
 

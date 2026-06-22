@@ -99,9 +99,6 @@ FROM x-vnc AS fortytwo
 ARG GIT_URL
 ARG GIT_COMMIT
 
-ENV GIT_URL=${GIT_URL}
-ENV GIT_COMMIT=${GIT_COMMIT}
-
 # VNC Config
 RUN mkdir -p ~/.vnc/
 RUN echo ${VNC_PASSWORD} | vncpasswd -f > ~/.vnc/passwd
@@ -124,6 +121,9 @@ RUN apt-get update && \
 RUN  curl -fsSL https://install.julialang.org | sh -s -- --yes
 
 # Clone the 42 repo for a specific branch
+
+ENV GIT_URL=${GIT_URL}
+ENV GIT_COMMIT=${GIT_COMMIT}
 
 RUN mkdir -p /opt/nasa-itc && \
   cd /opt/nasa-itc && \
