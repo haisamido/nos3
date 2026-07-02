@@ -22,7 +22,7 @@
     </applications>
     <components>
         <adcs>
-            <enable>false</enable>
+            <enable>true</enable>
         </adcs>
         <cam>
             <enable>true</enable>
@@ -37,7 +37,7 @@
             <enable>true</enable>
         </fss>
         <gps>
-            <enable>false</enable>
+            <enable>true</enable>
         </gps>
         <imu>
             <enable>true</enable>
@@ -82,6 +82,6 @@
         <tipoff_z>5.0</tipoff_z>
     </orbit>
     <sim>
-        <sim_truth_interface>true</sim_truth_interface>
+        <sim_truth_interface>false</sim_truth_interface>
     </sim>
 </sc-1-config>

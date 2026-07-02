@@ -72,11 +72,11 @@ Fidelity to the component is ultimately left up to the user, and "TODO" statemen
 
     ![SC_config](./_static/adding_nos3_component/research_cfg_xml.png)
 
-12. Next we will want to declare a target for the new component in Cosmos. To this we will modify the system.txt file found in **nos3/gsw/cosmos/config/**. Decalre your target like sample below for both the component and for the radio. See the syntax below.
+12. Next we will want to declare a target for the new component in Cosmos. To this we will modify the system.txt file found in **nos3/gsw/cosmos/config/system/stash**. Declare your target like sample below for both the component and for the radio. See the syntax below.
 
     ![Cosmos_config_system_txt](./_static/adding_nos3_component/cosmos_system_txt_declare_target.png)
 
-13. Now that we have declared the target, we will add the target to the cmd_tlm_server for our interfaces defined in cosmos. The cmd_tlm_server.txt can be found in **nos3/gsw/cosmos/config/tools/cmd_tlm_server/**. Add the target for both the debug and radio interfaces like sample below.
+13. Now that we have declared the target, we will add the target to the cmd_tlm_server for our interfaces defined in cosmos. The cmd_tlm_server.txt can be found in **nos3/gsw/cosmos/config/tools/cmd_tlm_server/stash**. Add the target for both the debug and radio interfaces like sample below.
 
     ![Cosmos_cmd_tlm_server](./_static/adding_nos3_component/cosmos_cmd_tlm_server_target_interface.png)
 

@@ -22,13 +22,21 @@ NUM_CPUS="$( nproc )"
 USERDIR=$(cd ~/ && pwd)
 USER_NOS3_DIR=$(cd ~/ && pwd)/.nos3
 USER_FPRIME_PATH=$USERDIR/.cookiecutter_replay
-
-OPENC3_DIR=$USER_NOS3_DIR/cosmos
+USER_YAMCS_PATH=$USER_NOS3_DIR/.m2
+OPENC3_DIR=$USER_NOS3_DIR/openc3
 OPENC3_PATH=$OPENC3_DIR/openc3.sh
+OPENC3_CLI="$OPENC3_DIR/openc3.sh cli"
+OPENC3_CLIROOT="$OPENC3_DIR/openc3.sh cliroot"
 
 INFLUXDB_DB=ait
 INFLUXDB_ADMIN_USER=ait
 INFLUXDB_ADMIN_PASSWORD=admin_password
+
+DOCKER_COMPOSE_COMMAND="docker compose"
+${DOCKER_COMPOSE_COMMAND} version &> /dev/null
+if [ "$?" -ne 0 ]; then
+  DOCKER_COMPOSE_COMMAND="docker-compose"
+fi
 
 ###
 ### Notes: 
@@ -48,7 +56,17 @@ INFLUXDB_ADMIN_PASSWORD=admin_password
     DNETWORK="docker network"
 #fi
 
-DBOX="ivvitc/nos3-64:20250514"
+DBOX="ivvitc/nos3-64:20260619"
+
+# Radio Config
+RADIO_TX_FSW_PORT=5010
+RADIO_RX_FSW_PORT=5011
+
+# CryptoLib Ground Config
+CRYPTO_RX_GROUND_PORT=6010
+CRYPTO_TX_GROUND_PORT=6011
+CRYPTO_TX_RADIO_PORT=8010
+CRYPTO_RX_RADIO_PORT=8011
 
 # Debugging
 #echo "Script directory = " $SCRIPT_DIR

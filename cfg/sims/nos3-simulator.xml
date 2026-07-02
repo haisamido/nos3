@@ -148,15 +148,19 @@
                 </connections>
                 <data-provider>
                     <type>SAMPLE_PROVIDER</type>
-                    <!-- 
+                </data-provider>
+                <!--<data-provider>
                     <type>SAMPLE_42_PROVIDER</type>
                     <hostname>fortytwo</hostname>
                     <port>4242</port>
                     <max-connection-attempts>30</max-connection-attempts>
                     <retry-wait-seconds>1</retry-wait-seconds>
                     <spacecraft>0</spacecraft>
-                    -->
-                </data-provider>
+                </data-provider>-->
+                <!--<data-provider>
+                    <type>SAMPLE_SHMEM_PROVIDER</type>
+                    <shared-memory-name>Blackboard</shared-memory-name>
+                </data-provider>-->             
             </hardware-model>
         </simulator>
 
@@ -182,7 +186,13 @@
                     <spacecraft>0</spacecraft>
                     <GPS>0</GPS>
                     <leap-seconds>37</leap-seconds>
-                </data-provider>               
+                </data-provider>
+                <!--<data-provider>
+                    <type>GPS_SHMEM</type>
+                    <spacecraft>0</spacecraft>
+                    <GPS>0</GPS>
+                    <leap-seconds>37</leap-seconds>
+                </data-provider>-->
                 <!-- <data-provider>               
                     <type>GPSFILE</type>
                     <filename>gps_data.42</filename>
@@ -241,6 +251,11 @@
                     <retry-wait-seconds>1</retry-wait-seconds>
                     <spacecraft>0</spacecraft>
                 </data-provider>
+                <!--<data-provider>
+                    <type>GENERIC_EPS_SHMEM_PROVIDER</type>
+                    <orbit>0</orbit>
+                    <spacecraft>0</spacecraft>
+                </data-provider>-->
                 <physical>
                     <bus>
                         <battery-voltage>24.0</battery-voltage>
@@ -323,7 +338,14 @@
                     <retry-wait-seconds>1</retry-wait-seconds>
                     <spacecraft>0</spacecraft>
                     <reactionwheel>0</reactionwheel>
-                </data-provider>               
+                </data-provider>
+                <!--<data-provider>
+                    <type>GENERIC_RW_SHMEM_PROVIDER</type>
+                    <hostname>fortytwo</hostname>
+                    <command-port>4278</command-port>
+                    <spacecraft>0</spacecraft>
+                    <reactionwheel>0</reactionwheel>
+                </data-provider>-->
             </hardware-model>
         </simulator>
 
@@ -349,7 +371,14 @@
                     <retry-wait-seconds>1</retry-wait-seconds>
                     <spacecraft>0</spacecraft>
                     <reactionwheel>1</reactionwheel>
-                </data-provider>               
+                </data-provider>
+                <!--<data-provider>
+                    <type>GENERIC_RW_SHMEM_PROVIDER</type>
+                    <hostname>fortytwo</hostname>
+                    <command-port>4378</command-port>
+                    <spacecraft>0</spacecraft>
+                    <reactionwheel>1</reactionwheel>
+                </data-provider>-->
             </hardware-model>
         </simulator>
 
@@ -375,7 +404,14 @@
                     <retry-wait-seconds>1</retry-wait-seconds>
                     <spacecraft>0</spacecraft>
                     <reactionwheel>2</reactionwheel>
-                </data-provider>               
+                </data-provider>
+                <!--<data-provider>
+                    <type>GENERIC_RW_SHMEM_PROVIDER</type>
+                    <hostname>fortytwo</hostname>
+                    <command-port>4478</command-port>
+                    <spacecraft>0</spacecraft>
+                    <reactionwheel>2</reactionwheel>
+                </data-provider>-->
             </hardware-model>
         </simulator>
 
@@ -400,7 +436,12 @@
                     <retry-wait-seconds>1</retry-wait-seconds>
                     <spacecraft>0</spacecraft>
                     <42-css-scale-factor>1.0</42-css-scale-factor>
-                </data-provider>   
+                </data-provider>
+                <!--<data-provider>
+                    <type>GENERIC_CSS_SHMEM_PROVIDER</type>
+                    <spacecraft>0</spacecraft>
+                    <42-css-scale-factor>1.0</42-css-scale-factor>
+                </data-provider>-->
                 <i2c>
                     <address>64</address>
                     <bus>i2c_2</bus>
@@ -427,6 +468,7 @@
                     <command-port>4279</command-port>
                     <max-connection-attempts>30</max-connection-attempts>
                     <retry-wait-seconds>1</retry-wait-seconds>
+                    <spacecraft>0</spacecraft>
                 </data-provider>
                 <params>
                     <num-mtbs>3</num-mtbs>
@@ -462,6 +504,7 @@
                     <command-port>4280</command-port>
                     <max-connection-attempts>30</max-connection-attempts>
                     <retry-wait-seconds>1</retry-wait-seconds>
+                    <spacecraft>0</spacecraft>
                 </data-provider>
             </hardware-model>
         </simulator>
@@ -512,7 +555,11 @@
                     <max-connection-attempts>30</max-connection-attempts>
                     <retry-wait-seconds>1</retry-wait-seconds>
                     <spacecraft>0</spacecraft>
-                </data-provider>               
+                </data-provider>
+                <!--<data-provider>
+                    <type>GENERIC_FSS_SHMEM_PROVIDER</type>
+                    <shared-memory-name>Blackboard</shared-memory-name>
+                </data-provider>-->             
             </hardware-model>
         </simulator>
 
@@ -567,8 +614,23 @@
                     </connection>
                 </connections>
                 <data-provider>
+                    <type>GENERIC_RADIO_42_PROVIDER</type>
+                    <hostname>fortytwo</hostname>
+                    <port>4286</port>
+                    <max-connection-attempts>30</max-connection-attempts>
+                    <retry-wait-seconds>5</retry-wait-seconds>
+                    <comm-uplink>0</comm-uplink>
+                    <uplink-close-criteria>none</uplink-close-criteria><!-- "none", "occulted" or "cnr" -->
+                    <uplink-cnr-limit>15</uplink-cnr-limit>
+                    <uplink-delay-on>false</uplink-delay-on>
+                    <comm-downlink>1</comm-downlink>
+                    <downlink-close-criteria>none</downlink-close-criteria><!-- "none", "occulted" or "cnr" -->
+                    <downlink-cnr-limit>15</downlink-cnr-limit>
+                    <downlink-delay-on>false</downlink-delay-on>
+                </data-provider>
+                <!--<data-provider>               
                     <type>GENERIC_RADIO_PROVIDER</type>
-                </data-provider>               
+                </data-provider>-->
             </hardware-model>
         </simulator>
 
@@ -596,6 +658,10 @@
                     <retry-wait-seconds>1</retry-wait-seconds>
                     <spacecraft>0</spacecraft>
                 </data-provider>
+                <!--<data-provider>
+                    <type>GENERIC_IMU_SHMEM_PROVIDER</type>
+                    <shared-memory-name>Blackboard</shared-memory-name>
+                </data-provider>-->
             </hardware-model>
         </simulator>
 
@@ -623,6 +689,9 @@
                     <retry-wait-seconds>1</retry-wait-seconds>
                     <spacecraft>0</spacecraft>
                 </data-provider>
+                <!--<data-provider>
+                    <type>GENERIC_MAG_SHMEM_PROVIDER</type>
+                </data-provider>-->
             </hardware-model>
         </simulator>
 
@@ -650,6 +719,34 @@
                     <retry-wait-seconds>1</retry-wait-seconds>
                     <spacecraft>0</spacecraft>
                     <star-tracker>0</star-tracker>
+                </data-provider>
+                <!--<data-provider>
+                    <type>GENERIC_STAR_TRACKER_SHMEM_PROVIDER</type>
+                    <spacecraft>0</spacecraft>
+                    <star-tracker>0</star-tracker>
+                </data-provider>-->
+            </hardware-model>
+        </simulator>
+
+        <simulator>
+            <name>blackboard-sim</name>
+            <active>true</active>
+            <library>libblackboard_sim.so</library>
+            <hardware-model>
+                <type>BLACKBOARD</type>
+                <connections>
+                    <connection><type>command</type>
+                        <bus-name>command</bus-name>
+                        <node-name>blackboard-command</node-name>
+                    </connection>
+                </connections>
+                <data-provider>
+                    <type>BLACKBOARD_42_PROVIDER</type>
+                    <hostname>fortytwo</hostname>
+                    <port>4285</port>
+                    <max-connection-attempts>30</max-connection-attempts>
+                    <retry-wait-seconds>5</retry-wait-seconds>
+                    <spacecraft>0</spacecraft>
                 </data-provider>
             </hardware-model>
         </simulator>
