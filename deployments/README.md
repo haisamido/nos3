@@ -6,6 +6,7 @@
 - `bash`
 - `task` a contemporary version of `make`
 - `lazydocker`
+- GNU `date` and `sed` (on macOS: `brew install coreutils gnu-sed`, which provides `gdate` and `gsed`; the scripts use them automatically)
 
 Which can be installed via `make install-lazydocker install-taskfile`
 
@@ -98,7 +99,7 @@ more info on `lazydocker` can be found here https://github.com/jesseduffield/laz
 ## Test
 
 open http://localhost:8090/instance?c=nos3__realtime to access yamcs/gsw
-open http://localhost:30090/vnc.html to access fortytwo (42)
+open http://localhost:30090/vnc.html to access fortytwo (42); scaling mode defaults to Remote Resizing
 open http://localhost:9000 to access openmct
 
 ## Diagrams
